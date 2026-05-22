@@ -63,17 +63,19 @@ from PIL import Image, ImageOps
 # --- CONFIGURATION  ---
 CONFIG = {
     "SOURCE_DIR": os.getcwd(),
-    "SELECTED_CATALOG": "Messier",                # selected catalog at startup: possible values : "Messier", "Caldwell", "RASC"
-    "THUMB_DIR": "thumbnails",                    # name of the thumbnails directory
+    "SELECTED_CATALOG": "Messier",                 # selected catalog at startup: possible values : "Messier", "Caldwell", "RASC"
+    "THUMB_DIR": "thumbnails",                     # name of the thumbnails directory
     "OUTPUT_HTML": "astro_catalog.html",          # name of the HTML page
     "THUMB_SIZE": 105,                            # size of the square thumbnail on the HTML page (max 200x200)
-    "LATITUDE": 43.6,                             # your latitude
-    "LONGITUDE": 1.5,                             # your longitude
-    "ELEVATION": 150,                             # your elevation in meters
+    "LATITUDE": 43.6,                              # your latitude
+    "LONGITUDE": 1.5,                              # your longitude
+    "ELEVATION": 150,                              # your elevation in meters
     "LIMIT_IMPOSSIBLE": 0,                        # degrees : change here if your horizon is masked
     "LIMIT_DIFFICILE": 20,
     "LIMIT_SMALL_OBJECT": 120,                    # arcseconds ; paint small objects size in orange
-    "CHART_HEIGHT": 80                            # Height of the graphic area inside the tooltip (in px)
+    "CHART_HEIGHT": 80,                            # Height of the graphic area inside the tooltip (in px)
+    "TN_ALTITUDE_THRESHOLD": 30.0,                # altitude threshold (degrees) for visibility computation of high onjects
+    "TN_LOW_ALTITUDE_FACTOR": 0.80                 # for low objects, they are "visible tonight" when their altitude becomes > (80% * maxalt) during astro period
 }
 
 # -----------------------------------------------
@@ -1177,10 +1179,24 @@ def generate():
                         return false;
                     }}
 
-                    // --- 3. CHECK TARGET ALTITUDE BETWEEN THESE TWO BOUNDARIES ---
+                    // --- 3. COMPUTE DYNAMIC VISIBILITY THRESHOLD ---
+                    // Calculate absolute maximum altitude regardless of the season: 90 - abs(lat - dec)
+                    const maxAbsoluteAltitude = 90 - Math.abs(userLat - decTarget);
+                    
+                    const configThreshold = parseFloat("{CONFIG["TN_ALTITUDE_THRESHOLD"]}");
+                    const configLowFactor = parseFloat("{CONFIG["TN_LOW_ALTITUDE_FACTOR"]}");
+                    
+                    let targetThreshold = 0;
+                    if (maxAbsoluteAltitude > configThreshold) {{
+                        targetThreshold = configThreshold;
+                    }} else {{
+                        targetThreshold = maxAbsoluteAltitude * configLowFactor;
+                    }}
+
+                    // --- 4. CHECK TARGET ALTITUDE BETWEEN THESE TWO BOUNDARIES ---
                     for (let idx = indexCoucherAstro; idx <= indexLeverAstro; idx++) {{
-                        if (altitudesObjet[idx] > 0) {{
-                            return true; // Match found! The object is > 0° during the astro window
+                        if (altitudesObjet[idx] > targetThreshold) {{
+                            return true; // Match found! The object exceeds the dynamic threshold during the astro window
                         }}
                     }}
 
