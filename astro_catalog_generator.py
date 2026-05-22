@@ -107,7 +107,7 @@ LANG = {
         "SNR": "Rémanent Supernova",                         # "super nova remnant"
         "EN": "Néb. Émission",                               # "Emission Nebula"
         "RN": "Néb. Réflexion",                              # "reflection nebula 
-        "E/RN": "Néb. Ém./Réf.",                             # " emissin and reflexion nebula"
+        "E/RN": "Néb. Ém./Réf.",                             # " emission and reflexion nebula"
         "N+C": "Amas + Néb.",                                # " Nebula and cluster"
         "QSR": "Qasar"
     },
