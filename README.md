@@ -34,7 +34,8 @@ The marathon score is displayed at the top .
 Placing the mouse over one object will display usefull data to prepare your imaging session inside a popup window (Tooltip) .
 If you want to get more details, reference of each object (eg C42) is clickable and points to the corresponding telescopius page. For empty thumbnails, just click inside the thumbnail aera.
 
-To switch between Messier/Caldwell/RASC/OMEARA catalogs just select the required catalog from the menu bar.
+To switch between Messier/Caldwell/RASC/OMEARA catalogs just select the required catalog from the menu bar. There is also an option to select the "All in 1" catalog. In that case, the Messier objects are listed then Caldwell with no dupplication with the Messier, then the RASC with no dupplication with Messier/Caldwell and so on... All in 1 you get 504 objects to image, quite a good challenge !
+
 you can also filter by type of objects (Nebula, galaxies, clusters and others)
 
 <img width="1276" height="699" alt="nebu" src="https://github.com/user-attachments/assets/9d131ef7-6bf4-497f-b306-160a5f8fe396" />
