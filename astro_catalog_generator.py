@@ -6,7 +6,10 @@
 # http://www.messier.seds.org/xtra/similar/rasc-ngc.html
 # https://www.catchersofthelight.com/astrophotography-hidden-treasures-list.aspx
 # https://app.astrobin.com/u/GaryI?collection=677&i=esls3b#gallery
+# https://vicmenard.com/articles/
 #
+#   V6.0 : added a "All in 1" catalog option. Added some Deep sky challenges from RASC
+#          added a "OTHER" catalog with some interesting objects from "the list" (Vic Menard)
 #   V5.2 : fixed visible to night option
 #   V5.1 : plot of object altitude curve - added visible to night option
 #   V5.0 : database restructuration: first field is direct type
@@ -97,7 +100,7 @@ LANG = {
     "VALIDATE": "Valider",                                   # "Validate"
     "TYPES": {
         "N": "Nébuleuse",                                    # "nebula"
-        "NP": "Néb. Planétaire",                             # "planetary nebula"
+        "PN": "Néb. Planétaire",                             # "planetary nebula"
         "GC": "Amas Globulaire",                             # "globular cluster"
         "OC": "Amas Ouvert",                                 # "open cluster"
         "G": "Galaxie",                                      # "galaxy
@@ -164,7 +167,7 @@ MESSIER_DATA = {
     24: ["SC", "NGC 6603", "Sagittaire", "4.6", "90'", "Petit Nuage Stellaire du Sagittaire", 18.28, -18.4],
     25: ["OC", "IC 4725", "Sagittaire", "4.6", "32'", "Amas du Sagittaire", 18.53, -19.2],
     26: ["OC", "NGC 6694", "Écu", "8.0", "15'", "Amas de l'Écu", 18.75, -9.4],
-    27: ["NP", "NGC 6853", "Petit Renard", "7.4", "8'x6'", "Nébuleuse Dumbbell", 19.99, 22.7],
+    27: ["PN", "NGC 6853", "Petit Renard", "7.4", "8'x6'", "Nébuleuse Dumbbell", 19.99, 22.7],
     28: ["GC", "NGC 6626", "Sagittaire", "6.8", "11'", "Amas du Sagittaire", 18.41, -24.9],
     29: ["OC", "NGC 6913", "Cygne", "7.1", "7'", "Amas du Cygne", 20.4, 38.5],
     30: ["GC", "NGC 7099", "Capricorne", "7.2", "12'", "Amas du Capricorne", 21.67, -23.2],
@@ -183,7 +186,7 @@ MESSIER_DATA = {
     43: ["N", "NGC 1982", "Orion", "9.0", "20'x15'", "Nébuleuse de De Mairan", 5.59, -5.2],
     44: ["OC", "NGC 2632", "Cancer", "3.1", "95'", "Amas de la Crèche", 8.67, 19.7],
     45: ["OC", "NGC 1432", "Taureau", "1.6", "110'", "Les Pléiades", 3.78, 24.1],
-    46: ["OC", "NGC 2437", "Poupe", "6.1", "27'", "Amas de la Poupe", 7.7, -14.8],
+    46: ["N+C", "NGC 2437", "Poupe", "6.1", "27'", "Amas de la Poupe + NP NGC2438", 7.7, -14.8],
     47: ["OC", "NGC 2422", "Poupe", "4.4", "30'", "Amas de la Poupe", 7.61, -14.4],
     48: ["OC", "NGC 2548", "Hydre", "5.8", "54'", "Amas de l'Hydre", 8.23, -5.8],
     49: ["G", "NGC 4472", "Vierge", "8.4", "10'x9'", "Galaxie de la Vierge", 12.5, 8.0],
@@ -194,7 +197,7 @@ MESSIER_DATA = {
     54: ["GC", "NGC 6715", "Sagittaire", "7.6", "12'", "Amas du Sagittaire", 18.92, -30.5],
     55: ["GC", "NGC 6809", "Sagittaire", "6.3", "19'", "Amas du Sagittaire", 19.67, -30.9],
     56: ["GC", "NGC 6779", "Lyre", "8.3", "9'", "Amas de la Lyre", 19.28, 33.0],
-    57: ["NP", "NGC 6720", "Lyre", "8.8", "1.5'x1'", "Nébuleuse de l'Anneau", 18.89, 33.0],
+    57: ["PN", "NGC 6720", "Lyre", "8.8", "1.5'x1'", "Nébuleuse de l'Anneau", 18.89, 33.0],
     58: ["G", "NGC 4579", "Vierge", "9.7", "6'x5'", "Galaxie de la Vierge", 12.63, 11.8],
     59: ["G", "NGC 4621", "Vierge", "10.6", "5'x4'", "Galaxie de la Vierge", 12.7, 11.6],
     60: ["G", "NGC 4649", "Vierge", "8.8", "7'x6'", "Galaxie de la Vierge", 12.73, 11.6],
@@ -213,7 +216,7 @@ MESSIER_DATA = {
     73: ["A", "NGC 6994", "Verseau", "9.0", "2.8'", "Astérisme du Verseau", 20.98, -12.6],
     74: ["G", "NGC 628", "Poissons", "9.4", "10'x10'", "Galaxie du Fantôme", 1.61, 15.8],
     75: ["GC", "NGC 6864", "Sagittaire", "8.5", "7'", "Amas du Sagittaire", 20.1, -21.9],
-    76: ["NP", "NGC 650", "Persée", "10.1", "2.7'x1.8'", "Nébuleuse de la Petite Haltère", 1.7, 51.6],
+    76: ["PN", "NGC 650", "Persée", "10.1", "2.7'x1.8'", "Nébuleuse de la Petite Haltère", 1.7, 51.6],
     77: ["G", "NGC 1068", "Baleine", "8.9", "7'x6'", "Galaxie de la Baleine", 2.71, -0.0],
     78: ["N", "NGC 2068", "Orion", "8.3", "8'x6'", "M78 (Nébuleuse)", 5.78, 0.1],
     79: ["GC", "NGC 1904", "Lièvre", "7.7", "10'", "Amas du Lièvre", 5.41, -24.5],
@@ -234,7 +237,7 @@ MESSIER_DATA = {
     94: ["G", "NGC 4736", "Ch. de Chasse", "8.2", "11'x9'", "Galaxie de l'Œil de Crocodile", 12.85, 41.1],
     95: ["G", "NGC 3351", "Lion", "9.7", "7'x5'", "Galaxie du Lion", 10.73, 11.7],
     96: ["G", "NGC 3368", "Lion", "9.2", "8'x5'", "Galaxie du Lion", 10.78, 11.8],
-    97: ["NP", "NGC 3587", "Grande Ourse", "9.9", "3.4'", "Nébuleuse du Hibou", 11.25, 55.0],
+    97: ["PN", "NGC 3587", "Grande Ourse", "9.9", "3.4'", "Nébuleuse du Hibou", 11.25, 55.0],
     98: ["G", "NGC 4192", "Chevelure", "10.1", "10'x3'", "Galaxie de la Chevelure", 12.23, 14.9],
     99: ["G", "NGC 4254", "Chevelure", "9.9", "5'x5'", "Galaxie du Coma Pinwheel", 12.31, 14.4],
     100: ["G", "NGC 4321", "Chevelure", "9.3", "7'x6'", "Galaxie de la Chevelure", 12.38, 15.8],
@@ -254,11 +257,11 @@ MESSIER_DATA = {
 
 CALDWELL_DATA = {
     1: ["OC", "NGC 188", "Céphée", "8.1", "13'", "NGC 188", 0.74, 85.3],
-    2: ["NP", "NGC 40", "Céphée", "10.2", "37''", "Nébuleuse du Nœud Coulant", 0.05, 72.5],
+    2: ["PN", "NGC 40", "Céphée", "10.2", "37''", "Nébuleuse du Nœud Coulant", 0.05, 72.5],
     3: ["G", "NGC 4236", "Dragon", "9.7", "18.6'x6.9'", "Galaxie du Dragon", 12.28, 69.5],
     4: ["RN", "NGC 7023", "Céphée", "-", "18'x18'", "Nébuleuse de l'Iris", 21.03, 68.2],
     5: ["G", "IC 342", "Girafe", "8.4", "21.1'x20.9'", "Galaxie de la Girafe", 3.78, 68.1],
-    6: ["NP", "NGC 6543", "Dragon", "8.1", "18''", "Nébuleuse de l'Œil de Chat", 17.98, 66.6],
+    6: ["PN", "NGC 6543", "Dragon", "8.1", "18''", "Nébuleuse de l'Œil de Chat", 17.98, 66.6],
     7: ["G", "NGC 2403", "Girafe", "8.4", "24.9'x12'", "NGC 2403", 7.62, 65.6],
     8: ["OC", "NGC 559", "Cassiopée", "7.1", "5.8'", "NGC 559", 1.49, 63.3],
     9: ["EN", "Sh2-155", "Céphée", "-", "50'x40'", "Nébuleuse de la Grotte", 22.95, 62.3],
@@ -267,14 +270,14 @@ CALDWELL_DATA = {
     12: ["G", "NGC 6946", "Céphée", "8.9", "11.5'x11.5'", "Galaxie du Feu d'Artifice", 20.58, 60.1],
     13: ["OC", "NGC 457", "Cassiopée", "6.7", "13'", "Amas de la Chouette", 1.32, 58.3],
     14: ["OC", "NGC 869", "Persée", "4.4", "30'", "Double Amas de Persée", 2.32, 57.1],
-    15: ["NP", "NGC 6826", "Cygne", "9.8", "30''", "Nébuleuse de l'Œil Clignotant", 19.75, 50.5],
+    15: ["PN", "NGC 6826", "Cygne", "9.8", "30''", "Nébuleuse de l'Œil Clignotant", 19.75, 50.5],
     16: ["OC", "NGC 7243", "Lézard", "6.4", "20'", "NGC 7243", 22.25, 49.9],
     17: ["G", "NGC 147", "Cassiopée", "9.1", "13'x8'", "NGC 147", 0.55, 48.5],
     18: ["G", "NGC 185", "Cassiopée", "9.2", "12'x10'", "NGC 185", 0.65, 48.3],
     19: ["EN", "IC 5146", "Céphée", "-", "12'", "Nébuleuse du Cocon", 21.89, 47.3],
     20: ["EN", "NGC 7000", "Cygne", "-", "120'x100'", "Nébuleuse de l'Amérique du Nord", 20.99, 44.3],
     21: ["G", "NGC 4449", "Chiens de Chasse", "9.4", "5'x4'", "NGC 4449", 12.47, 44.1],
-    22: ["NP", "NGC 7662", "Andromède", "8.3", "20''", "Nébuleuse de la Boule de Neige Bleue", 23.43, 42.5],
+    22: ["PN", "NGC 7662", "Andromède", "8.3", "20''", "Nébuleuse de la Boule de Neige Bleue", 23.43, 42.5],
     23: ["G", "NGC 891", "Andromède", "10.0", "13'x3'", "Galaxie de l'Aiguille d'Argent", 2.38, 42.3],
     24: ["G", "NGC 1275", "Persée", "11.7", "2'x2'", "Perseus A", 3.33, 41.5],
     25: ["GC", "NGC 2419", "Lynx", "10.4", "4'", "Amas de l'Errant Intergalactique", 7.63, 38.9],
@@ -291,7 +294,7 @@ CALDWELL_DATA = {
     36: ["G", "NGC 4559", "Chevelure de Bérénice", "9.6", "11'x5'", "NGC 4559", 12.6, 28.0],
     37: ["OC", "NGC 6885", "Petit Renard", "6.0", "14'", "NGC 6885", 20.2, 26.5],
     38: ["G", "NGC 4565", "Chevelure de Bérénice", "9.6", "16'x3'", "Galaxie de l'Aiguille", 12.6, 26.0],
-    39: ["NP", "NGC 2392", "Gémeaux", "8.3", "13''", "Nébuleuse de l'Esquimau", 7.48, 20.9],
+    39: ["PN", "NGC 2392", "Gémeaux", "8.3", "13''", "Nébuleuse de l'Esquimau", 7.48, 20.9],
     40: ["G", "NGC 3626", "Lion", "10.7", "3'x2'", "NGC 3626", 11.33, 18.4],
     41: ["OC", "Mel 25", "Taureau", "0.5", "330'", "Les Hyades", 4.45, 15.9],
     42: ["GC", "NGC 7006", "Dauphin", "10.6", "3'", "NGC 7006", 21.02, 16.2],
@@ -307,31 +310,31 @@ CALDWELL_DATA = {
     52: ["G", "NGC 4697", "Vierge", "9.4", "4'x3'", "NGC 4697", 12.81, -5.8],
     53: ["G", "NGC 3115", "Sextant", "9.2", "8.3x3.2'", "Galaxie du Fuseau", 10.09, -7.7],
     54: ["OC", "NGC 2506", "Licorne", "7.6", "14'", "NGC 2506", 8.0, -10.8],
-    55: ["NP", "NGC 7009", "Verseau", "8.0", "25''", "Nébuleuse Saturne", 21.07, -11.4],
-    56: ["NP", "NGC 246", "Baleine", "8.0", "4'", "Nébuleuse du Crâne", 0.78, -11.9],
+    55: ["PN", "NGC 7009", "Verseau", "8.0", "25''", "Nébuleuse Saturne", 21.07, -11.4],
+    56: ["PN", "NGC 246", "Baleine", "8.0", "4'", "Nébuleuse du Crâne", 0.78, -11.9],
     57: ["G", "NGC 6822", "Sagittaire", "7.5", "15'x13'", "Galaxie de Barnard", 19.75, -14.8],
     58: ["OC", "NGC 2360", "Grand Chien", "7.2", "20'", "Amas de Caroline", 7.3, -15.6],
-    59: ["NP", "NGC 3242", "Hydre", "8.3", "16''", "Le Fantôme de Jupiter", 10.41, -18.6],
+    59: ["PN", "NGC 3242", "Hydre", "8.3", "16''", "Le Fantôme de Jupiter", 10.41, -18.6],
     60: ["G", "NGC 4038", "Corbeau", "10.3", "3'x2'", "Galaxies des Antennes A", 12.03, -18.9],
     61: ["G", "NGC 4039", "Corbeau", "10.3", "3'x2'", "Galaxies des Antennes B", 12.03, -19.0],
     62: ["G", "NGC 247", "Baleine", "8.9", "12'x3'", "NGC 247", 0.78, -20.8],
-    63: ["NP", "NGC 7293", "Verseau", "7.3", "13'", "Nébuleuse de l'Hélice", 22.49, -20.8],
+    63: ["PN", "NGC 7293", "Verseau", "7.3", "13'", "Nébuleuse de l'Hélice", 22.49, -20.8],
     64: ["OC", "NGC 2362", "Grand Chien", "4.1", "20'", "NGC 2362", 7.31, -24.9],
     65: ["G", "NGC 253", "Sculpteur", "7.1", "25'x7'", "Galaxie du Sculpteur", 0.79, -25.3],
     66: ["GC", "NGC 5694", "Hydre", "8.5", "2'", "NGC 5694", 14.66, -26.5],
     67: ["G", "NGC 1097", "Fourneau", "9.3", "9'x6'", "NGC 1097", 2.77, -30.3],
     68: ["EN", "NGC 6729", "Couronne Australe", "-", "1'", "NGC 6729", 19.03, -36.9],
-    69: ["NP", "NGC 6302", "Scorpion", "9.6", "2'", "Nébuleuse du Papillon", 17.23, -37.1],
+    69: ["PN", "NGC 6302", "Scorpion", "9.6", "2'", "Nébuleuse du Papillon", 17.23, -37.1],
     70: ["G", "NGC 300", "Sculpteur", "8.1", "12'x9'", "NGC 300", 0.91, -37.7],
     71: ["OC", "NGC 2477", "Poupe", "4.2", "27'", "NGC 2477", 7.87, -38.5],
     72: ["G", "NGC 55", "Sculpteur", "7.8", "31'x6'", "NGC 55", 0.25, -39.2],
     73: ["GC", "NGC 1851", "Colombe", "7.3", "11'", "NGC 1851", 5.24, -40.1],
-    74: ["NP", "NGC 3132", "Voiles", "8.2", "1'", "Nébuleuse du Huit Éclatant", 10.12, -40.4],
+    74: ["PN", "NGC 3132", "Voiles", "8.2", "1'", "Nébuleuse du Huit Éclatant", 10.12, -40.4],
     75: ["OC", "NGC 6124", "Loup", "5.8", "40'", "NGC 6124", 16.42, -40.7],
     76: ["OC", "NGC 6231", "Scorpion", "2.6", "15'", "NGC 6231", 16.9, -41.8],
     77: ["G", "NGC 5128", "Centaure", "6.8", "18'x14'", "Centaurus A", 13.42, -43.0],
     78: ["GC", "NGC 5139", "Centaure", "3.7", "36'", "Omega Centauri", 13.45, -47.5],
-    79: ["OC", "NGC 4755", "Croix du Sud", "4.2", "10'", "La Boîte à Bijoux", 12.89, -60.3],
+    79: ["GC", "NGC 3201", "Voiles", "6.8", "18.2'", "Globular Cluster", 10.29, -46.4],
     80: ["GC", "NGC 5139", "Centaure", "3.7", "36'", "Omega Centauri bis", 13.45, -47.5],
     81: ["GC", "NGC 6352", "Autel", "8.1", "6'", "NGC 6352", 17.42, -48.4],
     82: ["GC", "NGC 6362", "Autel", "8.1", "12'", "NGC 6362", 17.53, -67.0],
@@ -342,7 +345,7 @@ CALDWELL_DATA = {
     87: ["GC", "NGC 1261", "Horloge", "8.4", "7'", "NGC 1261", 3.2, -55.2],
     88: ["OC", "NGC 5823", "Compas", "9.1", "11'", "NGC 5823", 15.09, -55.6],
     89: ["OC", "NGC 6067", "Règle", "5.1", "14'", "NGC 6067", 16.22, -54.2],
-    90: ["NP", "NGC 2867", "Carène", "10.9", "18''", "NGC 2867", 9.36, -58.3],
+    90: ["PN", "NGC 2867", "Carène", "10.9", "18''", "NGC 2867", 9.36, -58.3],
     91: ["OC", "NGC 3532", "Carène", "3.9", "41'", "NGC 3532", 11.11, -58.7],
     92: ["EN", "NGC 3372", "Carène", "-", "120'", "Nébuleuse d'Eta Carinae", 10.75, -59.7],
     93: ["GC", "NGC 6752", "Paon", "5.4", "27'", "NGC 6752", 19.18, -59.9],
@@ -361,14 +364,14 @@ CALDWELL_DATA = {
     106: ["GC", "NGC 104", "Toucan", "4.0", "31'", "47 Tucanae", 0.4, -72.1],
     107: ["GC", "NGC 6101", "Oiseau de Paradis", "9.2", "10'", "NGC 6101", 16.43, -72.2],
     108: ["GC", "NGC 4372", "Mouche", "7.2", "20'", "NGC 4372", 12.43, -73.0],
-    109: ["NP", "NGC 3195", "Caméléon", "10.6", "15''", "NGC 3195", 10.16, -81.2]
+    109: ["PN", "NGC 3195", "Caméléon", "10.6", "15''", "NGC 3195", 10.16, -81.2]
 }
 
 
 
 RASC_DATA = {
-    1: ["NP", "NGC 7009", "Verseau", "8.3", "25''", "Nébuleuse Saturne", 21.07, -11.4],
-    2: ["NP", "NGC 7293", "Verseau", "6.5", "12'50''", "Nébuleuse de l'Hélice", 22.49, -20.8],
+    1: ["PN", "NGC 7009", "Verseau", "8.3", "25''", "Nébuleuse Saturne", 21.07, -11.4],
+    2: ["PN", "NGC 7293", "Verseau", "6.5", "12'50''", "Nébuleuse de l'Hélice", 22.49, -20.8],
     3: ["G", "NGC 7331", "Pégase", "9.5", "10.7x4.0'", "Galaxie de Deer Lick", 22.62, 34.4],
     4: ["EN", "NGC 7635", "Cassiopée", "-", "15x8'", "Nébuleuse de la Bulle", 23.35, 61.2],
     5: ["OC", "NGC 7789", "Cassiopée", "6.7", "16'", "Amas de la Rose Blanche", 23.95, 56.7],
@@ -376,32 +379,32 @@ RASC_DATA = {
     7: ["EN", "NGC 281", "Cassiopée", "-", "35x30'", "Nébuleuse Pacman", 0.87, 56.6],
     8: ["OC", "NGC 457", "Cassiopée", "6.4", "13'", "Amas de la Chouette", 1.32, 58.3],
     9: ["OC", "NGC 663", "Cassiopée", "7.1", "16'", "Amas de l'Écharpe (Scarf Cluster)", 1.77, 61.2],
-    10: ["NP", "NGC 1289", "Cassiopée", "12.3", "34''", "Phantom Streak Nebula", 0.51, 61.3],
-    11: ["NP", "NGC 7662", "Andromède", "9.2", "20''", "Nébuleuse de la Boule de Neige Bleue", 23.43, 42.5],
+    10: ["PN", "NGC 1289", "Cassiopée", "12.3", "34''", "Phantom Streak Nebula", 0.51, 61.3],
+    11: ["PN", "NGC 7662", "Andromède", "9.2", "20''", "Nébuleuse de la Boule de Neige Bleue", 23.43, 42.5],
     12: ["G", "NGC 891", "Andromède", "10", "13.5x2.8'", "Galaxie de l'Aiguille d'Argent", 2.38, 42.3],
     13: ["G", "NGC 253", "Sculpteur", "7.1", "25.1x7.4'", "Galaxie du Sculpteur", 0.79, -25.3],
     14: ["G", "NGC 772", "Bélier", "10.3", "7.1x4.5'", "Galaxie Spirale", 1.98, 19.0],
-    15: ["NP", "NGC 246", "Baleine", "8.0", "3'45''", "Nébuleuse du Crâne", 0.78, -11.9],
+    15: ["PN", "NGC 246", "Baleine", "8.0", "3'45''", "Nébuleuse du Crâne", 0.78, -11.9],
     16: ["G", "NGC 936", "Baleine", "10.1", "5.2x4.4'", "Galaxie lenticulaire", 2.47, -1.1],
     17: ["OC", "NGC 869", "Persée", "4.4", "30'/30'", "Double Amas de Persée", 2.32, 57.1],
     18: ["G", "NGC 1023", "Persée", "9.5", "8.7x4.3'", "Galaxie lenticulaire", 2.67, 39.0],
     19: ["EN", "NGC 1491", "Persée", "-", "3.0x3.0'", "Fossil Footprint Nebula", 4.05, 51.3],
-    20: ["NP", "NGC 1501", "Girafe", "12.0", "52''", "Nébuleuse de l'Huître", 4.11, 60.9],
+    20: ["PN", "NGC 1501", "Girafe", "12.0", "52''", "Nébuleuse de l'Huître", 4.11, 60.9],
     21: ["G", "NGC 1232", "Eridan", "9.9", "7.8x6.9'", "Galaxie NGC 1232", 3.16, -20.6],
-    22: ["NP", "NGC 1535", "Eridan", "10.4", "18''", "Nébuleuse de l'Œil de Cléopâtre", 4.24, -12.7],
-    23: ["NP", "NGC 1514", "Taureau", "10.8", "1'54''", "Crystal Ball Nebula", 4.15, 30.8],
+    22: ["PN", "NGC 1535", "Eridan", "10.4", "18''", "Nébuleuse de l'Œil de Cléopâtre", 4.24, -12.7],
+    23: ["PN", "NGC 1514", "Taureau", "10.8", "1'54''", "Crystal Ball Nebula", 4.15, 30.8],
     24: ["E/RN", "NGC 1931", "Cocher", "-", "3.0x3.0'", "Fly Nebula", 5.52, 34.2],
     25: ["RN", "NGC 1788", "Orion", "-", "8.0x5.0'", "Nébuleuse de la Tête de Renard", 5.13, -3.3],
     26: ["E/RN", "NGC 1973", "Orion", "-", "40x25'", "Nébuleuse Courante", 5.58, -4.7],
-    27: ["NP", "NGC 2022", "Orion", "12.4", "18''", "Nébuleuse planétaire", 5.7, 9.1],
+    27: ["PN", "NGC 2022", "Orion", "12.4", "18''", "Nébuleuse planétaire", 5.7, 9.1],
     28: ["EN", "NGC 2024", "Orion", "-", "30x30'", "Nébuleuse de la Flamme", 5.69, -1.9],
     29: ["OC", "NGC 2194", "Orion", "8.5", "10'", "Amas ouvert", 6.23, 12.8],
-    30: ["NP", "NGC 2371", "Gémeaux", "13.0", "55''", "Nébuleuse de la Cacahuète", 7.43, 29.5],
-    31: ["NP", "NGC 2392", "Gémeaux", "8.3", "13''", "Nébuleuse de l'Esquimau", 7.48, 20.9],
+    30: ["PN", "NGC 2371", "Gémeaux", "13.0", "55''", "Nébuleuse de la Cacahuète", 7.43, 29.5],
+    31: ["PN", "NGC 2392", "Gémeaux", "8.3", "13''", "Nébuleuse de l'Esquimau", 7.48, 20.9],
     32: ["EN", "NGC 2237", "Licorne", "-", "80x60'", "Nébuleuse de la Rosette", 6.54, 5.0],
     33: ["E/RN", "NGC 2261", "Licorne", "var", "2x1'", "Nébuleuse Variable de Hubble", 6.65, 8.7],
     34: ["EN", "NGC 2359", "Grand Chien", "-", "8.0x6.0'", "Nébuleuse du Casque de Thor", 7.31, -13.2],
-    35: ["NP", "NGC 2440", "Poupe", "10.3", "14''", "Nébuleuse de l'Insecte", 7.69, -18.2],
+    35: ["PN", "NGC 2440", "Poupe", "10.3", "14''", "Nébuleuse de l'Insecte", 7.69, -18.2],
     36: ["OC", "NGC 2539", "Poupe", "6.5", "22'", "Amas ouvert", 8.18, -12.8],
     37: ["G", "NGC 2403", "Girafe", "8.4", "17.8x11.0'", "Galaxie spirale", 7.62, 65.6],
     38: ["G", "NGC 2655", "Girafe", "10.1", "5.1x4.4'", "Galaxie lenticulaire", 8.9, 78.2],
@@ -416,7 +419,7 @@ RASC_DATA = {
     47: ["G", "NGC 4157", "Grande Ourse", "11.9", "6.9x1.7'", "Galaxie spirale", 12.2, 50.5],
     48: ["G", "NGC 4605", "Grande Ourse", "9.6", "5.5x2.3'", "Galaxie spirale", 12.67, 61.6],
     49: ["G", "NGC 3115", "Sextant", "9.2", "8.3x3.2'", "Galaxie du Fuseau", 10.09, -7.7],
-    50: ["NP", "NGC 3242", "Hydre", "8.6", "16''", "Le Fantôme de Jupiter", 10.41, -18.6],
+    50: ["PN", "NGC 3242", "Hydre", "8.6", "16''", "Le Fantôme de Jupiter", 10.41, -18.6],
     51: ["G", "NGC 3003", "Petit Lion", "11.7", "5.9x1.7'", "Galaxie spirale", 9.81, 33.4],
     52: ["G", "NGC 3344", "Petit Lion", "9.9", "6.9x6.5'", "Galaxie du Petit Moulinet", 10.73, 25.0],
     53: ["G", "NGC 3432", "Petit Lion", "11.3", "6.2x1.5'", "Galaxie spirale", 10.91, 36.6],
@@ -441,7 +444,7 @@ RASC_DATA = {
     72: ["G", "NGC 4565", "Chevelure de Bérénice", "9.6", "16.2x2.8'", "Galaxie de l'Aiguille", 12.6, 26.0],
     73: ["G", "NGC 4725", "Chevelure de Bérénice", "9.2", "11.0x7.9'", "Galaxie spirale", 12.84, 25.5],
     74: ["G", "NGC 4038", "Corbeau", "10.7", "~3x2'", "Galaxies des Antennes", 12.03, -18.9],
-    75: ["NP", "NGC 4361", "Corbeau", "10.3", "45''", "Galaxie de l'Atome pour la Paix", 12.41, -18.8],
+    75: ["PN", "NGC 4361", "Corbeau", "10.3", "45''", "Galaxie de l'Atome pour la Paix", 12.41, -18.8],
     76: ["G", "NGC 4216", "Vierge", "9.9", "8.3x2.2'", "Galaxie spirale", 12.26, 13.1],
     77: ["G", "NGC 4388", "Vierge", "11.0", "5.1x1.4'", "Galaxie spirale", 12.43, 12.7],
     78: ["G", "NGC 4438", "Vierge", "10.1", "9.3x3.9'", "Les Yeux", 12.46, 13.0],
@@ -455,29 +458,76 @@ RASC_DATA = {
     86: ["GC", "NGC 5466", "Bouvier", "9.1", "11.0'", "Amas globulaire", 14.09, 28.5],
     87: ["G", "NGC 5907", "Dragon", "10.4", "12.3x1.8'", "Galaxie de l'Éclat", 15.26, 56.3],
     88: ["G", "NGC 6503", "Dragon", "10.2", "6.2x2.3'", "Galaxie spirale", 17.81, 70.1],
-    89: ["NP", "NGC 6543", "Dragon", "8.8", "18''", "Nébuleuse de l'Œil de Chat", 17.98, 66.6],
-    90: ["NP", "NGC 6210", "Hercule", "9.3", "14''", "Nébuleuse de la Tortue", 16.74, 23.8],
-    91: ["NP", "NGC 6369", "Ophiuchus", "10.4", "30''", "Nébuleuse du Petit Fantôme", 17.49, -17.8],
-    92: ["NP", "NGC 6572", "Ophiuchus", "9.0", "8''", "Emerald Nebula", 18.2, 6.8],
+    89: ["PN", "NGC 6543", "Dragon", "8.8", "18''", "Nébuleuse de l'Œil de Chat", 17.98, 66.6],
+    90: ["PN", "NGC 6210", "Hercule", "9.3", "14''", "Nébuleuse de la Tortue", 16.74, 23.8],
+    91: ["PN", "NGC 6369", "Ophiuchus", "10.4", "30''", "Nébuleuse du Petit Fantôme", 17.49, -17.8],
+    92: ["PN", "NGC 6572", "Ophiuchus", "9.0", "8''", "Emerald Nebula", 18.2, 6.8],
     93: ["OC", "NGC 6633", "Ophiuchus", "4.6", "27'", "Amas de Tweedledum", 18.46, 6.5],
     94: ["GC", "NGC 6712", "Ecu de Sobieski", "8.2", "7.2'", "Amas globulaire", 18.89, -8.7],
-    95: ["NP", "NGC 6781", "Aigle", "11.8", "1'49''", "Phantom Feather Nebula", 19.31, 6.5],
+    95: ["PN", "NGC 6781", "Aigle", "11.8", "1'49''", "Phantom Feather Nebula", 19.31, 6.5],
     96: ["OC", "NGC 6819", "Cygne", "7.3", "5'", "Amas de la Tête de Renard (Foxhead)", 19.69, 40.2],
-    97: ["NP", "NGC 6826", "Cygne", "9.8", "30''", "Nébuleuse de l'Œil Clignotant", 19.75, 50.5],
+    97: ["PN", "NGC 6826", "Cygne", "9.8", "30''", "Nébuleuse de l'Œil Clignotant", 19.75, 50.5],
     98: ["SNR", "NGC 6888", "Cygne", "-", "20x10'", "Nébuleuse du Croissant", 20.2, 38.4],
     "99a": ["SNR", "NGC 6960", "Cygne", "-", "70x6'", "Petite Dentelle du Cygne", 20.76, 30.7],
     "99b": ["SNR", "NGC 6992", "Cygne", "-", "78x8'", "Grande Dentelle du Cygne", 20.94, 31.7],
     100: ["EN", "NGC 7000", "Cygne", "-", "120x100'", "Nébuleuse de l'Amérique du Nord", 20.99, 44.3],
-    101: ["NP", "NGC 7027", "Cygne", "10.4", "15''", "Nébuleuse planétaire", 21.12, 42.2],
-    102: ["NP", "NGC 6445", "Sagittaire", "11.8", "34''", "Little Gem Nebula", 17.82, -16.2],
+    101: ["PN", "NGC 7027", "Cygne", "10.4", "15''", "Nébuleuse planétaire", 21.12, 42.2],
+    102: ["PN", "NGC 6445", "Sagittaire", "11.8", "34''", "Little Gem Nebula", 17.82, -16.2],
     103: ["OC", "NGC 6520", "Sagittaire", "8.1", "6'", "Amas ouvert", 18.06, -27.9],
-    104: ["NP", "NGC 6818", "Sagittaire", "9.9", "17''", "Little Gem Nebula", 19.73, -16.2],
+    104: ["PN", "NGC 6818", "Sagittaire", "9.9", "17''", "Little Gem Nebula", 19.73, -16.2],
     105: ["OC", "NGC 6802", "Petit Renard", "8.8", "3.2'", "Amas ouvert", 19.51, 20.3],
     106: ["OC", "NGC 6940", "Petit Renard", "6.3", "31'", "Amas ouvert", 20.58, 28.3],
     107: ["OC", "NGC 6939", "Céphée", "7.8", "8'", "Amas ouvert", 20.57, 60.6],
     108: ["G", "NGC 6946", "Céphée", "8.9", "11.0x9.8'", "Galaxie du Feu d'Artifice", 20.58, 60.1],
     109: ["RN", "NGC 7129", "Céphée", "-", "8x7'", "Nébuleuse par réflexion", 21.72, 66.1],
-    110: ["NP", "NGC 40", "Céphée", "10.2", "37''", "Nébuleuse du Nœud Coulant", 0.05, 72.5]
+    110: ["PN", "NGC 40", "Céphée", "10.2", "37''", "Nébuleuse du Nœud Coulant", 0.05, 72.5],
+    
+# deep sky challenge (extracts)
+    1001: ["RN", "NGC 7822", "Cassiopée", "Non spécifiée", "60'x30'", "Nébuleuse par émission", 0.06, 68.6],
+    1002: ["RN", "IC 59", "Cassiopée", "Non spécifiée", "10'x5'", "Nébuleuse par émission/réflexion", 0.94, 61.1],
+    1003: ["OC", "NGC 609", "Cassiopée", "11.0", "3.0'", "Amas ouvert", 1.62, 64.6],
+    1004: ["EN", "IC 1795", "Cassiopée", "Non spécifiée", "27'x13'", "Nébuleuse par émission", 2.41, 61.9],
+    1005: ["G", "Maffei I", "Cassiopée", "14.0", "5'x3'", "Galaxie Maffei I", 2.61, 59.7],
+    1006: ["GC", "NGC 1049", "Fourneau", "11.0", "0.6'", "Amas globulaire", 2.66, -34.5],
+    1007: ["G", "Abell 426", "Persée", "12-16", "30'", "Amas de galaxies de Persée", 3.33, 41.5],
+    1008: ["RN", "NGC 1432/35", "Taureau", "Non spécifiée", "30'x30'", "Nébuleuse des Pléiades", 3.77, 23.8],
+    1009: ["G", "IC 342", "Girafe", "12.0", "17'x17'", "Galaxie IC 342", 3.78, 68.1],
+    1010: ["EN", "NGC 1499", "Persée", "Non spécifiée", "145'x40'", "Nébuleuse California", 4.01, 36.6],
+    1011: ["RN", "IC 405", "Cocher", "Non spécifiée", "30'x19'", "Nébuleuse de l'Étoile Flamboyante", 5.27, 34.3],
+    1012: ["N", "HH 1", "Orion", "14.5", "8'", "Herbig-Haro 1", 5.61, -6.8],
+    1013: ["N", "IC 434 / Barnard 33", "Orion", "Non spécifiée", "60'x10'", "Nébuleuse de la Tête de Cheval (B 33)", 5.68, -2.5],
+    1014: ["EN", "Sh 2-276", "Orion", "Non spécifiée", "600'x30'", "Boucle de Barnard", 5.80, 1.0],
+    1015: ["PN", "Abell 12", "Orion", "13.0", "37'", "Nébuleuse planétaire Abell 12", 6.04, 9.7],
+    1016: ["SNR", "IC 443", "Gémeaux", "Non spécifiée", "50'x40'", "Nébuleuse de la Méduse (SNR)", 6.28, 22.8],
+    1017: ["PN", "J 900", "Gémeaux", "12.2", "8'", "Jonckheere 900", 6.43, 17.8],
+    1018: ["RN", "IC 2177", "Licorne", "Non spécifiée", "120'x40'", "Nébuleuse de la Mouette", 7.09, -10.7],
+    1019: ["PN", "PK 205 +14.2", "Gémeaux", "13.0", "700'", "Nébuleuse de la Méduse (Abell 21)", 7.48, 13.3],
+    1020: ["PN", "PK 164 +31.1", "Lynx", "14.0", "400'", "Jones-Emberson 1", 7.96, 53.4],
+    1021: ["G", "Leo I", "Lion", "9.8", "10.7'x8.3'", "Galaxie naine du Lion", 10.14, 12.3],
+    1022: ["G", "Abell 1367", "Lion", "13-16", "60'", "Amas de galaxies du Lion", 11.73, 19.9],
+    1023: ["G", "NGC 3172", "Petite Ourse", "13.6", "0.7'x0.7'", "Polarissima Borealis", 11.84, 89.1],
+    1024: ["G", "NGC 4236", "Dragon", "9.6", "18.6'x6.9'", "Galaxie NGC 4236", 12.28, 69.5],
+    1025: ["QSR", "Mrk 205", "Dragon", "14.5", "Stellaire", "Quasar Markarian 205", 12.36, 75.3],
+    1026: ["QSR", "3C 273", "Vierge", "12-13", "Stellaire", "Quasar 3C 273", 12.49, 2.1],
+    1027: ["G", "NGC 4676", "Chevelure de Bérénice", "14.1", "2'x1'", "Les Souris (Galaxies en interaction)", 12.77, 30.7],
+    1028: ["G", "Abell 1656", "Chevelure de Bérénice", "12-16", "60'", "Amas de galaxies de la Coma", 13.00, 28.0],
+    1029: ["GC", "NGC 5053", "Chevelure de Bérénice", "9.8", "10.5'", "Amas globulaire", 13.27, 17.7],
+    1030: ["GC", "NGC 5897", "Balance", "8.6", "12.6'", "Amas globulaire", 15.29, -21.0],
+    1031: ["G", "Abell 2065", "Couronne Boréale", "16.0", "30'", "Amas de galaxies de la Couronne Boréale", 15.38, 27.7],
+    1032: ["G", "NGC 6027", "Serpent", "15.0", "2'x1'", "Sextet de Seyfert", 15.99, 20.8],
+    1033: ["N", "Barnard 72", "Serpentaire", "Non spécifiée", "30'", "Nébuleuse du Serpent", 17.39, -23.6],
+    1034: ["OC", "NGC 6791", "Lyre", "9.5", "16'", "Amas ouvert", 19.35, 37.9],
+    1035: ["PN", "PK 64 +5.l", "Cygne", "9.6", "8'", "Étoile d'Hydrogène de Campbell", 19.58, 30.5],
+    1036: ["RN", "Minkovski-92", "Cygne", "11.0", "12'x6'", "Nébuleuse de l'Empreinte de Pas", 19.61, 29.6],
+    1037: ["G", "NGC 6822", "Sagittaire", "11.0", "10.2'x9.5'", "Galaxie de Barnard", 19.75, -14.8],
+    1038: ["GC", "Palomar 11", "Aigle", "9.8", "3.2'", "Amas globulaire Palomar 11", 19.75, -8.0],
+    1039: ["PN", "IC 4997", "Flèche", "10.9", "2'", "Nébuleuse planétaire", 20.34, 16.8],
+    1040: ["EN", "IC 1318", "Cygne", "Non spécifiée", "Grande", "Nébuleuse de l'Étoile Sadr", 20.44, 40.5],
+    1041: ["PN", "PK 80 ?6.1", "Cygne", "13.5", "16'", "Nébuleuse de l'Œuf", 21.04, 36.7],
+    1042: ["EN", "IC 1396", "Céphée", "Non spécifiée", "170'x140'", "Nébuleuse de la Trompe d'Éléphant", 21.65, 57.5],
+    1043: ["RN", "IC 5146", "Cygne", "Non spécifiée", "12'x12'", "Nébuleuse du Cocon", 21.89, 47.3],
+    1044: ["G", "NGC 7317?20", "Pégase", "13-14", "1' chacune", "Quintette de Stephan", 22.60, 33.9],
+    1045: ["PN", "Jones 1", "Pégase", "12.1", "332'", "Nébuleuse planétaire Jones 1", 23.60, 30.5]
 }
 
 O_MEARA_DATA = {
@@ -497,19 +547,19 @@ O_MEARA_DATA = {
     13: ["G", "NGC 1316", "Fourneau", "9.4", "12'x9'", "Fornax A", 3.38, -37.2],
     14: ["OC", "Alpha Per", "Persée", "1.2", "185'", "Amas d'Alpha Persei", 3.40, 49.0],
     15: ["N", "NGC 1333", "Persée", "5.7", "3'", "nuage de Persée (NGC 1333)", 3.48, 31.4],
-    16: ["NP", "NGC 1360", "Fourneau", "9.4", "6'", "Nébuleuse de l'Embryon", 3.55, -25.9],
+    16: ["PN", "NGC 1360", "Fourneau", "9.4", "6'", "Nébuleuse de l'Embryon", 3.55, -25.9],
     17: ["G", "NGC 1365", "Fourneau", "9.5", "11'x6'", "NGC 1365", 3.56, -36.1],
     18: ["G", "NGC 1399", "Fourneau", "9.4", "7'x7'", "NGC 1399", 3.64, -35.4],
     19: ["G", "NGC 1398", "Fourneau", "9.5", "8'x5'", "NGC 1398", 3.65, -26.3],
     20: ["G", "NGC 1404", "Fourneau", "10.0", "3'x3'", "NGC 1404", 3.65, -35.6],
     21: ["A", "Kemble 1", "Girafe", "5.0", "150'", "Cascade de Kemble", 3.96, 63.0],
-    22: ["NP", "NGC 1501", "Girafe", "11.5", "0.9'", "Nébuleuse de l'Huître", 4.11, 61.0],
+    22: ["PN", "NGC 1501", "Girafe", "11.5", "0.9'", "Nébuleuse de l'Huître", 4.11, 61.0],
     23: ["OC", "NGC 1502", "Girafe", "6.0", "20'", "Amas du Jolly Roger", 4.13, 62.3],
-    24: ["NP", "NGC 1535", "Éridan", "9.6", "0.9'", "Œil de Cléopâtre", 4.24, -12.7],
+    24: ["PN", "NGC 1535", "Éridan", "9.6", "0.9'", "Œil de Cléopâtre", 4.24, -12.7],
     25: ["OC", "NGC 1528", "Persée", "6.4", "18'", "Amas m & m", 4.25, 51.2],
     26: ["OC", "NGC 1545", "Persée", "6.2", "12'", "Amas m & m", 4.30, 50.3],
     27: ["OC", "NGC 1647", "Taureau", "6.4", "40'", "Amas de la Lune Pirate", 4.77, 19.1],
-    28: ["NP", "IC 418", "Lièvre", "9.6", "0.5'", "Nébuleuse de la Framboise", 5.10, -12.7],
+    28: ["PN", "IC 418", "Lièvre", "9.6", "0.5'", "Nébuleuse de la Framboise", 5.10, -12.7],
     29: ["OC", "Cr 69", "Orion", "5.0", "50'", "Amas de Lambda Orionis", 5.58, 9.9],
     30: ["OC", "NGC 1981", "Orion", "4.2", "28'", "Amas du Wagon de Charbon", 5.59, -4.4],
     31: ["OC", "NGC 1980", "Orion", "5.0", "30'", "Le Joyau Perdu d'Orion", 5.59, -4.9],
@@ -522,7 +572,7 @@ O_MEARA_DATA = {
     38: ["OC", "NGC 2264", "Licorne", "4.1", "40'", "Amas de l'Arbre de Noël", 6.68, 9.9],
     39: ["OC", "NGC 2301", "Licorne", "6.0", "15'", "Le Dragon d'Hagrid", 6.86, 0.5],
     40: ["OC", "NGC 2353", "Licorne", "7.1", "18'", "Avery's Island", 7.24, -10.3],
-    41: ["NP", "NGC 2440", "Poupe", "9.4", "1.3'", "Nébuleuse du Papillon Albinos", 7.70, -18.2],
+    41: ["PN", "NGC 2440", "Poupe", "9.4", "1.3'", "Nébuleuse du Papillon Albinos", 7.70, -18.2],
     42: ["OC", "NGC 2451", "Poupe", "2.8", "50'", "Amas du Scorpion Piquant", 7.75, -38.0],
     43: ["N", "NGC 2467", "Poupe", "7.1", "15'", "NGC 2467", 7.87, -26.4],
     44: ["OC", "NGC 2547", "Voiles", "4.7", "25'", "Amas de la Boucle d'Oreille d'Or", 8.17, -49.2],
@@ -542,10 +592,10 @@ O_MEARA_DATA = {
     58: ["G", "NGC 3628", "Lion", "9.6", "13'x3'", "Galaxie du Fantôme du Roi Hamlet", 11.34, 13.6],
     59: ["G", "NGC 4214", "Chiens de Chasse", "9.6", "8'x7'", "NGC 4214", 12.26, 36.3],
     60: ["G", "NGC 4216", "Vierge", "10.3", "8'x2'", "Galaxie Silver Streak", 12.26, 13.1],
-    61: ["NP", "NGC 4361", "Corbeau", "10.9", "2.1'", "NGC 4361", 12.41, -18.8],
+    61: ["PN", "NGC 4361", "Corbeau", "10.9", "2.1'", "NGC 4361", 12.41, -18.8],
     62: ["OC", "Mel 111", "Chevelure de Bérénice", "1.8", "300'", "Amas de Coma", 12.42, 25.9],
     63: ["G", "NGC 4490", "Chiens de Chasse", "9.5", "6'x3'", "Galaxie du Cocon", 12.51, 41.6],
-    64: ["NP", "IC 3568", "Girafe", "10.6", "0.3'", "Nébuleuse du Citron Vert", 12.55, 82.6],
+    64: ["PN", "IC 3568", "Girafe", "10.6", "0.3'", "Nébuleuse du Citron Vert", 12.55, 82.6],
     65: ["G", "NGC 4526", "Vierge", "9.6", "7'x3'", "Galaxie du Sourcil Poilu", 12.57, 7.7],
     66: ["G", "NGC 4605", "Grande Ourse", "10.1", "6'x2'", "Galaxie de l'Œuf de Fabergé", 12.69, 61.6],
     67: ["G", "NGC 4656", "Chiens de Chasse", "10.1", "15'x2'", "Galaxie du Crochet", 12.71, 32.2],
@@ -559,19 +609,19 @@ O_MEARA_DATA = {
     75: ["G", "NGC 5866", "Dragon", "9.9", "7'x3'", "Galaxie de l'Or des Fous", 15.11, 55.8],
     76: ["GC", "NGC 5897", "Balance", "8.4", "11'", "Amas Globulaire Fantôme", 15.30, -21.0],
     77: ["GC", "NGC 5986", "Loup", "7.6", "10'", "NGC 5986", 15.77, -37.8],
-    78: ["NP", "NGC 6210", "Hercule", "8.8", "0.4'", "Nébuleuse de la Tortue", 16.74, 23.8],
+    78: ["PN", "NGC 6210", "Hercule", "8.8", "0.4'", "Nébuleuse de la Tortue", 16.74, 23.8],
     79: ["OC", "NGC 6242", "Scorpion", "6.4", "9'", "NGC 6242", 16.92, -39.5],
     80: ["OC", "NGC 6281", "Scorpion", "5.4", "8'", "Amas de l'Aile de Papillon de Nuit", 17.01, -37.9],
-    81: ["NP", "NGC 6369", "Ophiuchus", "11.4", "0.6'", "Nébuleuse du Petit Fantôme", 17.49, -23.8],
+    81: ["PN", "NGC 6369", "Ophiuchus", "11.4", "0.6'", "Nébuleuse du Petit Fantôme", 17.49, -23.8],
     82: ["OC", "NGC 6400", "Scorpion", "8.8", "12'", "Amas Fantôme", 17.67, -37.0],
     83: ["OC", "NGC 4665", "Ophiuchus", "8.3", "45'", "La Ruche d'Été", 17.66, 5.7],
-    84: ["NP", "NGC 6445", "Sagittaire", "11.2", "0.7'", "Nébuleuse de la Boîte", 17.82, -20.0],
+    84: ["PN", "NGC 6445", "Sagittaire", "11.2", "0.7'", "Nébuleuse de la Boîte", 17.82, -20.0],
     85: ["G", "NGC 6503", "Dragon", "10.2", "7'x3'", "Galaxie Perdue dans l'Space", 17.82, 70.1],
     86: ["GC", "NGC 6441", "Scorpion", "7.2", "10'", "Amas de la Pépite d'Argent", 17.83, -37.1],
     87: ["D", "Barnard", "Ophiuchus", "9.5", "n/a", "Étoile de Barnard", 17.96, 4.7],
     88: ["OC", "NGC 6520", "Sagittaire", "7.6", "5'", "Le Coffre du Mort", 18.06, -27.9],
     89: ["GC", "NGC 6544", "Sagittaire", "7.5", "9'", "Amas de l'Étoile de Mer", 18.12, -25.0],
-    90: ["NP", "NGC 6572", "Ophiuchus", "8.1", "0.3'", "Nébuleuse de l'Œil d'Émeraude", 18.20, 6.9],
+    90: ["PN", "NGC 6572", "Ophiuchus", "8.1", "0.3'", "Nébuleuse de l'Œil d'Émeraude", 18.20, 6.9],
     91: ["GC", "NGC 6624", "Sagittaire", "7.6", "9'", "NGC 6624", 18.39, -30.4],
     92: ["OC", "NGC 6633", "Ophiuchus", "4.6", "20'", "Amas de Tweedledum", 18.46, 6.5],
     93: ["OC", "IC 4756", "Serpent", "5.0", "52'", "Amas de Graff", 18.65, 5.4],
@@ -580,12 +630,12 @@ O_MEARA_DATA = {
     96: ["GC", "NGC 6723", "Sagittaire", "6.8", "13'", "NGC 6723", 18.99, -36.6],
     97: ["A", "Cr 399", "Petit Renard", "3.6", "60'", "Le Cintre", 19.42, 20.2],
     98: ["OC", "NGC 6819", "Cygne", "7.3", "5'", "Amas de la Tête de Renard", 19.69, 40.2],
-    99: ["NP", "NGC 6818", "Sagittaire", "9.3", "0.8'", "Nébuleuse du Petit Joyau", 19.73, -14.2],
+    99: ["PN", "NGC 6818", "Sagittaire", "9.3", "0.8'", "Nébuleuse du Petit Joyau", 19.73, -14.2],
     100: ["OC", "NGC 6866", "Cygne", "7.6", "7'", "Amas de la Frégate Pirate", 20.06, 44.2],
     101: ["OC", "NGC 6940", "Petit Renard", "6.3", "25'", "Amas de Mothra", 20.58, 28.3],
     102: ["N", "LDN 906", "Cygne", "n/a", "480'", "Sac à Charbon du Nord", 20.62, 41.0],
-    103: ["NP", "NGC 7008", "Cygne", "10.7", "1.4'", "Nébuleuse du Bouton de Manteau", 21.01, 54.5],
-    104: ["NP", "NGC 7027", "Cygne", "8.5", "0.3'", "NGC 7027", 21.12, 42.2],
+    103: ["PN", "NGC 7008", "Cygne", "10.7", "1.4'", "Nébuleuse du Bouton de Manteau", 21.01, 54.5],
+    104: ["PN", "NGC 7027", "Cygne", "8.5", "0.3'", "NGC 7027", 21.12, 42.2],
     105: ["N+C", "IC 1396", "Céphée", "3.5", "154'", "Amas de l'Éléphant / Trèfle", 21.65, 57.8],
     106: ["OC", "NGC 7380", "Céphée", "7.2", "20'", "Vif d'Or de Harry Potter", 22.78, 58.1],
     107: ["A", "Asterism", "Poissons", "8.0", "12'", "Petite Louche", 23.82, 8.0],
@@ -607,7 +657,7 @@ O_MEARA_DATA = {
     1013: ["G", "NGC 1400", "Éridan", "10.8", "1.9'", "Galaxie avec NGC 1407", 3.66, -18.6],
     1014: ["G", "NGC 1407", "Éridan", "9.7", "2.5'", "Galaxie avec NGC 1400", 3.67, -18.5],
     1015: ["EN", "NGC 1491", "Persée", "10.0", "12'", "Nébuleuse de l'Empreinte Fossile", 4.05, 51.3],
-    1016: ["NP", "NGC 1514", "Taureau", "10.0", "2'", "Nébuleuse de la Boule de Cristal", 4.15, 30.7],
+    1016: ["PN", "NGC 1514", "Taureau", "10.0", "2'", "Nébuleuse de la Boule de Cristal", 4.15, 30.7],
     1017: ["EN", "NGC 1579", "Persée", "10.0", "12'", "Trifide du Nord", 4.51, 35.2],
     1018: ["OC", "NGC 1750", "Taureau", "7.0", "60'", "Amas ouvert", 5.06, 23.6],
     1019: ["OC", "NGC 1758", "Taureau", "7.0", "90'", "Amas ouvert", 5.07, 23.7],
@@ -617,17 +667,17 @@ O_MEARA_DATA = {
     1023: ["EN", "IC 417", "Cocher", "10.0", "13'", "Nébuleuse de l'Araignée", 5.47, 34.4],
     1024: ["OC", "NGC 1931", "Cocher", "8.3", "3'", "La Mouche (avec IC 417)", 5.52, 34.2],
     1025: ["OC", "Collinder 70", "Orion", "0.4", "150'", "Ceinture d'Orion", 5.60, -1.0],
-    1026: ["NP", "NGC 2022", "Orion", "11.6", "0.5'", "Nébuleuse des Baisers", 5.70, 9.1],
-    1027: ["NP", "IC 2149", "Cocher", "11.5", "0.25'", "Nébuleuse planétaire", 5.91, 46.1],
+    1026: ["PN", "NGC 2022", "Orion", "11.6", "0.5'", "Nébuleuse des Baisers", 5.70, 9.1],
+    1027: ["PN", "IC 2149", "Cocher", "11.5", "0.25'", "Nébuleuse planétaire", 5.91, 46.1],
     1028: ["EN", "NGC 2149", "Licorne", "10.0", "3'", "Nébuleuse par émission", 6.13, -9.7],
     1029: ["RN", "NGC 2170", "Licorne", "10.0", "110'", "Nébuleuse de l'Ange", 6.13, -6.3],
     1030: ["OC", "NGC 2281", "Cocher", "7.2", "15'", "Amas du Cœur Brisé", 6.81, 41.1],
     1031: ["GC", "NGC 2298", "Poupe", "7.3", "6.8'", "Amas Globulaire de la Poupe", 6.81, -36.0],
     1032: ["EN", "NGC 2316", "Licorne", "10.0", "4'", "Nébuleuse par émission", 7.02, -7.7],
     1033: ["OC", "NGC 2343", "Licorne", "5.5", "7'", "Amas ouvert", 7.14, -10.6],
-    1034: ["NP", "NGC 2346", "Licorne", "10.3", "2'", "Nébuleuse du Papillon", 7.15, -0.8],
+    1034: ["PN", "NGC 2346", "Licorne", "10.3", "2'", "Nébuleuse du Papillon", 7.15, -0.8],
     1035: ["EN", "NGC 2359", "Grand Chien", "10.0", "10'", "Casque de Thor / Canard", 7.31, -13.2],
-    1036: ["NP", "NGC 2371", "Gémeaux", "9.1", "2.1'", "Nébuleuse de la Double Bulle", 7.43, 29.4],
+    1036: ["PN", "NGC 2371", "Gémeaux", "9.1", "2.1'", "Nébuleuse de la Double Bulle", 7.43, 29.4],
     1037: ["OC", "NGC 2420", "Gémeaux", "9.1", "10'", "Amas de la Comète Scintillante", 7.64, 21.5],
     1038: ["G", "NGC 3079", "Grande Ourse", "10.1", "7.6'", "Galaxie du Frisbee Fantôme", 10.03, 55.6],
     1039: ["G", "NGC 3077", "Grande Ourse", "10.0", "4.6'", "Galaxie irrégulière", 10.06, 68.7],
@@ -662,65 +712,92 @@ O_MEARA_DATA = {
     1068: ["GC", "NGC 5466", "Bouvier", "9.0", "9'", "Amas Globulaire Fantôme / Snowglobe", 14.09, 28.5],
     1069: ["G", "NGC 5846", "Vierge", "10.0", "3.0' x 3.0'", "Galaxie spirale", 15.10, 1.6],
     1070: ["G", "NGC 5907", "Dragon", "10.3", "11.5' x 1.7'", "Galaxie de l'Éclat / Splinter", 15.27, 56.3],
-    1071: ["NP", "IC 4593", "Hercule", "10.7", ">12\"", "Nébuleuse du Petit Pois / White-Eyed Pea", 16.20, 12.07],
+    1071: ["PN", "IC 4593", "Hercule", "10.7", ">12\"", "Nébuleuse du Petit Pois / White-Eyed Pea", 16.20, 12.07],
     1072: ["GC", "NGC 6144", "Scorpion", "9.0", "9'", "Amas Globulaire", 16.45, -26.02],
     1073: ["G", "NGC 6207", "Hercule", "11.6", "3.0' x 1.1'", "Galaxie proche de M13", 16.72, 36.83],
     1074: ["GC", "NGC 6229", "Hercule", "9.4", "4.5'", "Amas Globulaire d'Hercule / \"Prize Comet\"", 16.78, 47.53],
     1075: ["GC", "NGC 6293", "Ophiuchus", "8.2", "7.9'", "Amas Globulaire", 17.17, -26.58],
-    1076: ["NP", "NGC 6309", "Ophiuchus", "11.5", ">16\"", "Nébuleuse de la Boîte / Box", 17.24, -12.92],
+    1076: ["PN", "NGC 6309", "Ophiuchus", "11.5", ">16\"", "Nébuleuse de la Boîte / Box", 17.24, -12.92],
     1077: ["GC", "NGC 6356", "Ophiuchus", "8.2", "10'", "Amas Globulaire", 17.39, -17.82],
     1078: ["GC", "NGC 6522", "Sagittaire", "8.3", "9.4'", "Fenêtre de Baade", 18.06, -30.03],
     1079: ["GC", "NGC 6528", "Sagittaire", "9.6", "3.7'", "Amas Globulaire", 18.08, -30.05],
-    1080: ["NP", "NGC 6563", "Sagittaire", "11.0", "50\" x 38\"", "Anneau Austral / Southern Ring", 18.20, -33.87],
+    1080: ["PN", "NGC 6563", "Sagittaire", "11.0", "50\" x 38\"", "Anneau Austral / Southern Ring", 18.20, -33.87],
     1081: ["RN", "NGC 6589", "Sagittaire", "10.0", "5' x 3'", "Nébuleuse par réflexion", 18.28, -19.78],
     1082: ["RN", "NGC 6595", "Sagittaire", "10.0", "4' x 3'", "Nébuleuse par réflexion / = NGC 6590", 18.29, -19.87],
     1083: ["GC", "NGC 6638", "Sagittaire", "9.2", "7.3'", "Amas Globulaire", 18.52, -25.50],
     1084: ["OC", "NGC 6664", "Écu de Sobieski", "7.8", "12'", "Amas du Traîneau / Santa's Sleigh", 18.61, -8.18],
     1085: ["GC", "NGC 6717", "Sagittaire", "8.4", "5.4'", "Amas Globulaire (Palomar 9)", 18.92, -22.70],
-    1086: ["NP", "NGC 6751", "Aigle", "11.9", "24\"", "Nébuleuse de la Fleur de Pissenlit / Glowing Eye", 19.10, -5.99],
+    1086: ["PN", "NGC 6751", "Aigle", "11.9", "24\"", "Nébuleuse de la Fleur de Pissenlit / Glowing Eye", 19.10, -5.99],
     1087: ["OC", "NGC 6755", "Aigle", "7.5", "15'", "Amas avec NGC 6756 / Part of Binary Cluster?", 19.12, 4.27],
     1088: ["OC", "NGC 6756", "Aigle", "10.6", "4'", "Amas avec NGC 6755 / Part of Binary Cluster?", 19.15, 4.70],
-    1089: ["NP", "NGC 6778", "Aigle", "11.9", "20\" x 40\"", "Mini Dumbbell / Son of M76", 19.31, -1.60],
-    1090: ["NP", "NGC 6781", "Aigle", "11.4", "2'", "Nébuleuse de la Boule de Neige / Ghost of the Moon", 19.31, 6.53],
-    1091: ["NP", "NGC 6804", "Aigle", "12.2", "~50\"", "Nébuleuse du Rétrécissement / Incredible Shrinking", 19.53, 9.22],
+    1089: ["PN", "NGC 6778", "Aigle", "11.9", "20\" x 40\"", "Mini Dumbbell / Son of M76", 19.31, -1.60],
+    1090: ["PN", "NGC 6781", "Aigle", "11.4", "2'", "Nébuleuse de la Boule de Neige / Ghost of the Moon", 19.31, 6.53],
+    1091: ["PN", "NGC 6804", "Aigle", "12.2", "~50\"", "Nébuleuse du Rétrécissement / Incredible Shrinking", 19.53, 9.22],
     1092: ["OC", "NGC 6811", "Cygne", "6.8", "15'", "Smoke Ring / Hole in a Cluster", 19.62, 46.38],
     1093: ["A", "Cygnus Kite Asterism", "Cygne", "8.8 (star)", "-", "Astérisme du Cerf-Volant / HDE 226868", 19.97, 35.20],
     1094: ["A", "OME 3", "Cygne", "-", "12'", "Alessi J20053+4732", 20.09, 47.53],
-    1095: ["NP", "NGC 6891", "Dauphin", "10.5", ">18\"", "Nébuleuse planétaire", 20.25, 12.70],
-    1096: ["NP", "NGC 6894", "Cygne", "12.3", ">42\"", "Petite Nébuleuse de l'Anneau / Diamond Ring", 20.27, 30.57],
+    1095: ["PN", "NGC 6891", "Dauphin", "10.5", ">18\"", "Nébuleuse planétaire", 20.25, 12.70],
+    1096: ["PN", "NGC 6894", "Cygne", "12.3", ">42\"", "Petite Nébuleuse de l'Anneau / Diamond Ring", 20.27, 30.57],
     1097: ["EN", "IC 1318(a)", "Cygne", "-", "45' x 20'", "Nébuleuse Gamma Cygni / Near Gamma Cygni", 20.28, 41.82],
-    1098: ["NP", "NGC 6905", "Dauphin", "11.1", "42\" x 35\"", "Nébuleuse de l'Éclair Bleu / Blue Flash", 20.37, 20.10],
+    1098: ["PN", "NGC 6905", "Dauphin", "11.1", "42\" x 35\"", "Nébuleuse de l'Éclair Bleu / Blue Flash", 20.37, 20.10],
     1099: ["OC", "NGC 6910", "Cygne", "6.6", "10'", "Amas de l'Arpenteur (Inchworm)", 20.39, 40.78],
     1100: ["OC", "NGC 6939", "Céphée", "7.8", "10'", "Astérisme de l'Oie en vol / Flying Geese", 20.53, 60.67],
-    1101: ["NP", "NGC 7026", "Cygne", "10.9", "21\"", "Nébuleuse du Cheeseburger / Cheeseburger", 21.11, 47.85],
-    1102: ["NP", "NGC 7048", "Cygne", "12.1", "61\"", "Nébuleuse du Disque Fantôme / Peek-a-Boo", 21.24, 46.28],
+    1101: ["PN", "NGC 7026", "Cygne", "10.9", "21\"", "Nébuleuse du Cheeseburger / Cheeseburger", 21.11, 47.85],
+    1102: ["PN", "NGC 7048", "Cygne", "12.1", "61\"", "Nébuleuse du Disque Fantôme / Peek-a-Boo", 21.24, 46.28],
     1103: ["RN", "NGC 7129", "Céphée", "-", "7' x 7'", "Rose Cosmique / Cosmic Rosebud", 21.71, 66.10],
     1104: ["OC", "NGC 7160", "Céphée", "6.1", "5'", "Alligator Nageur / Bruce Lee", 21.90, 62.60],
     1105: ["OC", "NGC 7209", "Lézard", "7.7", "15'", "Amas ouvert / Star Lizard", 22.10, 46.48],
-    1106: ["NP", "NGC 7354", "Céphée", "12.2", "22\" x 18\"", "Nébuleuse planétaire", 22.67, 61.28],
+    1106: ["PN", "NGC 7354", "Céphée", "12.2", "22\" x 18\"", "Nébuleuse planétaire", 22.67, 61.28],
     1107: ["OC", "NGC 7510", "Céphée", "7.9", "7'", "Amas du Loir (Dormouse)", 23.19, 60.57],
     1108: ["EN", "NGC 7538", "Céphée", "-", "9' x 6'", "Nébuleuse de la Lagune Nord / Northern Lagoon", 23.23, 61.52],
     1109: ["OC", "NGC 7790", "Cassiopée", "8.5", "5'", "Widow's Web", 23.97, 61.21],
 }
 
+# --- Format: [Type, Tech_Ref, Constellation, Mag, Size, Common Name, RA, Dec]
+
+
+# extracts of the_list
+OTHER_DATA = {  
+    1: ["DN", "NGC 896", "Cassiopée", "8", "20'", "Nébuleuse de la Tête de Poisson - Utiliser un filtre UHC, nébuleuses obscures présentes", 2.41, 61.90],
+    2: ["PN", "IC 289", "Cassiopée", "13", ".5'", "annulaire", 3.17, 61.32],
+    3: ["OC", "NGC 1513", "Persée", "8.8", "12'", "En forme de U, amas assez condensé de 40 étoiles", 4.17, 49.52],
+    4: ["GC", "NGC 1049", "Fourneau", "12.9", "24\"", "Amas globulaire extragalactique - Fait partie du système nain du Fourneau", 2.66, -34.28],
+    5: ["G", "NGC 1380", "Fourneau", "10.2", "5'x2'", "SO, en forme de lentille - Amas du Fourneau I", 3.61, -34.98],
+    6: ["G", "NGC 1187", "Éridan", "11.3", "5.4'x4'", "SBc, galaxie spirale à bras multiples, barre?, légèrement inclinée", 3.04, -22.87],
+    7: ["G", "NGC 1421", "Éridan", "11.4", "3'x0.5'", "Sb, fuseau gris, aspect moucheté, recourbé à une extrémité", 3.71, -13.48],
+    8: ["G", "NGC 1433", "Horloge", "10", "6.8'", "SBa - barre proéminente, presque de face", 3.70, -47.22],
+    9: ["G", "NGC 1964", "Lièvre", "10.8", "6'x2'", "Sb, allongée, régions HII intégrées", 5.56, -21.95],
+    10: ["G", "NGC 1792", "Colombe", "10.2", "3'x1'", "Sc, allongée", 5.09, -37.98],
+    11: ["G", "NGC 1808", "Colombe", "9.9", "7.2'", "SB, bras externes faibles, barre d'un bout à l'autre, noyau plus brillant, structure de bras spiraux visible", 5.13, -37.52],
+    12: ["N+C", "NGC 1907", "Cocher", "8.2", "7'", "Bel amas compact, 110 étoiles", 5.47, 35.32],
+    13: ["OC", "NGC 2266", "Gémeaux", "9.8", "5'", "Semblable à M11", 6.72, 26.97],
+    14: ["OC", "NGC 2304", "Gémeaux", "10.1", "5.5'", "Amas irrégulier d'étoiles fines comme des têtes d'épingle, compact", 6.92, 18.02],
+    15: ["OC", "NGC 2355", "Gémeaux", "9.5", "9'", "Amas riche et compact de 70 étoiles", 7.28, 13.78],
+    16: ["PN", "NGC 2438", "Poupe", "11", "65\"", "Nébuleuse Planétaire d'M46 (sur le bord nord d'M46)", 7.7, -14.73]
+}
+
 try:
     # Si le fichier 'LANG_database.py' existe à côté, on charge ses données
-    from LANG_database import LANG, MESSIER_DATA, CALDWELL_DATA, RASC_DATA, O_MEARA_DATA
+    from LANG_database import LANG, MESSIER_DATA, CALDWELL_DATA, RASC_DATA, O_MEARA_DATA, OTHER_DATA
 except ImportError:
     # Si le fichier n'existe pas, Python ignore l'erreur et garde les données FR ci-dessus
     pass
 
 CATALOGS = {
     "Messier": {"prefix": "M", "data": MESSIER_DATA},          # the prefix is used in the HTML page
+        "O'Meara": {"prefix": "X", "data": O_MEARA_DATA},
     "Caldwell": {"prefix": "C", "data": CALDWELL_DATA},
     "RASC": {"prefix": "R", "data": RASC_DATA},
-    "O'Meara": {"prefix": "X", "data": O_MEARA_DATA}
+    "Other": {"prefix": "O", "data": OTHER_DATA}               # parts of SAC and the_list
 }
 
 TODO_FILE = "TODO.txt" # format is {"Catalog name": {"IdObjet": "free Comment"}}
 
 
-# --- SCRIPT ---
+#=============================================================================
+# SCRIPT 
+#=============================================================================
+
 
 
 def compute_best_season(ra):
@@ -830,7 +907,16 @@ def generate():
     final_json = {}
     stats = {}
     todo_list = load_todo_list() 
+    
+    # Build prefixes dictionary safely for JavaScript lookup
     prefixes_js = {k: v["prefix"] for k, v in CATALOGS.items()}
+    prefixes_js["All in 1"] = ""
+    
+    # Tracking sets to eliminate cross-catalog duplicates for the virtual "All in 1" list
+    all_in_one_objs = []
+    seen_tech_refs = set()
+    all_in_one_found_count = 0
+    all_in_one_total_count = 0
     
     for name, data_dict in CATALOGS.items():
         marked_dict = todo_list.get(name, {})
@@ -864,13 +950,14 @@ def generate():
             h_max = 90 - abs(CONFIG["LATITUDE"] - dec)
             season_computed = compute_best_season(ra)
 
-            color = "#c9d1d9" 
-            if h_max <= CONFIG["LIMIT_IMPOSSIBLE"]: color = "#da3633" 
-            elif h_max <= CONFIG["LIMIT_DIFFICILE"]: color = "#ff9f43" 
+            color = "#c9d1d9" # Default text color (GitHub theme)
+            if h_max <= CONFIG["LIMIT_IMPOSSIBLE"]: color = "#da3633" # Impossible color (Red)
+            elif h_max <= CONFIG["LIMIT_DIFFICILE"]: color = "#ff9f43" # Difficult color (Orange)
 
-            objs.append({
+            obj_data = {
                 "id": k, 
                 "prefix": prefix, 
+                "catalog_origin": name,
                 "info": info, 
                 "type_code": type_code, # needed for JS filters
                 "tech_ref": tech_ref,
@@ -882,12 +969,34 @@ def generate():
                 "label_color": color,
                 "todo": str(k) in marked_dict,
                 "todo_comment": marked_dict.get(str(k), "")
-            })
+            }
+            
+            objs.append(obj_data)
+            
+            # --- "All in 1" Deduplication logic ---
+            # Remove all spaces and normalize casing to prevent false mismatching
+            cleaned_ref = re.sub(r'\s+', '', str(tech_ref)).upper() if tech_ref else ""
+            fallback_ref = f"{prefix.upper()}{str(k).upper()}"
+            lookup_key = cleaned_ref if (cleaned_ref and cleaned_ref != "NONE") else fallback_ref
+            
+            if lookup_key not in seen_tech_refs:
+                seen_tech_refs.add(lookup_key)
+                all_in_one_objs.append(obj_data)
+                all_in_one_total_count += 1
+                if img_file:
+                    all_in_one_found_count += 1
             
         final_json[name] = objs
         stats[name] = f"{found_count}/{len(data_dict['data'])}"
 
-    select_options = "".join([f'<option value="{c}" {"selected" if c == CONFIG["SELECTED_CATALOG"] else ""}>{c}</option>' for c in CATALOGS.keys()])
+    # Append virtual "All in 1" catalog entries to datasets
+    final_json["All in 1"] = all_in_one_objs
+    stats["All in 1"] = f"{all_in_one_found_count}/{all_in_one_total_count}"
+
+    # Build dropdown selections. "All in 1" is forced as the native first element.
+    select_options = '<option value="All in 1"' + (' selected' if CONFIG["SELECTED_CATALOG"] == "All in 1" else '') + '>All in 1</option>'
+    select_options += "".join([f'<option value="{c}" {"selected" if c == CONFIG["SELECTED_CATALOG"] else ""}>{c}</option>' for c in CATALOGS.keys()])
+    
     season_options = "".join([f'<option value="{val}">{val}</option>' for val in LANG["SEASONS"].values()])
     dir_options = f'<option value="Tous">{LANG["ALL_DIR"]}</option><option value="{LANG["NORTH"]}">{LANG["NORTH"]}</option><option value="{LANG["SOUTH"]}">{LANG["SOUTH"]}</option>'
     family_options = f"""
@@ -967,6 +1076,12 @@ def generate():
             .chart-container {{ background: #000000; padding: 5px; position: relative; margin-top: 10px; width: 300px; height: {CONFIG["CHART_HEIGHT"]}px; }}
             canvas {{ display: block; width: 100% !important; height: 100% !important; }}
         </style>
+        <script>
+            console.log("CRITICAL: Top header script loaded.");
+            window.addEventListener('error', function(e) {{
+                console.log("FATAL ERROR TRAPPED:", e.message, "Line:", e.lineno);
+            }});
+        </script>
     </head>
     <body>
         <h1 id="catTitle">{LANG['CATALOG']}</h1>
@@ -1001,6 +1116,7 @@ def generate():
         </dialog>
 
         <script>
+            console.log("Core processing block start.");
             const data = {json.dumps(final_json)};
             const stats = {json.dumps(stats)};
             const prefixes = {json.dumps(prefixes_js)};
@@ -1011,18 +1127,20 @@ def generate():
             let globalChartInstance = null;
             let isTooltipFrozen = false;
             
-            // Sync local storage with JSON data on load
+            // Sync local storage mapping with unique prefix codes (e.g., M33, C33)
             let localTodo = JSON.parse(localStorage.getItem('astro_todo')) || {{}};
             for (let cat in data) {{
-                if (!localTodo[cat]) localTodo[cat] = {{}};
                 data[cat].forEach(obj => {{
-                    if (obj.todo) {{ localTodo[cat][obj.id] = obj.todo_comment || ""; }}
+                    if (obj.todo) {{ 
+                        let globalUniqueKey = obj.prefix + obj.id;
+                        localTodo[globalUniqueKey] = obj.todo_comment || "";
+                    }}
                 }});
             }}
             localStorage.setItem('astro_todo', JSON.stringify(localTodo));
 
             const FAMILIES = {{
-                "Nébuleuse": ["N", "NP", "SC", "SNR", "EN", "RN", "E/RN", "N+C"],
+                "Nébuleuse": ["N", "PN", "SC", "SNR", "EN", "RN", "E/RN", "N+C"],
                 "Galaxie": ["G"],
                 "Amas": ["GC", "OC", "D", "A", "N+C", "QSR"]
             }};
@@ -1031,7 +1149,7 @@ def generate():
             let scale = 1, posX = 0, posY = 0, isDragging = false, startX, startY;
             const m = document.getElementById("overlay"), mi = document.getElementById("fullImg"), t = document.getElementById('tooltip');
 
-            // Unfreeze tooltip when user right-clicks on a frozen tooltip box
+            // Unfreeze tooltip when user right-clicks on a frozen tooltip box                                                                        
             t.addEventListener('contextmenu', (e) => {{
                 if (isTooltipFrozen) {{
                     e.preventDefault();
@@ -1044,11 +1162,149 @@ def generate():
             function filterD(d) {{ currentDir = d; update(); }}
             function filterF(f) {{ currentFamily = f; update(); }}
 
-            /**
-             * Exports the favorite/todo objects list from localStorage as a JSON file named TODO.txt
-             */
+        /*    function showT(element, obj, currentComment) {{
+                if (isTooltipFrozen) return;
+                t.style.display = 'block';
+                let content = '<strong>' + obj.prefix + obj.id + '</strong> - ' + obj.info[0] + '<br>';
+                if (obj.tech_ref) content += 'Ref: ' + obj.tech_ref + '<br>';
+                if (currentComment) content += '<span style="color:#ff4d4d">❤ ' + currentComment + '</span><br>';
+                content += 'H-Max: ' + obj.h_max + '°<br>';
+                content += 'Saison: ' + obj.season_computed + '<br>';
+                if (obj.date) content += 'Date: ' + obj.date;
+                
+                t.innerHTML = content + '<div class="chart-container"><canvas id="tooltipChart"></canvas></div>';
+                
+                const rect = element.getBoundingClientRect();
+                t.style.left = (rect.left + window.scrollX + 20) + 'px';
+                t.style.top = (rect.top + window.scrollY + 20) + 'px';
+                
+                // Realtime simulation / drawing matrix curve via Astronomy Engine
+                try {{
+                    const ctx = document.getElementById('tooltipChart').getContext('2d');
+                    const observer = new Astronomy.Observer(userLat, userLon, userElv);
+                    const raHours = parseFloat(obj.info[6]);
+                    const decDegrees = parseFloat(obj.info[7]);
+                    const equaTarget = new Astronomy.Equator(raHours, decDegrees, 0);
+
+                    const now = new Date();
+                    const midnightLocal = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+
+                    let labels = [];
+                    let datasetAltitude = [];
+                    let datasetSunAltitude = [];
+                    let xMinIndex = 0;
+                    let xMaxIndex = 288;
+                    
+                    let indexCoucherAstro = null;
+                    let indexLeverAstro = null;
+
+                    for (let i = -72; i <= 216; i++) {{
+                        const hr = i / 6;
+                        const dPoint = new Date(midnightLocal.getTime() + hr * 60 * 60 * 1000);
+                        
+                        let hh = dPoint.getHours();
+                        let mm = dPoint.getMinutes();
+                        let timeString = (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+                        labels.push(timeString);
+
+                        const timeObj = new Astronomy.Time(dPoint);
+                        const horiz = Astronomy.Horizon(timeObj, observer, equaTarget, 'normal');
+                        datasetAltitude.push(horiz.altitude);
+
+                        const sunEqua = Astronomy.Equator(timeObj, null, null); 
+                        const sunPos = Astronomy.SunPosition(timeObj);
+                        const sunHoriz = Astronomy.Horizon(timeObj, observer, sunPos, 'normal');
+                        datasetSunAltitude.push(sunHoriz.altitude);
+                    }}
+
+                    for(let idx = 0; idx < datasetSunAltitude.length; idx++) {{
+                        if(datasetSunAltitude[idx] <= -12) {{
+                            if(indexCoucherAstro === null) indexCoucherAstro = idx;
+                            indexLeverAstro = idx;
+                        }}
+                    }}
+
+                    if (indexCoucherAstro !== null && indexLeverAstro !== null) {{
+                        xMinIndex = indexCoucherAstro;
+                        xMaxIndex = indexLeverAstro;
+                    }}
+
+                    let maxAlt = 0;
+                    for (let idx = xMinIndex; idx <= xMaxIndex; idx++) {{
+                        if (datasetAltitude[idx] > maxAlt) maxAlt = datasetAltitude[idx];
+                    }}
+
+                    if (globalChartInstance) {{
+                        globalChartInstance.destroy();
+                    }}
+
+                    globalChartInstance = new Chart(ctx, {{
+                        type: 'line',
+                        data: {{
+                            labels: labels,
+                            datasets: [{{
+                                label: 'Altitude',
+                                data: datasetAltitude,
+                                borderColor: '#3498db',
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                fill: false
+                            }}]
+                        }},
+                        options: {{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {{
+                                legend: {{ display: false }},
+                                tooltip: {{
+                                    enabled: false, 
+                                    intersect: false,
+                                    mode: 'index',
+                                    callbacks: {{
+                                        title: function(context) {{
+                                            return `${{LANG_LABELS?.HEURE || 'Heure'}}: ${{context[0].label}}`;
+                                        }},
+                                        label: function(context) {{
+                                            return `${{context.label}} ${{context.parsed.y.toFixed(0)}}°`;
+                                        }}
+                                    }}
+                                }}
+                            }},
+                            scales: {{
+                                x: {{
+                                    type: 'category',
+                                    min: xMinIndex,
+                                    max: xMaxIndex,
+                                    grid: {{ display: false }},
+                                    ticks: {{ display: false }}, 
+                                    border: {{ color: '#444444' }}
+                                }},
+                                y: {{
+                                    min: 0,
+                                    max: maxAlt > 0 ? Math.ceil(maxAlt + 15) : 90,
+                                    ticks: {{ color: '#888888', font: {{ size: 9 }}, callback: (v) => Math.round(v) + '°' }}
+                                }}
+                            }}
+                        }}
+                    }});
+                }} catch (err) {{ console.error(err); }}
+            }}
+            */
+
             function exportTodo() {{
-                const blob = new Blob([JSON.stringify(localTodo, null, 4)], {{type: 'text/plain'}});
+                // Reconstruct native JSON catalog architecture mapping for standard TODO.txt backwards compatibility
+                let exportData = {{}};
+                for (let catName in data) {{
+                    if (catName === "All in 1") continue;
+                    exportData[catName] = {{}};
+                    data[catName].forEach(obj => {{
+                        let globalUniqueKey = obj.prefix + obj.id;
+                        if (localTodo[globalUniqueKey] !== undefined) {{
+                            exportData[catName][obj.id] = localTodo[globalUniqueKey];
+                        }}
+                    }});
+                }}
+                const blob = new Blob([JSON.stringify(exportData, null, 4)], {{type: 'text/plain'}});
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url; a.download = 'TODO.txt'; a.click();
@@ -1057,14 +1313,15 @@ def generate():
 
             /**
              * Handles adding or removing an object from the favorite/todo list (Right-click on thumbnail image box)
-             */
-            function toggleHeart(e, catName, objId) {{
+             */               
+            function toggleHeart(e, prefix, objId) {{
                 e.preventDefault(); 
                 if (isTooltipFrozen) return false;
-                if (!localTodo[catName]) localTodo[catName] = {{}};
                 
-                if (localTodo[catName][objId] !== undefined) {{
-                    delete localTodo[catName][objId];
+                let globalUniqueKey = prefix + objId;
+
+                if (localTodo[globalUniqueKey] !== undefined) {{
+                    delete localTodo[globalUniqueKey];
                     localStorage.setItem('astro_todo', JSON.stringify(localTodo));
                     update();
                 }} else {{
@@ -1074,7 +1331,7 @@ def generate():
                     input.value = ""; 
                     dialog.showModal();
                     form.onsubmit = () => {{
-                        localTodo[catName][objId] = input.value.trim();
+                        localTodo[globalUniqueKey] = input.value.trim();
                         localStorage.setItem('astro_todo', JSON.stringify(localTodo));
                         update();
                     }};
@@ -1201,22 +1458,21 @@ def generate():
                     }}
 
                     return false;
-
                 }} catch (err) {{
                     return true; 
                 }}
             }}
             
-            /**
-             * Rebuilds and filters the grid view based on the current selection of catalog, family, season, and direction
-             */
             function update() {{
                 const cat = document.getElementById('catSelect').value;
+                console.log("Selected catalog: " + cat);
                 const g = document.getElementById('grid'); 
                 g.innerHTML = '';
                 document.getElementById('catTitle').innerText = "{LANG['CATALOG']} " + cat;
                 document.getElementById('statsText').innerText = "(" + stats[cat] + ")";
                 
+                if (!data[cat]) return;
+
                 data[cat].forEach(obj => {{
                     if (!obj.info || obj.info.length < 7) return;
                     const objType = obj.info[0].trim();
@@ -1238,17 +1494,20 @@ def generate():
                     if (currentDir !== 'Tous' && objDir !== currentDir) return;
                     
                     const d = document.createElement('div'); d.className = 'case';
-                    const isTodo = localTodo[cat] && localTodo[cat][obj.id] !== undefined;
-                    const currentComment = isTodo ? localTodo[cat][obj.id] : "";
+                    
+                    // Unified evaluation using global prefix key
+                    let globalUniqueKey = obj.prefix + obj.id;
+                    let isTodo = localTodo[globalUniqueKey] !== undefined;
+                    let currentComment = isTodo ? localTodo[globalUniqueKey] : "";
                     
                     d.onmouseenter = (e) => {{ if (!isTooltipFrozen) showT(d, obj, currentComment); }};
                     d.onmouseleave = () => {{ if (!isTooltipFrozen) {{ t.style.display='none'; if(globalChartInstance) {{ globalChartInstance.destroy(); globalChartInstance = null; }} }} }}
                     
                     const heartClass = currentComment ? 'has-comment' : 'no-comment';
-                    const heart = isTodo ? `<div class="todo-heart ${{heartClass}}">❤</div>` : '';
+                    const heart = isTodo ? '<div class="todo-heart ' + heartClass + '">❤</div>' : '';
 
-                    let displaySeason = currentSeason === 'Tous' ? `<br>(${{objSeason}})` : '';
-                    let content = obj.thumb ? `<img src="${{obj.thumb}}">` : `<div class="empty-info">${{objType}}${{displaySeason}}</div>`;
+                    let displaySeason = currentSeason === 'Tous' ? '<br>(' + objSeason + ')' : '';
+                    let content = obj.thumb ? '<img src="' + obj.thumb + '">' : '<div class="empty-info">' + objType + displaySeason + '</div>';
                     
                     /* CRITICAL ZONE: Dynamic full-resolution preview assignment.
                        If the source image was a high-fidelity TIFF format, we intercept the link 
@@ -1265,31 +1524,32 @@ def generate():
                     /* CRITICAL ZONE: Heterogeneous Dynamic URL Generation For Telescopius routing.
                        Each deep-sky index handles naming profiles uniquely based on its survey ecosystem:
                        1. Messier & Caldwell: Directly match uniform sequential tracking codes ('m-X', 'c-X').
-                       2. RASC & O'Meara: Mixed cross-referenced deep-sky tables. The script parses the target's 
+                       2. RASC & O'Meara & SAC: Mixed cross-referenced deep-sky tables. The script parses the target's 
                           technical designation field using regular expressions to extract standard catalog 
                           sub-identifiers (NGC, IC, Sh2, Barnard, vdB) and formats them into accurate URLs.
                     */
                     let tUrl = "https://telescopius.com/deep-sky-objects/";
-                    if (obj.prefix === prefixes.Messier) tUrl += "m-" + obj.id;
-                    else if (obj.prefix === prefixes.Caldwell) tUrl += "c-" + obj.id;
-                    else if (obj.prefix === prefixes.RASC || obj.prefix === prefixes["O'Meara"]) {{
-                        const match = obj.tech_ref.match(/(?:NGC|IC|SH2|BARNARD|VDB)[_ \-]?(\d+)/i);
+                    if (obj.prefix && prefixes.Messier && obj.prefix === prefixes.Messier) tUrl += "m-" + obj.id;
+                    else if (obj.prefix && prefixes.Caldwell && obj.prefix === prefixes.Caldwell) tUrl += "c-" + obj.id;
+                    else if (obj.prefix && (prefixes.RASC || prefixes["O'Meara"] || prefixes["OTHER"])) {{
+                        const match = obj.tech_ref.match(/(?:NGC|IC|SH2|BARNARD|VDB|LDN)[_ \-]?(\d+)/i);
                         const idNum = match ? match[1] : ""; 
                         
                         if (obj.tech_ref.toUpperCase().includes("IC")) tUrl += "ic-" + idNum;
                         else if (obj.tech_ref.toUpperCase().includes("SH2")) tUrl += "sh2-" + idNum;
                         else if (obj.tech_ref.toUpperCase().includes("BARNARD")) tUrl += "barnard-" + idNum;
                         else if (obj.tech_ref.toUpperCase().includes("VDB")) tUrl += "vdb-" + idNum;
+                        else if (obj.tech_ref.toUpperCase().includes("LDN")) tUrl += "ldn-" + idNum;
                         else tUrl += "ngc-" + idNum;
                     }}
                 
-                    const labelText = obj.tech_ref ? `${{obj.prefix}}${{obj.id}} - ${{obj.tech_ref}}` : `${{obj.prefix}}${{obj.id}}`;
-                    const imgAction = obj.img ? `openM('${{clickImg}}')` : `window.open('${{tUrl}}', '_blank')`;
+                    const labelText = obj.tech_ref ? obj.prefix + obj.id + ' - ' + obj.tech_ref : obj.prefix + obj.id;
+                    const imgAction = obj.img ? "openM('" + clickImg + "')" : "window.open('" + tUrl + "', '_blank')";
 
                     const imgBoxEl = document.createElement('div');
                     imgBoxEl.className = "img-box";
                     imgBoxEl.onclick = () => eval(imgAction);
-                    imgBoxEl.oncontextmenu = (e) => toggleHeart(e, cat, obj.id);
+                    imgBoxEl.oncontextmenu = (e) => toggleHeart(e, obj.prefix, obj.id);
                     imgBoxEl.innerHTML = heart + content;
 
                     const labelEl = document.createElement('div');
@@ -1305,12 +1565,14 @@ def generate():
                 }});
             }}
 
-
             // Full screen overlay image viewer control functions
             function openM(s) {{ if(!s) return; scale = 1; posX = 0; posY = 0; mi.src = s; m.style.display = "flex"; updateTransform(); }}
             function closeM() {{ m.style.display = "none"; }}
             function updateTransform() {{ mi.style.transform = `translate(calc(-50% + ${{posX}}px), calc(-50% + ${{posY}}px)) scale(${{scale}})`; }}
-            
+            // Full screen overlay image viewer control functions
+            function openM(s) {{ if(!s) return; scale = 1; posX = 0; posY = 0; mi.src = s; m.style.display = "flex"; updateTransform(); }}
+            function closeM() {{ m.style.display = "none"; }}
+            function updateTransform() {{ mi.style.transform = `translate(calc(-50% + ${{posX}}px), calc(-50% + ${{posY}}px)) scale(${{scale}})`; }}
             // Image viewer pan & zoom mouse event listeners
             m.addEventListener('wheel', e => {{ e.preventDefault(); scale = Math.min(Math.max(0.5, scale * (e.deltaY > 0 ? 0.9 : 1.1)), 10); updateTransform(); }}, {{passive: false}});
             mi.addEventListener('mousedown', e => {{ isDragging = true; startX = e.clientX - posX; startY = e.clientY - posY; e.preventDefault(); }});
