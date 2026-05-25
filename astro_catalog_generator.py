@@ -8,6 +8,7 @@
 # https://app.astrobin.com/u/GaryI?collection=677&i=esls3b#gallery
 # https://vicmenard.com/articles/
 #
+#   V6.1 : added a "?" button to find an object by reference
 #   V6.0 : added a "All in 1" catalog option. Added some Deep sky challenges from RASC
 #          added a "OTHER" catalog with some interesting objects from "the list" (Vic Menard)
 #   V5.2 : fixed visible to night option
@@ -1034,6 +1035,31 @@ def generate():
                 padding: 6px 12px; border-radius: 6px; font-size: 11px;
                 cursor: pointer; transition: 0.2s;
             }}
+            
+            /* button with a question mark */
+            .btn-search {{
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 1000;
+                background: #161b22;
+                border: 1px solid #30363d;
+                /* COULEUR ET DESIGN DU TEXTE "?" */
+                color: #8b949e; /* Modifiez cette couleur selon vos préférences */
+                font-size: 16px;
+                font-family: sans-serif;
+                padding: 6px 12px;
+                font-weight: bold;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: .2s;
+            }}
+            .btn-search:hover {{
+                background: #21262d;
+                border-color: #8b949e;
+                color: #c9d1d9;
+            }}
+            
             .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--case-size), 1fr)); gap: 15px; width: 100%; margin: 0 auto; }}
             .case {{ background: #161b22; border-radius: 8px; border: 1px solid #30363d; overflow: hidden; position: relative; display: flex; flex-direction: column; }}
             
@@ -1084,6 +1110,8 @@ def generate():
         </script>
     </head>
     <body>
+        <button onclick="searchCatalog()" class="btn-search">?</button>
+
         <h1 id="catTitle">{LANG['CATALOG']}</h1>
         <div class="stats-header" id="statsText"></div>
         <div class="filter-bar">
@@ -1463,6 +1491,89 @@ def generate():
                 }}
             }}
             
+            // FONCTION DE RECHERCHE DIRECTE AVEC CENTRAGE AUTOMATIQUE (SANS CONFIRMATION)
+            function searchCatalog() {{
+                let searchStr = prompt("Entrez une référence d'objet (ex: 3344, NGC3344, NGC 3344) :");
+                if (!searchStr) return;
+                
+                let cleanSearch = searchStr.replace(/\s+/g, '').toUpperCase();
+                if (!cleanSearch) return;
+                
+                let allInOne = data["All in 1"] || [];
+                let foundObj = null;
+                let isNumericOnly = /^\d+$/.test(cleanSearch);
+                
+                for (let i = 0; i < allInOne.length; i++) {{
+                    let obj = allInOne[i];
+                    let refTech = obj.tech_ref ? obj.tech_ref.replace(/\s+/g, '').toUpperCase() : "";
+                    let refIdNormal = (obj.prefix + obj.id).replace(/\s+/g, '').toUpperCase();
+                    let idOnly = String(obj.id).toUpperCase();
+                    
+                    if (refTech === cleanSearch || refIdNormal === cleanSearch || idOnly === cleanSearch) {{
+                        foundObj = obj;
+                        break;
+                    }}
+                    
+                    if (isNumericOnly && refTech) {{
+                        let refTechNumbers = refTech.replace(/\D/g, '');
+                        if (refTechNumbers === cleanSearch) {{
+                            foundObj = obj;
+                            break;
+                        }}
+                    }}
+                }}
+                
+                if (foundObj) {{
+                    // 1. Reset complet de tous les sélecteurs et bascule sur All in 1
+                    let catSelect = document.getElementById("catSelect");
+                    let familySelect = document.getElementById("familySelect");
+                    let seasonSelect = document.getElementById("seasonSelect");
+                    let dirSelect = document.getElementById("dirSelect");
+                    
+                    if (catSelect) catSelect.value = "All in 1";
+                    if (familySelect) {{ familySelect.value = "Tous"; currentFamily = "Tous"; }}
+                    if (seasonSelect) {{ seasonSelect.value = "Tous"; currentSeason = "Tous"; }}
+                    if (dirSelect) {{ dirSelect.value = "Tous"; currentDir = "Tous"; }}
+                    
+                    // Force la reconstruction immédiate de la grille complète
+                    update(); 
+                    
+                    // 2. Ciblage direct et instantané de la vignette
+                    setTimeout(() => {{
+                        let targetId = "card_" + foundObj.prefix.toUpperCase() + String(foundObj.id).toUpperCase();
+                        let targetElement = document.getElementById(targetId);
+
+                        if (targetElement) {{
+                            // Déplacement fluide automatique
+                            targetElement.scrollIntoView({{ behavior: "smooth", block: "center" }});
+                            
+                            // Effet visuel vert astro 5 sec
+                            let originalBorder = targetElement.style.borderColor;
+                            let originalBoxShadow = targetElement.style.boxShadow;
+                            targetElement.style.borderColor = "#00ff66";
+                            targetElement.style.boxShadow = "0 0 25px #00ff66";
+                            
+                            // Déclenchement de l'infobulle (survol simulé)
+                            let mouseEvent = new MouseEvent('mouseenter', {{
+                                bubbles: true,
+                                cancelable: true,
+                                view: window
+                            }});
+                            targetElement.dispatchEvent(mouseEvent);
+                            
+                            setTimeout(() => {{
+                                targetElement.style.borderColor = originalBorder;
+                                targetElement.style.boxShadow = originalBoxShadow;
+                            }}, 5000);
+                        }} else {{
+                            alert("object not found");
+                        }}
+                    }}, 150);
+                }} else {{
+                    alert("object not found");
+                }}
+            }}
+            
             function update() {{
                 const cat = document.getElementById('catSelect').value;
                 console.log("Selected catalog: " + cat);
@@ -1547,6 +1658,7 @@ def generate():
                     const imgAction = obj.img ? "openM('" + clickImg + "')" : "window.open('" + tUrl + "', '_blank')";
 
                     const imgBoxEl = document.createElement('div');
+                    d.id = "card_" + obj.prefix.toUpperCase() + String(obj.id).toUpperCase();
                     imgBoxEl.className = "img-box";
                     imgBoxEl.onclick = () => eval(imgAction);
                     imgBoxEl.oncontextmenu = (e) => toggleHeart(e, obj.prefix, obj.id);
