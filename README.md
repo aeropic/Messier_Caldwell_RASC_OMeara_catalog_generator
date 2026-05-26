@@ -110,7 +110,7 @@ At the top left of the screen there is a "question mark" button, press it and yo
 
 <img width="870" height="213" alt="cata_question" src="https://github.com/user-attachments/assets/03ea4ba4-60b6-4575-b611-4bf4a5b7a7f2" />
 
-Once OK is pressed, if the object is found in any catalog (first found object will win !), the catalog in which the object is located will be selected and the page will scroll to the object. A green "jacky tuning style" frame will be displayed to catch your eyes !
+Once OK is pressed, if the object is found in any catalog (first found object will win !), the catalog in which the object is located will be selected and the page will scroll to the object. A green "jacky tuning style" frame will be displayed during 5 seconds to catch your attention !
 
 <img width="666" height="686" alt="cata_found" src="https://github.com/user-attachments/assets/7c8ca460-1511-42ab-be9d-baaa39378e0e" />
 
