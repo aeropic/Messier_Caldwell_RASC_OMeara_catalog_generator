@@ -12,6 +12,8 @@ LANG = {
     "SOUTH": "Sur",
     "PROMPT_LABEL": "Introduce una descripción opcional:",
     "VALIDATE": "Validar",
+    "SEARCH_PROMPT": "Entrez une référence d'objet (ex: 3344, NGC3344, NGC 3344) :",
+    "NOT_FOUND": "Objet non trouvé",
     "TYPES": {
         "N": "nebulosa",
         "PN": "nebulosa planetaria",
