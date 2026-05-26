@@ -8,6 +8,7 @@
 # https://app.astrobin.com/u/GaryI?collection=677&i=esls3b#gallery
 # https://vicmenard.com/articles/
 #
+#   V6.1.1 : english translation of "?" function
 #   V6.1 : added a "?" button to find an object by reference
 #   V6.0 : added a "All in 1" catalog option. Added some Deep sky challenges from RASC
 #          added a "OTHER" catalog with some interesting objects from "the list" (Vic Menard)
@@ -89,7 +90,7 @@ CONFIG = {
 # -----------------------------------------------
 
 LANG = {
-    "CATALOG": "mon catalogue",                              # "my catalog"
+    "CATALOG": "mon catalogue",                               # "my catalog"
     "PAGE_TITLE": "Mon Catalogue Astro",                     # "my astro catalog"
     "UNIT_LABEL": "objets",                                  # "objects"
     "ALL": "Toutes saisons",                                 # "All seasons"
@@ -99,18 +100,20 @@ LANG = {
     "SOUTH": "Sud",                                          # "South"
     "PROMPT_LABEL": "Entrez une description optionnelle :",  # "Enter an optional description:"
     "VALIDATE": "Valider",                                   # "Validate"
+    "SEARCH_PROMPT": "Entrez une référence d'objet (ex: 3344, NGC3344, NGC 3344) :",
+    "NOT_FOUND": "Objet non trouvé",
     "TYPES": {
         "N": "Nébuleuse",                                    # "nebula"
         "PN": "Néb. Planétaire",                             # "planetary nebula"
         "GC": "Amas Globulaire",                             # "globular cluster"
         "OC": "Amas Ouvert",                                 # "open cluster"
-        "G": "Galaxie",                                      # "galaxy
+        "G": "Galaxie",                                      # "galaxy"
         "SC": "Nuage Stellaire",                             # "stellar cloud"
         "D": "Étoile Double",                                # "double star"
         "A": "Astérisme",                                    # "asterim"
         "SNR": "Rémanent Supernova",                         # "super nova remnant"
         "EN": "Néb. Émission",                               # "Emission Nebula"
-        "RN": "Néb. Réflexion",                              # "reflection nebula 
+        "RN": "Néb. Réflexion",                              # "reflection nebula"
         "E/RN": "Néb. Ém./Réf.",                             # " emission and reflexion nebula"
         "N+C": "Amas + Néb.",                                # " Nebula and cluster"
         "QSR": "Qasar"
@@ -774,7 +777,8 @@ OTHER_DATA = {
     13: ["OC", "NGC 2266", "Gémeaux", "9.8", "5'", "Semblable à M11", 6.72, 26.97],
     14: ["OC", "NGC 2304", "Gémeaux", "10.1", "5.5'", "Amas irrégulier d'étoiles fines comme des têtes d'épingle, compact", 6.92, 18.02],
     15: ["OC", "NGC 2355", "Gémeaux", "9.5", "9'", "Amas riche et compact de 70 étoiles", 7.28, 13.78],
-    16: ["PN", "NGC 2438", "Poupe", "11", "65\"", "Nébuleuse Planétaire d'M46 (sur le bord nord d'M46)", 7.7, -14.73]
+    16: ["PN", "NGC 2438", "Poupe", "11", "65\"", "Nébuleuse Planétaire d'M46 (sur le bord nord d'M46)", 7.7, -14.73],
+    17: ["N+C","IC 4685", "Sagittaire","NA", "NA", "chineese dragon", 18.15, -23.99]
 }
 
 try:
@@ -1044,7 +1048,7 @@ def generate():
                 z-index: 1000;
                 background: #161b22;
                 border: 1px solid #30363d;
-                /* COULEUR ET DESIGN DU TEXTE "?" */
+                /* Text color and design "?" */
                 color: #8b949e; /* Modifiez cette couleur selon vos préférences */
                 font-size: 16px;
                 font-family: sans-serif;
@@ -1102,12 +1106,7 @@ def generate():
             .chart-container {{ background: #000000; padding: 5px; position: relative; margin-top: 10px; width: 300px; height: {CONFIG["CHART_HEIGHT"]}px; }}
             canvas {{ display: block; width: 100% !important; height: 100% !important; }}
         </style>
-        <script>
-            console.log("CRITICAL: Top header script loaded.");
-            window.addEventListener('error', function(e) {{
-                console.log("FATAL ERROR TRAPPED:", e.message, "Line:", e.lineno);
-            }});
-        </script>
+        
     </head>
     <body>
         <button onclick="searchCatalog()" class="btn-search">?</button>
@@ -1190,134 +1189,7 @@ def generate():
             function filterD(d) {{ currentDir = d; update(); }}
             function filterF(f) {{ currentFamily = f; update(); }}
 
-        /*    function showT(element, obj, currentComment) {{
-                if (isTooltipFrozen) return;
-                t.style.display = 'block';
-                let content = '<strong>' + obj.prefix + obj.id + '</strong> - ' + obj.info[0] + '<br>';
-                if (obj.tech_ref) content += 'Ref: ' + obj.tech_ref + '<br>';
-                if (currentComment) content += '<span style="color:#ff4d4d">❤ ' + currentComment + '</span><br>';
-                content += 'H-Max: ' + obj.h_max + '°<br>';
-                content += 'Saison: ' + obj.season_computed + '<br>';
-                if (obj.date) content += 'Date: ' + obj.date;
-                
-                t.innerHTML = content + '<div class="chart-container"><canvas id="tooltipChart"></canvas></div>';
-                
-                const rect = element.getBoundingClientRect();
-                t.style.left = (rect.left + window.scrollX + 20) + 'px';
-                t.style.top = (rect.top + window.scrollY + 20) + 'px';
-                
-                // Realtime simulation / drawing matrix curve via Astronomy Engine
-                try {{
-                    const ctx = document.getElementById('tooltipChart').getContext('2d');
-                    const observer = new Astronomy.Observer(userLat, userLon, userElv);
-                    const raHours = parseFloat(obj.info[6]);
-                    const decDegrees = parseFloat(obj.info[7]);
-                    const equaTarget = new Astronomy.Equator(raHours, decDegrees, 0);
-
-                    const now = new Date();
-                    const midnightLocal = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
-
-                    let labels = [];
-                    let datasetAltitude = [];
-                    let datasetSunAltitude = [];
-                    let xMinIndex = 0;
-                    let xMaxIndex = 288;
-                    
-                    let indexCoucherAstro = null;
-                    let indexLeverAstro = null;
-
-                    for (let i = -72; i <= 216; i++) {{
-                        const hr = i / 6;
-                        const dPoint = new Date(midnightLocal.getTime() + hr * 60 * 60 * 1000);
-                        
-                        let hh = dPoint.getHours();
-                        let mm = dPoint.getMinutes();
-                        let timeString = (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
-                        labels.push(timeString);
-
-                        const timeObj = new Astronomy.Time(dPoint);
-                        const horiz = Astronomy.Horizon(timeObj, observer, equaTarget, 'normal');
-                        datasetAltitude.push(horiz.altitude);
-
-                        const sunEqua = Astronomy.Equator(timeObj, null, null); 
-                        const sunPos = Astronomy.SunPosition(timeObj);
-                        const sunHoriz = Astronomy.Horizon(timeObj, observer, sunPos, 'normal');
-                        datasetSunAltitude.push(sunHoriz.altitude);
-                    }}
-
-                    for(let idx = 0; idx < datasetSunAltitude.length; idx++) {{
-                        if(datasetSunAltitude[idx] <= -12) {{
-                            if(indexCoucherAstro === null) indexCoucherAstro = idx;
-                            indexLeverAstro = idx;
-                        }}
-                    }}
-
-                    if (indexCoucherAstro !== null && indexLeverAstro !== null) {{
-                        xMinIndex = indexCoucherAstro;
-                        xMaxIndex = indexLeverAstro;
-                    }}
-
-                    let maxAlt = 0;
-                    for (let idx = xMinIndex; idx <= xMaxIndex; idx++) {{
-                        if (datasetAltitude[idx] > maxAlt) maxAlt = datasetAltitude[idx];
-                    }}
-
-                    if (globalChartInstance) {{
-                        globalChartInstance.destroy();
-                    }}
-
-                    globalChartInstance = new Chart(ctx, {{
-                        type: 'line',
-                        data: {{
-                            labels: labels,
-                            datasets: [{{
-                                label: 'Altitude',
-                                data: datasetAltitude,
-                                borderColor: '#3498db',
-                                borderWidth: 2,
-                                pointRadius: 0,
-                                fill: false
-                            }}]
-                        }},
-                        options: {{
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {{
-                                legend: {{ display: false }},
-                                tooltip: {{
-                                    enabled: false, 
-                                    intersect: false,
-                                    mode: 'index',
-                                    callbacks: {{
-                                        title: function(context) {{
-                                            return `${{LANG_LABELS?.HEURE || 'Heure'}}: ${{context[0].label}}`;
-                                        }},
-                                        label: function(context) {{
-                                            return `${{context.label}} ${{context.parsed.y.toFixed(0)}}°`;
-                                        }}
-                                    }}
-                                }}
-                            }},
-                            scales: {{
-                                x: {{
-                                    type: 'category',
-                                    min: xMinIndex,
-                                    max: xMaxIndex,
-                                    grid: {{ display: false }},
-                                    ticks: {{ display: false }}, 
-                                    border: {{ color: '#444444' }}
-                                }},
-                                y: {{
-                                    min: 0,
-                                    max: maxAlt > 0 ? Math.ceil(maxAlt + 15) : 90,
-                                    ticks: {{ color: '#888888', font: {{ size: 9 }}, callback: (v) => Math.round(v) + '°' }}
-                                }}
-                            }}
-                        }}
-                    }});
-                }} catch (err) {{ console.error(err); }}
-            }}
-            */
+        
 
             function exportTodo() {{
                 // Reconstruct native JSON catalog architecture mapping for standard TODO.txt backwards compatibility
@@ -1491,31 +1363,45 @@ def generate():
                 }}
             }}
             
-            // FONCTION DE RECHERCHE DIRECTE AVEC CENTRAGE AUTOMATIQUE (SANS CONFIRMATION)
+            // SEARCH AND AUTOMATIC CENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
             function searchCatalog() {{
-                let searchStr = prompt("Entrez une référence d'objet (ex: 3344, NGC3344, NGC 3344) :");
-                if (!searchStr) return;
+                // Open native browser prompt to capture user input using localized string
+                let searchStr = prompt("{LANG['SEARCH_PROMPT']}");
+                if (!searchStr) return; // Exit if user cancels or leaves input empty
                 
+                // Normalize input: remove all spaces and force uppercase for robust string comparison
                 let cleanSearch = searchStr.replace(/\s+/g, '').toUpperCase();
                 if (!cleanSearch) return;
                 
+                // Retrieve the global master array to search across all catalog objects
                 let allInOne = data["All in 1"] || [];
                 let foundObj = null;
+                
+                // Flags if user input is purely numeric (e.g., searching "3344" instead of "NGC 3344")
                 let isNumericOnly = /^\d+$/.test(cleanSearch);
                 
+                // Iterate through the master database to find a matching signature
                 for (let i = 0; i < allInOne.length; i++) {{
                     let obj = allInOne[i];
+                    
+                    // Normalize standard technical reference string (e.g., "NGC 4321" becomes "NGC4321")
                     let refTech = obj.tech_ref ? obj.tech_ref.replace(/\s+/g, '').toUpperCase() : "";
+                    
+                    // Normalize catalog identifier prefix + identifier (e.g., "M" + "100" becomes "M100")
                     let refIdNormal = (obj.prefix + obj.id).replace(/\s+/g, '').toUpperCase();
+                    
+                    // Extract ID string standalone for fallback checking
                     let idOnly = String(obj.id).toUpperCase();
                     
+                    // Priority 1: Check strict combinations matching input criteria
                     if (refTech === cleanSearch || refIdNormal === cleanSearch || idOnly === cleanSearch) {{
                         foundObj = obj;
                         break;
                     }}
                     
+                    // Priority 2: Fallback parsing if query is numeric-only (strip text prefix from data fields)
                     if (isNumericOnly && refTech) {{
-                        let refTechNumbers = refTech.replace(/\D/g, '');
+                        let refTechNumbers = refTech.replace(/\D/g, ''); // Extract only digits (e.g., "NGC3344" -> "3344")
                         if (refTechNumbers === cleanSearch) {{
                             foundObj = obj;
                             break;
@@ -1523,37 +1409,44 @@ def generate():
                     }}
                 }}
                 
+                // Action block executed if target astronomical object is located
                 if (foundObj) {{
-                    // 1. Reset complet de tous les sélecteurs et bascule sur All in 1
+                    // Fetch DOM elements of all filtering drop-down menus
                     let catSelect = document.getElementById("catSelect");
                     let familySelect = document.getElementById("familySelect");
                     let seasonSelect = document.getElementById("seasonSelect");
                     let dirSelect = document.getElementById("dirSelect");
                     
-                    if (catSelect) catSelect.value = "All in 1";
+                    // Switch interface views: Set catalog filter matching object's origin field
+                    if (catSelect && foundObj.catalog_origin) {{ 
+                        catSelect.value = foundObj.catalog_origin; 
+                    }}
+                    
+                    // Clear all restrictive filter dropdowns back to default ("Tous") to prevent layout isolation
                     if (familySelect) {{ familySelect.value = "Tous"; currentFamily = "Tous"; }}
                     if (seasonSelect) {{ seasonSelect.value = "Tous"; currentSeason = "Tous"; }}
                     if (dirSelect) {{ dirSelect.value = "Tous"; currentDir = "Tous"; }}
                     
-                    // Force la reconstruction immédiate de la grille complète
+                    // Trigger UI rebuild chain to render correct elements within active viewport
                     update(); 
                     
-                    // 2. Ciblage direct et instantané de la vignette
+                    // Timeout macro task: executing after layout painting ensures target DOM node initialization
                     setTimeout(() => {{
+                        // Construct matching specific DOM ID signature injected inside dynamic update structure
                         let targetId = "card_" + foundObj.prefix.toUpperCase() + String(foundObj.id).toUpperCase();
                         let targetElement = document.getElementById(targetId);
 
                         if (targetElement) {{
-                            // Déplacement fluide automatique
+                            // Execute native smooth scroll alignment anchoring node to display center
                             targetElement.scrollIntoView({{ behavior: "smooth", block: "center" }});
                             
-                            // Effet visuel vert astro 5 sec
+                            // Visual feedback overlay: Apply temporary neon green borders and shadow highlight
                             let originalBorder = targetElement.style.borderColor;
                             let originalBoxShadow = targetElement.style.boxShadow;
                             targetElement.style.borderColor = "#00ff66";
                             targetElement.style.boxShadow = "0 0 25px #00ff66";
                             
-                            // Déclenchement de l'infobulle (survol simulé)
+                            // Programmatically fire synthetic 'mouseenter' event tracking to deploy context tooltip/altitudes
                             let mouseEvent = new MouseEvent('mouseenter', {{
                                 bubbles: true,
                                 cancelable: true,
@@ -1561,16 +1454,19 @@ def generate():
                             }});
                             targetElement.dispatchEvent(mouseEvent);
                             
+                            // Visual teardown timer: removes highlight styling frame safely after 3 seconds
                             setTimeout(() => {{
                                 targetElement.style.borderColor = originalBorder;
                                 targetElement.style.boxShadow = originalBoxShadow;
-                            }}, 5000);
+                            }}, 3000);
                         }} else {{
-                            alert("object not found");
+                            // Handle edge case where object data exists but DOM element registration fails
+                            alert("{LANG['NOT_FOUND']}");
                         }}
-                    }}, 150);
+                    }}, 150); // Safe threshold delay tracking grid rendering loop cycle completion
                 }} else {{
-                    alert("object not found");
+                    // Fallback alerts if zero matching records are registered inside master array dataset
+                    alert("{LANG['NOT_FOUND']}");
                 }}
             }}
             
