@@ -12,6 +12,8 @@ LANG = {
     "SOUTH": "South",
     "PROMPT_LABEL": "Enter an optional description:",
     "VALIDATE": "Validate",
+    "SEARCH_PROMPT": "Enter an object ref. (eg: 3344, NGC3344, NGC 3344) :",
+    "NOT_FOUND": "Objet non trouvé",
     "TYPES": {
         "N": "nebula",
         "PN": "planetary nebula",
