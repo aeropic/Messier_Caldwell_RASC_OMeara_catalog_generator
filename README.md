@@ -104,6 +104,17 @@ From V5.1 you can also filter the objects to display only the tonight visible ob
 
 <img width="620" height="312" alt="tonight" src="https://github.com/user-attachments/assets/f2ec1dd3-b8d3-43bb-bb2f-14e2d4a7b438" />
 
+## search tool
+
+At the top left of the screen there is a "question mark" button, press it and you'll be invited to type an object reference
+
+<img width="870" height="213" alt="cata_question" src="https://github.com/user-attachments/assets/03ea4ba4-60b6-4575-b611-4bf4a5b7a7f2" />
+
+Once OK is pressed, if the object is found in any catalog (first found object will win !), the catalog in which the object is located will be selected and the page will scroll to the object. A green "jacky tuning style" frame will be displayed to catch your eyes !
+
+<img width="666" height="686" alt="cata_found" src="https://github.com/user-attachments/assets/7c8ca460-1511-42ab-be9d-baaa39378e0e" />
+
+
 
 ## editing the python file
 you can also edit the python file and change this value
