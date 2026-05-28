@@ -7,7 +7,9 @@
 # https://www.catchersofthelight.com/astrophotography-hidden-treasures-list.aspx
 # https://app.astrobin.com/u/GaryI?collection=677&i=esls3b#gallery
 # https://vicmenard.com/articles/
+# https://alasky.cds.unistra.fr/hips-image-services/
 #
+#   V6.2 : added alasky thumbanials in tooltip - O'MEARA fixed
 #   V6.1.1 : english translation of "?" function
 #   V6.1 : added a "?" button to find an object by reference
 #   V6.0 : added a "All in 1" catalog option. Added some Deep sky challenges from RASC
@@ -569,10 +571,10 @@ O_MEARA_DATA = {
     31: ["OC", "NGC 1980", "Orion", "5.0", "30'", "Le Joyau Perdu d'Orion", 5.59, -4.9],
     32: ["N", "NGC 1977", "Orion", "6.3", "20'", "Nébuleuse de l'Homme qui Court", 5.59, -4.8],
     33: ["N", "NGC 1999", "Orion", "9.5", "2'", "Nébuleuse du Tampon en Caoutchouc", 5.61, -6.7],
-    34: ["N", "NGC 2024", "Orion", "7.2", "30'", "Nébuleuse de la Flamme", 5.69, 1.9],
-    35: ["N", "NGC 2163", "Orion", "10.0", "3'", "NGC 2163", 6.25, 18.7],
+    34: ["N", "NGC 2024", "Orion", "7.2", "30'", "Nébuleuse de la Flamme", 5.69, -1.85],
+    35: ["N", "NGC 2163", "Orion", "10.0", "3'", "NGC 2163", 6.13, 18.65],
     36: ["OC", "NGC 2169", "Orion", "5.9", "6'", "Amas des Petites Pléiades", 6.36, 14.0],
-    37: ["N", "NGC 2175", "Orion", "6.9", "18'", "NGC 2175", 6.38, 20.5],
+    37: ["N", "NGC 2175", "Orion", "6.9", "18'", "NGC 2175", 6.15, 20.5],
     38: ["OC", "NGC 2264", "Licorne", "4.1", "40'", "Amas de l'Arbre de Noël", 6.68, 9.9],
     39: ["OC", "NGC 2301", "Licorne", "6.0", "15'", "Le Dragon d'Hagrid", 6.86, 0.5],
     40: ["OC", "NGC 2353", "Licorne", "7.1", "18'", "Avery's Island", 7.24, -10.3],
@@ -618,9 +620,9 @@ O_MEARA_DATA = {
     80: ["OC", "NGC 6281", "Scorpion", "5.4", "8'", "Amas de l'Aile de Papillon de Nuit", 17.01, -37.9],
     81: ["PN", "NGC 6369", "Ophiuchus", "11.4", "0.6'", "Nébuleuse du Petit Fantôme", 17.49, -23.8],
     82: ["OC", "NGC 6400", "Scorpion", "8.8", "12'", "Amas Fantôme", 17.67, -37.0],
-    83: ["OC", "NGC 4665", "Ophiuchus", "8.3", "45'", "La Ruche d'Été", 17.66, 5.7],
+    83: ["OC", "NGC 6633", "Ophiuchus", "4.6", "20'", "Amas de Tweedledum", 18.46, 6.5],
     84: ["PN", "NGC 6445", "Sagittaire", "11.2", "0.7'", "Nébuleuse de la Boîte", 17.82, -20.0],
-    85: ["G", "NGC 6503", "Dragon", "10.2", "7'x3'", "Galaxie Perdue dans l'Space", 17.82, 70.1],
+    85: ["G", "NGC 6503", "Dragon", "10.2", "7'x3'", "Galaxie Perdue dans l'Espace", 17.82, 70.1],
     86: ["GC", "NGC 6441", "Scorpion", "7.2", "10'", "Amas de la Pépite d'Argent", 17.83, -37.1],
     87: ["D", "Barnard", "Ophiuchus", "9.5", "n/a", "Étoile de Barnard", 17.96, 4.7],
     88: ["OC", "NGC 6520", "Sagittaire", "7.6", "5'", "Le Coffre du Mort", 18.06, -27.9],
@@ -657,7 +659,7 @@ O_MEARA_DATA = {
     1009: ["OC", "NGC 1245", "Persée", "7.6", "10'", "Amas de l'Étoile de Mer", 3.24, 47.2],
     1010: ["G", "NGC 1300", "Éridan", "10.4", "6.5'", "Galaxie spirale barrée", 3.33, -19.4],
     1011: ["OC", "NGC 1342", "Persée", "8.1", "30'", "Amas de la Raie / Petit Scorpion", 3.53, 37.3],
-    1012: ["N", "Barnard 33", "Orion", "10.0", "90'", "La Tête de Cheval (dans Barnard's Loop)", 5.68, 0.7],
+    1012: ["N", "Barnard 33", "Orion", "10.0", "90'", "La Tête de Cheval (dans Barnard's Loop)", 5.68, -2.45],
     1013: ["G", "NGC 1400", "Éridan", "10.8", "1.9'", "Galaxie avec NGC 1407", 3.66, -18.6],
     1014: ["G", "NGC 1407", "Éridan", "9.7", "2.5'", "Galaxie avec NGC 1400", 3.67, -18.5],
     1015: ["EN", "NGC 1491", "Persée", "10.0", "12'", "Nébuleuse de l'Empreinte Fossile", 4.05, 51.3],
@@ -673,8 +675,8 @@ O_MEARA_DATA = {
     1025: ["OC", "Collinder 70", "Orion", "0.4", "150'", "Ceinture d'Orion", 5.60, -1.0],
     1026: ["PN", "NGC 2022", "Orion", "11.6", "0.5'", "Nébuleuse des Baisers", 5.70, 9.1],
     1027: ["PN", "IC 2149", "Cocher", "11.5", "0.25'", "Nébuleuse planétaire", 5.91, 46.1],
-    1028: ["EN", "NGC 2149", "Licorne", "10.0", "3'", "Nébuleuse par émission", 6.13, -9.7],
-    1029: ["RN", "NGC 2170", "Licorne", "10.0", "110'", "Nébuleuse de l'Ange", 6.13, -6.3],
+    1028: ["RN", "NGC 2182", "Licorne", "10.0", "3'", "Nébuleuse par réflexion", 6.16, -6.32],
+    1029: ["RN", "NGC 2170", "Licorne", "10.0", "2'", "Nébuleuse de l'Ange", 6.13, -6.3],
     1030: ["OC", "NGC 2281", "Cocher", "7.2", "15'", "Amas du Cœur Brisé", 6.81, 41.1],
     1031: ["GC", "NGC 2298", "Poupe", "7.3", "6.8'", "Amas Globulaire de la Poupe", 6.81, -36.0],
     1032: ["EN", "NGC 2316", "Licorne", "10.0", "4'", "Nébuleuse par émission", 7.02, -7.7],
@@ -738,7 +740,7 @@ O_MEARA_DATA = {
     1090: ["PN", "NGC 6781", "Aigle", "11.4", "2'", "Nébuleuse de la Boule de Neige / Ghost of the Moon", 19.31, 6.53],
     1091: ["PN", "NGC 6804", "Aigle", "12.2", "~50\"", "Nébuleuse du Rétrécissement / Incredible Shrinking", 19.53, 9.22],
     1092: ["OC", "NGC 6811", "Cygne", "6.8", "15'", "Smoke Ring / Hole in a Cluster", 19.62, 46.38],
-    1093: ["A", "Cygnus Kite Asterism", "Cygne", "8.8 (star)", "-", "Astérisme du Cerf-Volant / HDE 226868", 19.97, 35.20],
+    1093: ["A", "Cygnus Kite Asterism", "Cygne", "8.8", "-", "Astérisme du Cerf-Volant / HDE 226868", 19.97, 35.20],
     1094: ["A", "OME 3", "Cygne", "-", "12'", "Alessi J20053+4732", 20.09, 47.53],
     1095: ["PN", "NGC 6891", "Dauphin", "10.5", ">18\"", "Nébuleuse planétaire", 20.25, 12.70],
     1096: ["PN", "NGC 6894", "Cygne", "12.3", ">42\"", "Petite Nébuleuse de l'Anneau / Diamond Ring", 20.27, 30.57],
@@ -777,8 +779,9 @@ OTHER_DATA = {
     13: ["OC", "NGC 2266", "Gémeaux", "9.8", "5'", "Semblable à M11", 6.72, 26.97],
     14: ["OC", "NGC 2304", "Gémeaux", "10.1", "5.5'", "Amas irrégulier d'étoiles fines comme des têtes d'épingle, compact", 6.92, 18.02],
     15: ["OC", "NGC 2355", "Gémeaux", "9.5", "9'", "Amas riche et compact de 70 étoiles", 7.28, 13.78],
-    16: ["PN", "NGC 2438", "Poupe", "11", "65\"", "Nébuleuse Planétaire d'M46 (sur le bord nord d'M46)", 7.7, -14.73],
-    17: ["N+C","IC 4685", "Sagittaire","NA", "NA", "chineese dragon", 18.15, -23.99]
+    16: ["PN", "NGC 2438", "Poupe", "11", "65\"", "Nébuleuse Planétaire de M46 (sur le bord nord M46)", 7.7, -14.73],
+    17: ["N+C","IC 4685", "Sagittaire","7.2", "10'", "chineese dragon", 18.15, -23.99],
+    18: ["EN", "NGC 6334", "Scorpion", "10", "20'", "nébuleuse patte de chat - Halpha", 17.35,-36,15]
 }
 
 try:
@@ -1589,7 +1592,10 @@ def generate():
 
             /**
              * Renders the details info box (tooltip) with object metadata and altitude profile chart via Chart.js
-             */
+            */
+             
+            
+            
             function showT(element, obj, comment) {{
                 if (globalChartInstance) {{
                     globalChartInstance.destroy();
@@ -1616,11 +1622,27 @@ def generate():
                 }}
                 if (isSmall) c = ' style="color:orange;"';
 
+                // Extraction des coordonnées (placée ici pour éviter le ReferenceError)
+                let raDecimal = parseFloat(obj.info[6]);
+                //const declin = parseFloat(obj.info[7]);
+                
                 // Direction and badge calculation
                 const declin = parseFloat(obj.info[7]), isNorth = declin > userLat;
                 const direction = isNorth ? "{LANG['NORTH']}" : "{LANG['SOUTH']}";
                 const badgeColor = isNorth ? "#3498db" : "#f1c40f";
 
+                // URL CDS hips2fits
+                const raDeg = raDecimal * 15;
+                const publicImageUrl = `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&ra=${{raDeg}}&dec=${{declin}}&width=150&height=150&fov=0.6&projection=TAN&format=jpg`;
+
+                // Log de l'URL remis en place
+                console.log("Objet :", obj.prefix + obj.id, "RA(deg):", raDeg, "DEC:", declin, "-> URL :", publicImageUrl);
+                
+                // Début du conteneur Flexbox (Texte à gauche, Image à droite)
+                html += `<div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 5px;">`;
+                
+                // Colonne de gauche : Les infos techniques
+                html += `<div style="flex: 1;">`;
                 html += `<div><strong>{LANG["TOOLTIP_LABELS"]["TYPE"]}:</strong> ${{obj.info[0]}}</div>`;
                 html += `<div><strong>{LANG["TOOLTIP_LABELS"]["SEASON"]}:</strong> ${{obj.season_computed}}</div>`;
                 html += `<div><strong>{LANG["TOOLTIP_LABELS"]["CONSTELLATION"]}:</strong> ${{obj.info[2]}}</div>`;
@@ -1628,7 +1650,6 @@ def generate():
                 html += `<div ${{c}}><strong>{LANG["TOOLTIP_LABELS"]["SIZE"]}:</strong> ${{s}}</div>`;
                 
                 // RA conversion to HMS
-                let raDecimal = parseFloat(obj.info[6]);
                 let hours = Math.floor(raDecimal), minDec = (raDecimal - hours) * 60, minutes = Math.floor(minDec), seconds = Math.round((minDec - minutes) * 60);
                 if (seconds === 60) {{ seconds = 0; minutes += 1; }}
                 if (minutes === 60) {{ minutes = 0; hours += 1; }}
@@ -1636,6 +1657,14 @@ def generate():
                 html += `<div><strong>RA :</strong> ${{hours}}h ${{String(minutes).padStart(2, '0')}}m ${{String(seconds).padStart(2, '0')}}s</div>`;
                 html += `<div><strong>Dec :</strong> ${{obj.info[7]}}° <span style="font-size:9px; background:#21262d; color:${{badgeColor}}; padding:1px 4px; border-radius:3px; border:1px solid ${{badgeColor}}; margin-left:5px; vertical-align:middle; font-weight:bold;">${{direction}}</span></div>`;
                 html += `<div><strong>{LANG["TOOLTIP_LABELS"]["ELEVATION"]}:</strong> ${{obj.h_max}}</div>`;
+                html += `</div>`; // Fin colonne gauche
+
+                // Colonne de droite : La vignette CDS
+                html += `<div style="flex-shrink: 0; display: flex; align-items: center; justify-content: center;">`;
+                html += `<img src="${{publicImageUrl}}" onerror="this.parentNode.style.display='none';" style="width: 120px; height: 120px; border-radius: 4px; border: 1px solid #444; object-fit: cover;">`;
+                html += `</div>`; // Fin colonne droite
+                
+                html += `</div>`; // Fin du conteneur Flexbox
                 
                 if (comment) {{
                     html += `<hr style="border:0; border-top:1px solid #ff4d4d; margin:8px 0;">`;
@@ -1816,6 +1845,7 @@ def generate():
                     }};
 
                     const canvasCtx = document.getElementById('astroChart').getContext('2d');
+                    
                     globalChartInstance = new Chart(canvasCtx, {{
                         type: 'line',
                         data: {{
@@ -1869,6 +1899,7 @@ def generate():
                     }});
                 }} catch (err) {{ console.error(err); }}
             }}
+            
             
             // Initialization update trigger on page startup
             update();
