@@ -9,7 +9,7 @@
 # https://vicmenard.com/articles/
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
-#   V6.2 : added alasky thumbanials in tooltip - O'MEARA fixed
+#   V6.2 : added alasky thumbnails in tooltip - O'MEARA fixed
 #   V6.1.1 : english translation of "?" function
 #   V6.1 : added a "?" button to find an object by reference
 #   V6.0 : added a "All in 1" catalog option. Added some Deep sky challenges from RASC
@@ -505,10 +505,10 @@ RASC_DATA = {
     1014: ["EN", "Sh 2-276", "Orion", "Non spécifiée", "600'x30'", "Boucle de Barnard", 5.80, 1.0],
     1015: ["PN", "Abell 12", "Orion", "13.0", "37'", "Nébuleuse planétaire Abell 12", 6.04, 9.7],
     1016: ["SNR", "IC 443", "Gémeaux", "Non spécifiée", "50'x40'", "Nébuleuse de la Méduse (SNR)", 6.28, 22.8],
-    1017: ["PN", "J 900", "Gémeaux", "12.2", "8'", "Jonckheere 900", 6.43, 17.8],
+    1017: ["PN", "J 900", "Gémeaux", "12.2", "8'", "Jonckheere 900", 6.43, 17.78],
     1018: ["RN", "IC 2177", "Licorne", "Non spécifiée", "120'x40'", "Nébuleuse de la Mouette", 7.09, -10.7],
     1019: ["PN", "PK 205 +14.2", "Gémeaux", "13.0", "700'", "Nébuleuse de la Méduse (Abell 21)", 7.48, 13.3],
-    1020: ["PN", "PK 164 +31.1", "Lynx", "14.0", "400'", "Jones-Emberson 1", 7.96, 53.4],
+    1020: ["PN", "PK 164 +31.1", "Lynx", "14.0", "400'", "Jones-Emberson 1 - nébuleuse écouteurs", 7.96, 53.4],
     1021: ["G", "Leo I", "Lion", "9.8", "10.7'x8.3'", "Galaxie naine du Lion", 10.14, 12.3],
     1022: ["G", "Abell 1367", "Lion", "13-16", "60'", "Amas de galaxies du Lion", 11.73, 19.9],
     1023: ["G", "NGC 3172", "Petite Ourse", "13.6", "0.7'x0.7'", "Polarissima Borealis", 11.84, 89.1],
@@ -544,7 +544,7 @@ O_MEARA_DATA = {
     4: ["GC", "NGC 288", "Sculpteur", "8.1", "13'", "NGC 288", 0.88, -26.6],
     5: ["G", "NGC 404", "Andromède", "10.0", "3.5'", "Galaxie de la Perle Perdue", 1.16, 35.7],
     6: ["G", "NGC 584", "Céto", "10.5", "4'x2'", "Galaxie du Petit Fuseau", 1.52, -6.9],
-    7: ["OC", "NGC 659", "Cassiopée", "7.9", "6'", "Amas Ying Yang", 1.77, 60.7],
+    7: ["OC", "NGC 659", "Cassiopée", "7.9", "6'", "Amas Ying Yang", 1.74, 60.68],
     8: ["G", "NGC 772", "Bélier", "10.3", "7'x4'", "Galaxie Fiddlehead", 1.99, 19.0],
     9: ["G", "NGC 908", "Céto", "10.2", "6'x3'", "NGC 908", 2.38, -21.2],
     10: ["G", "NGC 1023", "Persée", "9.5", "7'x3'", "Galaxie Lenticulaire de Persée", 2.67, 39.1],
@@ -565,7 +565,7 @@ O_MEARA_DATA = {
     25: ["OC", "NGC 1528", "Persée", "6.4", "18'", "Amas m & m", 4.25, 51.2],
     26: ["OC", "NGC 1545", "Persée", "6.2", "12'", "Amas m & m", 4.30, 50.3],
     27: ["OC", "NGC 1647", "Taureau", "6.4", "40'", "Amas de la Lune Pirate", 4.77, 19.1],
-    28: ["PN", "IC 418", "Lièvre", "9.6", "0.5'", "Nébuleuse de la Framboise", 5.10, -12.7],
+    28: ["PN", "IC 418", "Lièvre", "9.6", "0.5'", "Nébuleuse de la Framboise", 5.46, -12.7],
     29: ["OC", "Cr 69", "Orion", "5.0", "50'", "Amas de Lambda Orionis", 5.58, 9.9],
     30: ["OC", "NGC 1981", "Orion", "4.2", "28'", "Amas du Wagon de Charbon", 5.59, -4.4],
     31: ["OC", "NGC 1980", "Orion", "5.0", "30'", "Le Joyau Perdu d'Orion", 5.59, -4.9],
@@ -573,7 +573,7 @@ O_MEARA_DATA = {
     33: ["N", "NGC 1999", "Orion", "9.5", "2'", "Nébuleuse du Tampon en Caoutchouc", 5.61, -6.7],
     34: ["N", "NGC 2024", "Orion", "7.2", "30'", "Nébuleuse de la Flamme", 5.69, -1.85],
     35: ["N", "NGC 2163", "Orion", "10.0", "3'", "NGC 2163", 6.13, 18.65],
-    36: ["OC", "NGC 2169", "Orion", "5.9", "6'", "Amas des Petites Pléiades", 6.36, 14.0],
+    36: ["OC", "NGC 2169", "Orion", "5.9", "6'", "Amas des Petites Pléiades", 6.14, 14.0],
     37: ["N", "NGC 2175", "Orion", "6.9", "18'", "NGC 2175", 6.15, 20.5],
     38: ["OC", "NGC 2264", "Licorne", "4.1", "40'", "Amas de l'Arbre de Noël", 6.68, 9.9],
     39: ["OC", "NGC 2301", "Licorne", "6.0", "15'", "Le Dragon d'Hagrid", 6.86, 0.5],
@@ -586,7 +586,7 @@ O_MEARA_DATA = {
     46: ["OC", "NGC 2546", "Poupe", "6.3", "70'", "Amas du Cœur et de la Dague", 8.20, -37.6],
     47: ["G", "NGC 2683", "Lynx", "9.7", "9'x2'", "Galaxie de l'OVNI", 8.88, 33.4],
     48: ["G", "NGC 2655", "Girafe", "10.1", "5'x4'", "NGC 2655", 8.93, 78.2],
-    49: ["G", "NGC 2841", "Grande Ourse", "9.3", "8'x4'", "Galaxie de l'Œil de Tigre", 9.55, 51.0],
+    49: ["G", "NGC 2841", "Grande Ourse", "9.3", "8'x4'", "Galaxie de l'Œil de Tigre", 9.37, 51.0],
     50: ["OC", "IC 2488", "Voiles", "7.0", "15'", "Amas du Collier de Perles", 9.77, -57.0],
     51: ["G", "NGC 2903", "Lion", "8.8", "13'x6'", "NGC 2903", 9.53, 21.5],
     52: ["G", "NGC 3184", "Grande Ourse", "9.6", "7'x7'", "Petite Galaxie du Moulinet", 10.30, 41.4],
@@ -604,7 +604,7 @@ O_MEARA_DATA = {
     64: ["PN", "IC 3568", "Girafe", "10.6", "0.3'", "Nébuleuse du Citron Vert", 12.55, 82.6],
     65: ["G", "NGC 4526", "Vierge", "9.6", "7'x3'", "Galaxie du Sourcil Poilu", 12.57, 7.7],
     66: ["G", "NGC 4605", "Grande Ourse", "10.1", "6'x2'", "Galaxie de l'Œuf de Fabergé", 12.69, 61.6],
-    67: ["G", "NGC 4656", "Chiens de Chasse", "10.1", "15'x2'", "Galaxie du Crochet", 12.71, 32.2],
+    67: ["G", "NGC 4656", "Chiens de Chasse", "10.1", "15'x2'", "Galaxie du Crochet", 12.73, 32.18],
     68: ["G", "NGC 4699", "Vierge", "9.6", "4'x3'", "NGC 4699", 12.82, -8.7],
     69: ["G", "NGC 4725", "Chevelure de Bérénice", "9.3", "11'x8'", "NGC 4725", 12.84, 25.5],
     70: ["G", "NGC 5102", "Centaure", "9.5", "9'x3'", "Le Fantôme d'Iota", 13.36, -36.6],
@@ -650,7 +650,7 @@ O_MEARA_DATA = {
     # secret deep
     1001: ["RN", "vdB 1", "Cassiopée", "10.1", "8.6'", "vdB 1", 0.18, 58.7],
     1002: ["G", "NGC 134", "Sculpteur", "10.4", "8.1'", "Galaxie du Calmar Géant", 0.50, -33.2],
-    1003: ["G", "NGC 488", "Poissons", "10.4", "5.2'", "Galaxie du Tourbillon", 1.39, 5.2],
+    1003: ["G", "NGC 488", "Poissons", "10.4", "5.2'", "Galaxie du Tourbillon", 1.36, 5.26],
     1004: ["OC", "NGC 654", "Cassiopée", "7.9", "40'", "Amas ouvert avec nébulosité", 1.74, 61.8],
     1005: ["OC", "Collinder 463", "Cassiopée", "9.1", "57'", "Lund 57 / Loch Ness monster", 1.89, 71.9],
     1006: ["OC", "Stock 2", "Cassiopée", "4.4", "130'", "Strong Man Cluster", 2.25, 59.4],
@@ -687,8 +687,8 @@ O_MEARA_DATA = {
     1037: ["OC", "NGC 2420", "Gémeaux", "9.1", "10'", "Amas de la Comète Scintillante", 7.64, 21.5],
     1038: ["G", "NGC 3079", "Grande Ourse", "10.1", "7.6'", "Galaxie du Frisbee Fantôme", 10.03, 55.6],
     1039: ["G", "NGC 3077", "Grande Ourse", "10.0", "4.6'", "Galaxie irrégulière", 10.06, 68.7],
-    1040: ["G", "NGC 3166", "Sextant", "10.5", "30'", "Galaxie Impétueuse", 10.27, 3.4],
-    1041: ["G", "NGC 3169", "Sextant", "10.3", "4.8'", "Galaxie spirale", 10.27, 3.4],
+    1040: ["G", "NGC 3166", "Sextant", "10.5", "30'", "Galaxie Impétueuse", 10.24, 3.45],
+    1041: ["G", "NGC 3169", "Sextant", "10.3", "4.8'", "Galaxie spirale", 10.24, 3.45],
     1042: ["G", "NGC 3198", "Grande Ourse", "10.7", "8.3'", "Galaxie spirale", 10.33, 45.5],
     1043: ["G", "NGC 3226", "Lion", "10.3", "2.8'", "Arp 94 (avec NGC 3227)", 10.40, 19.8],
     1044: ["G", "NGC 3227", "Lion", "10.3", "5.6'", "Arp 94 (avec NGC 3226)", 10.40, 19.8],
@@ -784,12 +784,35 @@ OTHER_DATA = {
     18: ["EN", "NGC 6334", "Scorpion", "10", "20'", "nébuleuse patte de chat - Halpha", 17.35,-36,15]
 }
 
+
+
+# internationalization : import the strings from LANG and databases (constellation, description)
+
 try:
-    # Si le fichier 'LANG_database.py' existe à côté, on charge ses données
-    from LANG_database import LANG, MESSIER_DATA, CALDWELL_DATA, RASC_DATA, O_MEARA_DATA, OTHER_DATA
+    import LANG_database
+    
+    if hasattr(LANG_database, 'LANG'):
+        LANG = LANG_database.LANG
+
+    datasets = [
+        (OTHER_DATA, 'OTHER_DATA'),
+        (MESSIER_DATA, 'MESSIER_DATA'),
+        (CALDWELL_DATA, 'CALDWELL_DATA'),
+        (RASC_DATA, 'RASC_DATA'),
+        (O_MEARA_DATA, 'O_MEARA_DATA'),
+    ]
+    
+    for local_dict, var_name in datasets:
+        lang_dict = getattr(LANG_database, var_name, None)
+        if lang_dict:
+            for obj_id, lang_row in lang_dict.items():
+                if obj_id in local_dict and len(lang_row) > 5:
+                    local_dict[obj_id][2] = lang_row[2]  # Constellation
+                    local_dict[obj_id][5] = lang_row[5]  # Description
+
 except ImportError:
-    # Si le fichier n'existe pas, Python ignore l'erreur et garde les données FR ci-dessus
     pass
+
 
 CATALOGS = {
     "Messier": {"prefix": "M", "data": MESSIER_DATA},          # the prefix is used in the HTML page
@@ -1367,7 +1390,7 @@ def generate():
             }}
             
             // SEARCH AND AUTOMATIC CENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
-            function searchCatalog() {{
+            async function searchCatalog() {{
                 // Open native browser prompt to capture user input using localized string
                 let searchStr = prompt("{LANG['SEARCH_PROMPT']}");
                 if (!searchStr) return; // Exit if user cancels or leaves input empty
@@ -1411,9 +1434,68 @@ def generate():
                         }}
                     }}
                 }}
+
+                // Helper function to query SIMBAD safely via simple independent TAP API calls
+                async function logSimbadLine(queryName) {{
+                    try {{
+                        let url = "https://simbad.cds.unistra.fr/simbad/sim-tap/sync";
+                        
+                        // Core structural query: Only fields guaranteed to be invariant in the TAP schema
+                        let adqlBasic = `SELECT TOP 1 main_id, otype, ra, dec FROM basic WHERE oid IN (SELECT oidref FROM ident WHERE id = '${{queryName}}')`;
+                        
+                        let response = await fetch(url, {{
+                            method: "POST",
+                            headers: {{ "Content-Type": "application/x-www-form-urlencoded" }},
+                            body: new URLSearchParams({{ "request": "doQuery", "lang": "ADQL", "format": "json", "query": adqlBasic }})
+                        }});
+                        
+                        if (!response.ok) return "[SIMBAD Query Failed]";
+                        let resData = await response.json();
+                        
+                        if (resData && resData.data && resData.data.length > 0) {{
+                            let row = resData.data[0];
+                            let mainId = row[0] ? row[0].replace(/[\s\u00a0]+/g, ' ').trim() : queryName;
+                            let type = row[1] ? row[1].trim() : "Unknown";
+                            
+                            // RA conversion from decimal degrees to decimal hours (deg / 15)
+                            let ra = row[2] !== null ? (row[2] / 15).toFixed(2) : "N/A";
+                            let dec = row[3] !== null ? row[3].toFixed(2) : "N/A";
+                            
+                            // Build equivalent catalog row representation safely with fixed stable parameters
+                            // Format: [Type, Tech_Ref, Constellation, Mag, Size, Common Name, RA, Dec]
+                            let simbadLine = `["${{type}}", "${{mainId}}", "N/A", "N/A", "N/A", "${{mainId}}", ${{ra}}, ${{dec}}]`;
+                            return simbadLine;
+                        }}
+                        return "[Object not found in SIMBAD matrix]";
+                    }} catch (err) {{
+                        return "[SIMBAD Error: " + err.message + "]";
+                    }}
+                }}
                 
                 // Action block executed if target astronomical object is located
+                // ==============================================================
                 if (foundObj) {{
+                    // Object found: generate log from SIMBAD query based on its technical reference
+                    let simbadQuery = foundObj.tech_ref || (foundObj.prefix + " " + foundObj.id);
+                    logSimbadLine(simbadQuery).then(line => {{
+                        console.log("SIMBAD match for found object:", line);
+                        
+                        // Use the internal "info" array directly generated by Python script to output raw catalog format
+                        if (foundObj.info && Array.isArray(foundObj.info)) {{
+                            // Format elements cleanly ensuring strings are properly quoted and floats are raw
+                            let formattedElements = foundObj.info.map(el => {{
+                                if (typeof el === 'string') return `"${{el}}"`;
+                                if (el === null || el === undefined) return '"N/A"';
+                                return el;
+                            }});
+                            
+                            // Extract object ID (e.g. 7 or "7") from python dictionary schema and prepends it to layout string
+                            let catId = foundObj.id !== undefined ? foundObj.id : "";
+                            let catalogLine = `${{catId}}: [${{formattedElements.join(", ")}}]`;
+                            console.log("corresponding catalog entry :\n", catalogLine);
+                        }}
+                    }});
+
                     // Fetch DOM elements of all filtering drop-down menus
                     let catSelect = document.getElementById("catSelect");
                     let familySelect = document.getElementById("familySelect");
@@ -1447,21 +1529,22 @@ def generate():
                             let originalBorder = targetElement.style.borderColor;
                             let originalBoxShadow = targetElement.style.boxShadow;
                             targetElement.style.borderColor = "#00ff66";
-                            targetElement.style.boxShadow = "0 0 25px #00ff66";
+                            targetElement.style.boxShadow = "0 0 15px #00ff66";
                             
-                            // Programmatically fire synthetic 'mouseenter' event tracking to deploy context tooltip/altitudes
+                            // N/U : Programmatically fire synthetic 'mouseenter' event tracking to deploy context tooltip/altitudes
                             let mouseEvent = new MouseEvent('mouseenter', {{
                                 bubbles: true,
                                 cancelable: true,
                                 view: window
                             }});
-                            targetElement.dispatchEvent(mouseEvent);
+                            //targetElement.dispatchEvent(mouseEvent);
                             
-                            // Visual teardown timer: removes highlight styling frame safely after 3 seconds
+                            
+                            // Visual teardown timer: removes highlight styling frame safely after 4 seconds
                             setTimeout(() => {{
                                 targetElement.style.borderColor = originalBorder;
                                 targetElement.style.boxShadow = originalBoxShadow;
-                            }}, 3000);
+                            }}, 4000);
                         }} else {{
                             // Handle edge case where object data exists but DOM element registration fails
                             alert("{LANG['NOT_FOUND']}");
@@ -1469,7 +1552,12 @@ def generate():
                     }}, 150); // Safe threshold delay tracking grid rendering loop cycle completion
                 }} else {{
                     // Fallback alerts if zero matching records are registered inside master array dataset
-                    alert("{LANG['NOT_FOUND']}");
+                    let fallbackQuery = isNumericOnly ? "NGC " + searchStr.trim() : searchStr.trim();
+                    
+                    logSimbadLine(fallbackQuery).then(simbadLine => {{
+                        console.log("SIMBAD reference for missing object:", simbadLine);
+                        alert("{LANG['NOT_FOUND']}\nSIMBAD: " + simbadLine);
+                    }});
                 }}
             }}
             
@@ -1593,8 +1681,6 @@ def generate():
             /**
              * Renders the details info box (tooltip) with object metadata and altitude profile chart via Chart.js
             */
-             
-            
             
             function showT(element, obj, comment) {{
                 if (globalChartInstance) {{
@@ -1636,7 +1722,7 @@ def generate():
                 const publicImageUrl = `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&ra=${{raDeg}}&dec=${{declin}}&width=150&height=150&fov=0.6&projection=TAN&format=jpg`;
 
                 // Log de l'URL remis en place
-                console.log("Objet :", obj.prefix + obj.id, "RA(deg):", raDeg, "DEC:", declin, "-> URL :", publicImageUrl);
+                //console.log("Objet :", obj.prefix + obj.id, "RA(deg):", raDeg, "DEC:", declin, "-> URL :", publicImageUrl);
                 
                 // Début du conteneur Flexbox (Texte à gauche, Image à droite)
                 html += `<div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 5px;">`;
