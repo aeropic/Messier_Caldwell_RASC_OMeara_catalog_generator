@@ -9,6 +9,8 @@
 # https://vicmenard.com/articles/
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
+#   V6.3 : checked all catalogs coordinates - request to SIMBAD in logs F12
+#            CTRL + hovering paints bad coordinates box in red, then goto F12
 #   V6.2 : added alasky thumbnails in tooltip - O'MEARA fixed
 #   V6.1.1 : english translation of "?" function
 #   V6.1 : added a "?" button to find an object by reference
@@ -102,7 +104,7 @@ LANG = {
     "SOUTH": "Sud",                                          # "South"
     "PROMPT_LABEL": "Entrez une description optionnelle :",  # "Enter an optional description:"
     "VALIDATE": "Valider",                                   # "Validate"
-    "SEARCH_PROMPT": "Entrez une référence d'objet (ex: 3344, NGC3344, NGC 3344) :",
+    "SEARCH_PROMPT": "Entrez une référence d'objet (ex: 3344, NGC3344, NGC 3344) puis F12 pour vérifier les coord. :",
     "NOT_FOUND": "Objet non trouvé",
     "TYPES": {
         "N": "Nébuleuse",                                    # "nebula"
@@ -147,7 +149,7 @@ LANG = {
 
 
 MESSIER_DATA = {
-    1: ["SNR", "NGC 1952", "Taureau", "8.4", "6'x4'", "Nébuleuse du Crabe", 5.57, 22.0],
+    1: ["SNR", "NGC 1952", "Taureau", "8.4", "6'x4'", "Nébuleuse du Crabe", 5.58, 22.90],
     2: ["GC", "NGC 7089", "Verseau", "6.3", "16'", "Amas du Verseau", 21.56, -0.8],
     3: ["GC", "NGC 5272", "Ch. de Chasse", "6.2", "18'", "Amas des Chiens de Chasse", 13.7, 28.4],
     4: ["GC", "NGC 6121", "Scorpion", "5.9", "36'", "Amas du Scorpion", 16.4, -26.5],
@@ -202,7 +204,7 @@ MESSIER_DATA = {
     53: ["GC", "NGC 5024", "Chevelure", "7.6", "13'", "Amas de la Chevelure", 13.21, 18.2],
     54: ["GC", "NGC 6715", "Sagittaire", "7.6", "12'", "Amas du Sagittaire", 18.92, -30.5],
     55: ["GC", "NGC 6809", "Sagittaire", "6.3", "19'", "Amas du Sagittaire", 19.67, -30.9],
-    56: ["GC", "NGC 6779", "Lyre", "8.3", "9'", "Amas de la Lyre", 19.28, 33.0],
+    56: ["GC", "NGC 6779", "Lyre", "8.3", "9'", "Amas de la Lyre", 19.28, 30.18],
     57: ["PN", "NGC 6720", "Lyre", "8.8", "1.5'x1'", "Nébuleuse de l'Anneau", 18.89, 33.0],
     58: ["G", "NGC 4579", "Vierge", "9.7", "6'x5'", "Galaxie de la Vierge", 12.63, 11.8],
     59: ["G", "NGC 4621", "Vierge", "10.6", "5'x4'", "Galaxie de la Vierge", 12.7, 11.6],
@@ -254,7 +256,7 @@ MESSIER_DATA = {
     105: ["G", "NGC 3379", "Lion", "9.3", "5'x5'", "Galaxie du Lion", 10.79, 12.6],
     106: ["G", "NGC 4258", "Ch. de Chasse", "8.4", "18'x7'", "Galaxie des Chiens de Chasse", 12.32, 47.3],
     107: ["GC", "NGC 6171", "Ophiuchus", "7.9", "13'", "Amas d'Ophiuchus", 16.54, -13.1],
-    108: ["G", "NGC 3556", "Grande Ourse", "10.0", "9'x2'", "Galaxie de la Planche à Surf", 11.19, 53.4],
+    108: ["G", "NGC 3556", "Grande Ourse", "10.0", "9'x2'", "Galaxie de la Planche à Surf", 11.19, 55.67],
     109: ["G", "NGC 3992", "Grande Ourse", "9.8", "8'x5'", "Galaxie de la Grande Ourse", 11.96, 53.4],
     110: ["G", "NGC 205", "Andromède", "8.1", "17'x10'", "Galaxie d'Andromède (sat.)", 0.67, 41.7]
 }
@@ -262,8 +264,8 @@ MESSIER_DATA = {
 
 
 CALDWELL_DATA = {
-    1: ["OC", "NGC 188", "Céphée", "8.1", "13'", "NGC 188", 0.74, 85.3],
-    2: ["PN", "NGC 40", "Céphée", "10.2", "37''", "Nébuleuse du Nœud Coulant", 0.05, 72.5],
+    1: ["OC", "NGC 188", "Céphée", "8.1", "13'", "NGC 188", 0.79, 85.3],
+    2: ["PN", "NGC 40", "Céphée", "10.2", "37''", "Nébuleuse du Nœud Coulant", 0.22, 72.5],
     3: ["G", "NGC 4236", "Dragon", "9.7", "18.6'x6.9'", "Galaxie du Dragon", 12.28, 69.5],
     4: ["RN", "NGC 7023", "Céphée", "-", "18'x18'", "Nébuleuse de l'Iris", 21.03, 68.2],
     5: ["G", "IC 342", "Girafe", "8.4", "21.1'x20.9'", "Galaxie de la Girafe", 3.78, 68.1],
@@ -359,13 +361,13 @@ CALDWELL_DATA = {
     95: ["OC", "NGC 6025", "Triangle Austral", "5.1", "12'", "NGC 6025", 16.03, -60.5],
     96: ["OC", "NGC 2516", "Carène", "3.8", "30'", "NGC 2516", 7.97, -60.8],
     97: ["OC", "NGC 3766", "Centaure", "3.9", "12'", "NGC 3766", 11.6, -61.5],
-    98: ["OC", "NGC 4609", "Croix du Sud", "4.1", "5'", "NGC 4609", 12.71, -61.0],
+    98: ["OC", "NGC 4609", "Croix du Sud", "4.1", "5'", "NGC 4609", 12.71, -62.99],
     99: ["EN", "C99", "Croix du Sud", "-", "420'x300'", "Nébuleuse du Sac à Charbon", 12.83, -62.5],
     100: ["EN", "IC 2944", "Centaure", "-", "60'", "Nébuleuse du Poulet qui Court", 11.6, -63.0],
     101: ["G", "NGC 6744", "Paon", "8.3", "16'x11'", "NGC 6744", 19.16, -63.9],
     102: ["OC", "IC 2602", "Carène", "1.9", "100'", "Pléiades du Sud", 10.72, -64.4],
     103: ["EN", "NGC 2070", "Dorade", "-", "40'", "Nébuleuse de la Tarentule", 5.65, -69.1],
-    104: ["GC", "NGC 47", "Toucan", "4.0", "31'", "NGC 47", 0.4, -72.1],
+    104: ["GC", "NGC 362", "Toucan", "4.0", "31'", "NGC 362", 1.05, -70.85],
     105: ["GC", "NGC 4833", "Mouche", "7.8", "14'", "NGC 4833", 12.99, -70.9],
     106: ["GC", "NGC 104", "Toucan", "4.0", "31'", "47 Tucanae", 0.4, -72.1],
     107: ["GC", "NGC 6101", "Oiseau de Paradis", "9.2", "10'", "NGC 6101", 16.43, -72.2],
@@ -385,7 +387,7 @@ RASC_DATA = {
     7: ["EN", "NGC 281", "Cassiopée", "-", "35x30'", "Nébuleuse Pacman", 0.87, 56.6],
     8: ["OC", "NGC 457", "Cassiopée", "6.4", "13'", "Amas de la Chouette", 1.32, 58.3],
     9: ["OC", "NGC 663", "Cassiopée", "7.1", "16'", "Amas de l'Écharpe (Scarf Cluster)", 1.77, 61.2],
-    10: ["PN", "NGC 1289", "Cassiopée", "12.3", "34''", "Phantom Streak Nebula", 0.51, 61.3],
+    10: ["PN", "IC 289", "Cassiopée", "12.3", "34''", "Phantom Streak Nebula", 3.17, 61.3],
     11: ["PN", "NGC 7662", "Andromède", "9.2", "20''", "Nébuleuse de la Boule de Neige Bleue", 23.43, 42.5],
     12: ["G", "NGC 891", "Andromède", "10", "13.5x2.8'", "Galaxie de l'Aiguille d'Argent", 2.38, 42.3],
     13: ["G", "NGC 253", "Sculpteur", "7.1", "25.1x7.4'", "Galaxie du Sculpteur", 0.79, -25.3],
@@ -419,7 +421,7 @@ RASC_DATA = {
     41: ["G", "NGC 3079", "Grande Ourse", "10.6", "7.6x1.7'", "Galaxie spirale", 10.03, 55.7],
     42: ["G", "NGC 3184", "Grande Ourse", "9.7", "6.9x6.8'", "Galaxie spirale", 10.3, 41.4],
     43: ["G", "NGC 3877", "Grande Ourse", "10.9", "5.4x1.5'", "Galaxie spirale", 11.77, 47.5],
-    44: ["G", "NGC 3941", "Grande Ourse", "9.8", "3.8x2.5'", "Galaxie lenticulaire", 11.88, 45.0],
+    44: ["G", "NGC 3941", "Grande Ourse", "9.8", "3.8x2.5'", "Galaxie lenticulaire", 11.88, 36.99],
     45: ["G", "NGC 4026", "Grande Ourse", "10.7", "5.1x1.4'", "Galaxie lenticulaire", 11.99, 50.9],
     46: ["G", "NGC 4088", "Grande Ourse", "10.5", "5.8x2.5'", "Galaxie spirale", 12.1, 50.5],
     47: ["G", "NGC 4157", "Grande Ourse", "11.9", "6.9x1.7'", "Galaxie spirale", 12.2, 50.5],
@@ -466,7 +468,7 @@ RASC_DATA = {
     88: ["G", "NGC 6503", "Dragon", "10.2", "6.2x2.3'", "Galaxie spirale", 17.81, 70.1],
     89: ["PN", "NGC 6543", "Dragon", "8.8", "18''", "Nébuleuse de l'Œil de Chat", 17.98, 66.6],
     90: ["PN", "NGC 6210", "Hercule", "9.3", "14''", "Nébuleuse de la Tortue", 16.74, 23.8],
-    91: ["PN", "NGC 6369", "Ophiuchus", "10.4", "30''", "Nébuleuse du Petit Fantôme", 17.49, -17.8],
+    91: ["PN", "NGC 6369", "Ophiuchus", "10.4", "30''", "Nébuleuse du Petit Fantôme", 17.49, -23.73],
     92: ["PN", "NGC 6572", "Ophiuchus", "9.0", "8''", "Emerald Nebula", 18.2, 6.8],
     93: ["OC", "NGC 6633", "Ophiuchus", "4.6", "27'", "Amas de Tweedledum", 18.46, 6.5],
     94: ["GC", "NGC 6712", "Ecu de Sobieski", "8.2", "7.2'", "Amas globulaire", 18.89, -8.7],
@@ -478,18 +480,18 @@ RASC_DATA = {
     "99b": ["SNR", "NGC 6992", "Cygne", "-", "78x8'", "Grande Dentelle du Cygne", 20.94, 31.7],
     100: ["EN", "NGC 7000", "Cygne", "-", "120x100'", "Nébuleuse de l'Amérique du Nord", 20.99, 44.3],
     101: ["PN", "NGC 7027", "Cygne", "10.4", "15''", "Nébuleuse planétaire", 21.12, 42.2],
-    102: ["PN", "NGC 6445", "Sagittaire", "11.8", "34''", "Little Gem Nebula", 17.82, -16.2],
+    102: ["PN", "NGC 6445", "Sagittaire", "11.8", "34''", "Little Gem Nebula", 17.82, -20.01],
     103: ["OC", "NGC 6520", "Sagittaire", "8.1", "6'", "Amas ouvert", 18.06, -27.9],
-    104: ["PN", "NGC 6818", "Sagittaire", "9.9", "17''", "Little Gem Nebula", 19.73, -16.2],
+    104: ["PN", "NGC 6818", "Sagittaire", "9.9", "17''", "Little Gem Nebula", 19.73, -14.15],
     105: ["OC", "NGC 6802", "Petit Renard", "8.8", "3.2'", "Amas ouvert", 19.51, 20.3],
     106: ["OC", "NGC 6940", "Petit Renard", "6.3", "31'", "Amas ouvert", 20.58, 28.3],
     107: ["OC", "NGC 6939", "Céphée", "7.8", "8'", "Amas ouvert", 20.57, 60.6],
     108: ["G", "NGC 6946", "Céphée", "8.9", "11.0x9.8'", "Galaxie du Feu d'Artifice", 20.58, 60.1],
     109: ["RN", "NGC 7129", "Céphée", "-", "8x7'", "Nébuleuse par réflexion", 21.72, 66.1],
-    110: ["PN", "NGC 40", "Céphée", "10.2", "37''", "Nébuleuse du Nœud Coulant", 0.05, 72.5],
+    110: ["PN", "NGC 40", "Céphée", "10.2", "37''", "Nébuleuse du Nœud Coulant", 0.22, 72.5],
     
 # deep sky challenge (extracts)
-    1001: ["RN", "NGC 7822", "Cassiopée", "Non spécifiée", "60'x30'", "Nébuleuse par émission", 0.06, 68.6],
+    1001: ["RN", "NGC 7822", "Cassiopée", "Non spécifiée", "60'x30'", "Nébuleuse par émission", 0.06, 67.42],
     1002: ["RN", "IC 59", "Cassiopée", "Non spécifiée", "10'x5'", "Nébuleuse par émission/réflexion", 0.94, 61.1],
     1003: ["OC", "NGC 609", "Cassiopée", "11.0", "3.0'", "Amas ouvert", 1.62, 64.6],
     1004: ["EN", "IC 1795", "Cassiopée", "Non spécifiée", "27'x13'", "Nébuleuse par émission", 2.41, 61.9],
@@ -502,7 +504,7 @@ RASC_DATA = {
     1011: ["RN", "IC 405", "Cocher", "Non spécifiée", "30'x19'", "Nébuleuse de l'Étoile Flamboyante", 5.27, 34.3],
     1012: ["N", "HH 1", "Orion", "14.5", "8'", "Herbig-Haro 1", 5.61, -6.8],
     1013: ["N", "IC 434 / Barnard 33", "Orion", "Non spécifiée", "60'x10'", "Nébuleuse de la Tête de Cheval (B 33)", 5.68, -2.5],
-    1014: ["EN", "Sh 2-276", "Orion", "Non spécifiée", "600'x30'", "Boucle de Barnard", 5.80, 1.0],
+    1014: ["EN", "Sh 2-276", "Orion", "Non spécifiée", "600'x30'", "Boucle de Barnard - sorcière", 5.50, -4],
     1015: ["PN", "Abell 12", "Orion", "13.0", "37'", "Nébuleuse planétaire Abell 12", 6.04, 9.7],
     1016: ["SNR", "IC 443", "Gémeaux", "Non spécifiée", "50'x40'", "Nébuleuse de la Méduse (SNR)", 6.28, 22.8],
     1017: ["PN", "J 900", "Gémeaux", "12.2", "8'", "Jonckheere 900", 6.43, 17.78],
@@ -528,7 +530,7 @@ RASC_DATA = {
     1037: ["G", "NGC 6822", "Sagittaire", "11.0", "10.2'x9.5'", "Galaxie de Barnard", 19.75, -14.8],
     1038: ["GC", "Palomar 11", "Aigle", "9.8", "3.2'", "Amas globulaire Palomar 11", 19.75, -8.0],
     1039: ["PN", "IC 4997", "Flèche", "10.9", "2'", "Nébuleuse planétaire", 20.34, 16.8],
-    1040: ["EN", "IC 1318", "Cygne", "Non spécifiée", "Grande", "Nébuleuse de l'Étoile Sadr", 20.44, 40.5],
+    1040: ["EN", "IC 1318", "Cygne", "Non spécifiée", "Grande", "Nébuleuse de l'Étoile Sadr", 20.28, 41.96],
     1041: ["PN", "PK 80 ?6.1", "Cygne", "13.5", "16'", "Nébuleuse de l'Œuf", 21.04, 36.7],
     1042: ["EN", "IC 1396", "Céphée", "Non spécifiée", "170'x140'", "Nébuleuse de la Trompe d'Éléphant", 21.65, 57.5],
     1043: ["RN", "IC 5146", "Cygne", "Non spécifiée", "12'x12'", "Nébuleuse du Cocon", 21.89, 47.3],
@@ -538,7 +540,7 @@ RASC_DATA = {
 
 O_MEARA_DATA = {
     # hidden treasures
-    1: ["OC", "NGC 189", "Cassiopée", "8.8", "5'", "NGC 189", 0.38, 61.1],
+    1: ["OC", "NGC 189", "Cassiopée", "8.8", "5'", "NGC 189", 0.66, 61.1],
     2: ["OC", "Amas du Voilier", "Cassiopée", "7.0", "15'", "Amas du Voilier", 0.73, 61.8],
     3: ["N", "NGC 281", "Cassiopée", "7.8", "30'x35'", "Nébuleuse Pacman", 0.87, 56.6],
     4: ["GC", "NGC 288", "Sculpteur", "8.1", "13'", "NGC 288", 0.88, -26.6],
@@ -551,7 +553,7 @@ O_MEARA_DATA = {
     11: ["G", "NGC 1232", "Éridan", "9.8", "7'x7'", "Galaxie de l'Œil de Dieu", 3.16, -20.6],
     12: ["G", "NGC 1291", "Éridan", "8.5", "11'x10'", "Galaxie au Col de Neige", 3.29, -41.1],
     13: ["G", "NGC 1316", "Fourneau", "9.4", "12'x9'", "Fornax A", 3.38, -37.2],
-    14: ["OC", "Alpha Per", "Persée", "1.2", "185'", "Amas d'Alpha Persei", 3.40, 49.0],
+    14: ["OC", "Alpha Per", "Persée", "1.2", "185'", "Amas d'Alpha Persei", 3.40, 49.86],
     15: ["N", "NGC 1333", "Persée", "5.7", "3'", "nuage de Persée (NGC 1333)", 3.48, 31.4],
     16: ["PN", "NGC 1360", "Fourneau", "9.4", "6'", "Nébuleuse de l'Embryon", 3.55, -25.9],
     17: ["G", "NGC 1365", "Fourneau", "9.5", "11'x6'", "NGC 1365", 3.56, -36.1],
@@ -568,7 +570,7 @@ O_MEARA_DATA = {
     28: ["PN", "IC 418", "Lièvre", "9.6", "0.5'", "Nébuleuse de la Framboise", 5.46, -12.7],
     29: ["OC", "Cr 69", "Orion", "5.0", "50'", "Amas de Lambda Orionis", 5.58, 9.9],
     30: ["OC", "NGC 1981", "Orion", "4.2", "28'", "Amas du Wagon de Charbon", 5.59, -4.4],
-    31: ["OC", "NGC 1980", "Orion", "5.0", "30'", "Le Joyau Perdu d'Orion", 5.59, -4.9],
+    31: ["OC", "NGC 1980", "Orion", "5.0", "30'", "Le Joyau Perdu d'Orion", 5.59, -5.9],
     32: ["N", "NGC 1977", "Orion", "6.3", "20'", "Nébuleuse de l'Homme qui Court", 5.59, -4.8],
     33: ["N", "NGC 1999", "Orion", "9.5", "2'", "Nébuleuse du Tampon en Caoutchouc", 5.61, -6.7],
     34: ["N", "NGC 2024", "Orion", "7.2", "30'", "Nébuleuse de la Flamme", 5.69, -1.85],
@@ -587,7 +589,7 @@ O_MEARA_DATA = {
     47: ["G", "NGC 2683", "Lynx", "9.7", "9'x2'", "Galaxie de l'OVNI", 8.88, 33.4],
     48: ["G", "NGC 2655", "Girafe", "10.1", "5'x4'", "NGC 2655", 8.93, 78.2],
     49: ["G", "NGC 2841", "Grande Ourse", "9.3", "8'x4'", "Galaxie de l'Œil de Tigre", 9.37, 51.0],
-    50: ["OC", "IC 2488", "Voiles", "7.0", "15'", "Amas du Collier de Perles", 9.77, -57.0],
+    50: ["OC", "IC 2488", "Voiles", "7.0", "15'", "Amas du Collier de Perles", 9.46, -57.0],
     51: ["G", "NGC 2903", "Lion", "8.8", "13'x6'", "NGC 2903", 9.53, 21.5],
     52: ["G", "NGC 3184", "Grande Ourse", "9.6", "7'x7'", "Petite Galaxie du Moulinet", 10.30, 41.4],
     53: ["OC", "NGC 3228", "Voiles", "6.0", "5'", "Amas du Trésor de la Reine", 10.36, -51.7],
@@ -1389,6 +1391,9 @@ def generate():
                 }}
             }}
             
+            
+            
+            // SEARCH AND AUTOMATIC CENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
             // SEARCH AND AUTOMATIC CENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
             async function searchCatalog() {{
                 // Open native browser prompt to capture user input using localized string
@@ -1435,130 +1440,241 @@ def generate():
                     }}
                 }}
 
-                // Helper function to query SIMBAD safely via simple independent TAP API calls
+                // Helper function to query SIMBAD database safely via multi-step linear logic
                 async function logSimbadLine(queryName) {{
+                    let url = "https://simbad.cds.unistra.fr/simbad/sim-tap/sync";
+                    let adqlBasic = `SELECT TOP 1 main_id, otype, ra, dec, oid, galdim_majaxis, galdim_minaxis FROM basic JOIN ident ON oid = oidref WHERE id = '${{queryName}}'`;
+                    
                     try {{
-                        let url = "https://simbad.cds.unistra.fr/simbad/sim-tap/sync";
-                        
-                        // Core structural query: Only fields guaranteed to be invariant in the TAP schema
-                        let adqlBasic = `SELECT TOP 1 main_id, otype, ra, dec FROM basic WHERE oid IN (SELECT oidref FROM ident WHERE id = '${{queryName}}')`;
-                        
-                        let response = await fetch(url, {{
+                        let basicResponse = await fetch(url, {{
                             method: "POST",
                             headers: {{ "Content-Type": "application/x-www-form-urlencoded" }},
                             body: new URLSearchParams({{ "request": "doQuery", "lang": "ADQL", "format": "json", "query": adqlBasic }})
                         }});
+                        if (!basicResponse.ok) throw new Error("Primary failed");
+                        let resBasic = await basicResponse.json();
                         
-                        if (!response.ok) return "[SIMBAD Query Failed]";
-                        let resData = await response.json();
-                        
-                        if (resData && resData.data && resData.data.length > 0) {{
-                            let row = resData.data[0];
+                        if (resBasic && resBasic.data && resBasic.data.length > 0) {{
+                            let row = resBasic.data[0];
                             let mainId = row[0] ? row[0].replace(/[\s\u00a0]+/g, ' ').trim() : queryName;
-                            let type = row[1] ? row[1].trim() : "Unknown";
-                            
-                            // RA conversion from decimal degrees to decimal hours (deg / 15)
+                            let rawType = row[1] ? row[1].trim() : "";
                             let ra = row[2] !== null ? (row[2] / 15).toFixed(2) : "N/A";
                             let dec = row[3] !== null ? row[3].toFixed(2) : "N/A";
+                            let internalOid = row[4];
                             
-                            // Build equivalent catalog row representation safely with fixed stable parameters
-                            // Format: [Type, Tech_Ref, Constellation, Mag, Size, Common Name, RA, Dec]
-                            let simbadLine = `["${{type}}", "${{mainId}}", "N/A", "N/A", "N/A", "${{mainId}}", ${{ra}}, ${{dec}}]`;
-                            return simbadLine;
+                            let catalogTypeCode = "N/A";
+                            if (rawType !== "") {{
+                                let tUpper = rawType.toUpperCase();
+                                if (tUpper === "G" || tUpper === "GAL" || tUpper === "LIN" || tUpper === "SYG" || tUpper === "SGB" || tUpper === "BGG" || tUpper === "EMG" || tUpper.includes("GALAXY") || tUpper.startsWith("SY") || tUpper.startsWith("SB") || tUpper === "AMG" || tUpper === "BII" || tUpper === "HCV" || tUpper.includes("SEYFERT") || tUpper.includes("AGN") || tUpper === "BLLAC" || tUpper === "BLL") {{
+                                    catalogTypeCode = "G";
+                                }}
+                                else if (tUpper === "GLC" || tUpper === "GCL") catalogTypeCode = "GC";
+                                else if (tUpper === "OPC" || tUpper === "OCL" || tUpper === "CL*") catalogTypeCode = "OC";
+                                else if (tUpper === "PLN" || tUpper === "PN") catalogTypeCode = "PN";
+                                else if (tUpper === "SNR") catalogTypeCode = "SNR";
+                                else if (tUpper === "HII" || tUpper === "EN") catalogTypeCode = "EN";
+                                else if (tUpper === "RNE" || tUpper === "RN") catalogTypeCode = "RN";
+                                else if (tUpper === "NEB" || tUpper === "CCN" || tUpper === "GNE" || tUpper === "PN?") catalogTypeCode = "N";
+                                else if (tUpper === "QSR" || tUpper === "QSO") catalogTypeCode = "QSR";
+                                else if (tUpper === "AS*" || tUpper === "AST") catalogTypeCode = "A";
+                                else if (tUpper === "CL+N") catalogTypeCode = "N+C";
+                                else if (tUpper === "DUB" || tUpper === "DB*") catalogTypeCode = "D";
+                                else if (tUpper === "C*") catalogTypeCode = "SC";
+                            }}
+                            
+                            let rawMaj = row[5] !== undefined ? row[5] : null;
+                            let rawMin = row[6] !== undefined ? row[6] : null;
+                            let sizeStr = "N/A";
+                            
+                            if (rawMaj !== null && rawMaj !== undefined && parseFloat(rawMaj) > 0 && catalogTypeCode !== "G") {{
+                                let mMaj = parseFloat(rawMaj);
+                                let mMin = rawMin !== null ? parseFloat(rawMin) : 0;
+                                if (mMaj < 2.0) {{ mMaj = mMaj * 60; mMin = mMin * 60; }}
+                                else if (mMaj > 150.0) {{ mMaj = mMaj / 60; mMin = mMin / 60; }}
+                                if (mMin > 0.1 && Math.abs(mMaj - mMin) > 0.1) {{
+                                    sizeStr = `${{mMaj.toFixed(1)}}'x${{mMin.toFixed(1)}}'`;
+                                }} else {{
+                                    sizeStr = `${{mMaj.toFixed(1)}}'`;
+                                }}
+                            }}
+                            
+                            if ((sizeStr === "N/A" || sizeStr.startsWith("0.0") || catalogTypeCode === "G") && internalOid) {{
+                                try {{
+                                    let cleanOid = Number(internalOid);
+                                    let adqlDim = `SELECT TOP 1 majaxis, minaxis FROM galdim WHERE oidref = ${{cleanOid}} ORDER BY majaxis DESC`;
+                                    let dimResponse = await fetch(url, {{
+                                        method: "POST",
+                                        headers: {{ "Content-Type": "application/x-www-form-urlencoded" }},
+                                        body: new URLSearchParams({{ "request": "doQuery", "lang": "ADQL", "format": "json", "query": adqlDim }})
+                                    }});
+                                    if (dimResponse.ok) {{
+                                        let resDim = await dimResponse.json();
+                                        if (resDim && resDim.data && resDim.data.length > 0 && resDim.data[0]) {{
+                                            let dRow = resDim.data[0];
+                                            if (dRow[0] !== null && dRow[0] !== undefined && parseFloat(dRow[0]) > 0) {{
+                                                let sMaj = parseFloat(dRow[0]);
+                                                let sMin = (dRow[1] !== null && dRow[1] !== undefined && parseFloat(dRow[1]) > 0) ? parseFloat(dRow[1]) : 0;
+                                                if (sMaj > 150.0 || sMaj === 11400) {{ sMaj = sMaj / 60; sMin = sMin / 60; }}
+                                                if (sMin > 0.05 && Math.abs(sMaj - sMin) > 0.05) {{
+                                                    sizeStr = `${{sMaj.toFixed(1)}}'x${{sMin.toFixed(1)}}'`;
+                                                }} else {{
+                                                    sizeStr = `${{sMaj.toFixed(1)}}'`;
+                                                }}
+                                            }}
+                                        }}
+                                    }}
+                                }} catch(e) {{}}
+                            }}
+                            
+                            let mag = "N/A";
+                            if (internalOid !== null && internalOid !== undefined) {{
+                                try {{
+                                    let cleanOidForFlux = Number(internalOid);
+                                    let adqlFlux = `SELECT TOP 1 V, B FROM allfluxes WHERE oidref = ${{cleanOidForFlux}}`;
+                                    let fluxResponse = await fetch(url, {{
+                                        method: "POST",
+                                        headers: {{ "Content-Type": "application/x-www-form-urlencoded" }},
+                                        body: new URLSearchParams({{ "request": "doQuery", "lang": "ADQL", "format": "json", "query": adqlFlux }})
+                                    }});
+                                    if (fluxResponse.ok) {{
+                                        let resFlux = await fluxResponse.json();
+                                        if (resFlux && resFlux.data && resFlux.data.length > 0 && resFlux.data[0]) {{
+                                            let fluxRow = resFlux.data[0];
+                                            if (fluxRow[0] !== null && fluxRow[0] !== undefined) mag = fluxRow[0];
+                                            else if (fluxRow[1] !== null && fluxRow[1] !== undefined) mag = fluxRow[1];
+                                        }}
+                                    }}
+                                }} catch (e) {{}}
+                            }}
+
+                            let finalMag;
+                            if (mag === "N/A" || mag === null || mag === undefined) {{
+                                finalMag = '"N/A"';
+                            }} else if (typeof mag === 'string') {{
+                                let parsed = parseFloat(mag);
+                                finalMag = !isNaN(parsed) ? parsed : `"${{mag.trim()}}"`;
+                            }} else {{
+                                finalMag = mag;
+                            }}
+                            
+                            return `["${{catalogTypeCode}}", "${{mainId}}", "const TBD", ${{finalMag}}, "${{sizeStr}}", "${{mainId}}", ${{ra}}, ${{dec}}]`;
                         }}
-                        return "[Object not found in SIMBAD matrix]";
+                        return `["N/A", "${{queryName}}", "const TBD", "N/A", "N/A", "${{queryName}}", "N/A", "N/A"]`;
                     }} catch (err) {{
-                        return "[SIMBAD Error: " + err.message + "]";
+                        return `["N/A", "${{queryName}}", "const TBD", "N/A", "N/A", "${{queryName}}", "N/A", "N/A"]`;
                     }}
                 }}
-                
-                // Action block executed if target astronomical object is located
-                // ==============================================================
-                if (foundObj) {{
-                    // Object found: generate log from SIMBAD query based on its technical reference
-                    let simbadQuery = foundObj.tech_ref || (foundObj.prefix + " " + foundObj.id);
-                    logSimbadLine(simbadQuery).then(line => {{
-                        console.log("SIMBAD match for found object:", line);
-                        
-                        // Use the internal "info" array directly generated by Python script to output raw catalog format
-                        if (foundObj.info && Array.isArray(foundObj.info)) {{
-                            // Format elements cleanly ensuring strings are properly quoted and floats are raw
-                            let formattedElements = foundObj.info.map(el => {{
-                                if (typeof el === 'string') return `"${{el}}"`;
-                                if (el === null || el === undefined) return '"N/A"';
-                                return el;
-                            }});
-                            
-                            // Extract object ID (e.g. 7 or "7") from python dictionary schema and prepends it to layout string
-                            let catId = foundObj.id !== undefined ? foundObj.id : "";
-                            let catalogLine = `${{catId}}: [${{formattedElements.join(", ")}}]`;
-                            console.log("corresponding catalog entry :\n", catalogLine);
-                        }}
-                    }});
 
-                    // Fetch DOM elements of all filtering drop-down menus
+                // Strategy routing logic for mapping the targeted query string
+                let simbadQuery = isNumericOnly ? "NGC " + cleanSearch : searchStr.trim();
+
+                if (foundObj) {{
+                    // Fetch filtering interactive dropdowns
                     let catSelect = document.getElementById("catSelect");
                     let familySelect = document.getElementById("familySelect");
                     let seasonSelect = document.getElementById("seasonSelect");
                     let dirSelect = document.getElementById("dirSelect");
                     
-                    // Switch interface views: Set catalog filter matching object's origin field
-                    if (catSelect && foundObj.catalog_origin) {{ 
-                        catSelect.value = foundObj.catalog_origin; 
-                    }}
-                    
-                    // Clear all restrictive filter dropdowns back to default ("Tous") to prevent layout isolation
+                    // Switch current active view tab matching the detected object origin
+                    if (catSelect && foundObj.catalog_origin) {{ catSelect.value = foundObj.catalog_origin; }}
                     if (familySelect) {{ familySelect.value = "Tous"; currentFamily = "Tous"; }}
                     if (seasonSelect) {{ seasonSelect.value = "Tous"; currentSeason = "Tous"; }}
                     if (dirSelect) {{ dirSelect.value = "Tous"; currentDir = "Tous"; }}
                     
-                    // Trigger UI rebuild chain to render correct elements within active viewport
+                    // Trigger UI rebuild matrix
                     update(); 
-                    
-                    // Timeout macro task: executing after layout painting ensures target DOM node initialization
-                    setTimeout(() => {{
-                        // Construct matching specific DOM ID signature injected inside dynamic update structure
-                        let targetId = "card_" + foundObj.prefix.toUpperCase() + String(foundObj.id).toUpperCase();
-                        let targetElement = document.getElementById(targetId);
 
-                        if (targetElement) {{
-                            // Execute native smooth scroll alignment anchoring node to display center
-                            targetElement.scrollIntoView({{ behavior: "smooth", block: "center" }});
-                            
-                            // Visual feedback overlay: Apply temporary neon green borders and shadow highlight
-                            let originalBorder = targetElement.style.borderColor;
-                            let originalBoxShadow = targetElement.style.boxShadow;
-                            targetElement.style.borderColor = "#00ff66";
-                            targetElement.style.boxShadow = "0 0 15px #00ff66";
-                            
-                            // N/U : Programmatically fire synthetic 'mouseenter' event tracking to deploy context tooltip/altitudes
-                            let mouseEvent = new MouseEvent('mouseenter', {{
-                                bubbles: true,
-                                cancelable: true,
-                                view: window
-                            }});
-                            //targetElement.dispatchEvent(mouseEvent);
-                            
-                            
-                            // Visual teardown timer: removes highlight styling frame safely after 4 seconds
-                            setTimeout(() => {{
-                                targetElement.style.borderColor = originalBorder;
-                                targetElement.style.boxShadow = originalBoxShadow;
-                            }}, 4000);
-                        }} else {{
-                            // Handle edge case where object data exists but DOM element registration fails
-                            alert("{LANG['NOT_FOUND']}");
-                        }}
-                    }}, 150); // Safe threshold delay tracking grid rendering loop cycle completion
+                    // Call shared execution pipeline
+                    processCatalogObject(foundObj, simbadQuery, logSimbadLine);
                 }} else {{
-                    // Fallback alerts if zero matching records are registered inside master array dataset
-                    let fallbackQuery = isNumericOnly ? "NGC " + searchStr.trim() : searchStr.trim();
-                    
-                    logSimbadLine(fallbackQuery).then(simbadLine => {{
+                    // Fallback block if the target object is missing from local script datasets
+                    logSimbadLine(simbadQuery).then(simbadLine => {{
                         console.log("SIMBAD reference for missing object:", simbadLine);
                         alert("{LANG['NOT_FOUND']}\nSIMBAD: " + simbadLine);
                     }});
                 }}
+            }}
+
+            // SHARED PIEPLINE FOR SIMBAD INTERROGATION AND UI GLOW ANIMATION
+            function processCatalogObject(foundObj, fallbackQuery, logSimbadLineFn) {{
+                let backupQuery = (foundObj && foundObj.tech_ref) ? foundObj.tech_ref.trim() : null;
+                let primarySimbadTarget = (foundObj && backupQuery && backupQuery !== "") ? backupQuery : fallbackQuery;
+                
+                // Re-inject required space formatting for explicit SIMBAD TAP lookups
+                if (/^NGC\d+$/.test(primarySimbadTarget.replace(/\s+/g, '').toUpperCase())) {{
+                    let num = primarySimbadTarget.replace(/\s+/g, '').toUpperCase().replace('NGC', '');
+                    primarySimbadTarget = "NGC " + num;
+                }} else if (/^M\d+$/.test(primarySimbadTarget.replace(/\s+/g, '').toUpperCase())) {{
+                    let num = primarySimbadTarget.replace(/\s+/g, '').toUpperCase().replace('M', '');
+                    primarySimbadTarget = "M " + num;
+                }}
+
+                logSimbadLineFn(primarySimbadTarget).then(line => {{
+                    console.log("SIMBAD match for found object:", line);
+                    
+                    if (foundObj.info && Array.isArray(foundObj.info)) {{
+                        let formattedElements = foundObj.info.map(el => {{
+                            if (typeof el === 'string') return `"${{el}}"`;
+                            if (el === null || el === undefined) return '"N/A"';
+                            return el;
+                        }});
+                        let catId = foundObj.id !== undefined ? foundObj.id : "";
+                        let catalogLine = `${{catId}}: [${{formattedElements.join(", ")}}]`;
+                        console.log("corresponding catalog entry :\n", catalogLine);
+                    }}
+
+                    // Check coordinates differences and change border color if threshold is exceeded
+                    try {{
+                        let simbadData = JSON.parse(line);
+                        let simbadRa = parseFloat(simbadData[6]);
+                        let simbadDec = parseFloat(simbadData[7]);
+
+                        if (foundObj.info && Array.isArray(foundObj.info) && !isNaN(simbadRa) && !isNaN(simbadDec)) {{
+                            let catRa = parseFloat(foundObj.info[6]);
+                            let catDec = parseFloat(foundObj.info[7]);
+
+                            if (!isNaN(catRa) && !isNaN(catDec)) {{
+                                //let diffRaMinutes = Math.abs(simbadRa - catRa) * 15 * 60;
+                                // On applique le cosinus de la déclinaison (convertie en radians) pour corriger la convergence des méridiens aux pôles
+                                let diffRaMinutes = Math.abs(simbadRa - catRa) * 15 * 60 * Math.cos(catDec * Math.PI / 180);
+                                let diffDecMinutes = Math.abs(simbadDec - catDec) * 60;
+
+                                if (diffRaMinutes > 30 || diffDecMinutes > 30) {{
+                                    
+                                    let targetId = "card_" + foundObj.prefix.toUpperCase() + String(foundObj.id).toUpperCase();
+                                    let targetElement = document.getElementById(targetId);
+                                    if (targetElement) {{
+                                        targetElement.style.borderColor = "#ff0033";
+                                        targetElement.style.boxShadow = "0 0 15px #ff0033";
+                                        
+                                        console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+                                    }}
+                                }}
+                            }}
+                        }}
+                    }} catch (e) {{}}
+                }});
+
+                // Scroll into view and execute CSS glow highlighting animation on the targeted DOM node element card
+                setTimeout(() => {{
+                    let targetId = "card_" + foundObj.prefix.toUpperCase() + String(foundObj.id).toUpperCase();
+                    let targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {{
+                        targetElement.scrollIntoView({{ behavior: "smooth", block: "center" }});
+                        let originalBorder = targetElement.style.borderColor;
+                        let originalBoxShadow = targetElement.style.boxShadow;
+                        targetElement.style.borderColor = "#00ff66";
+                        targetElement.style.boxShadow = "0 0 15px #00ff66";
+                        
+                        setTimeout(() => {{
+                            targetElement.style.borderColor = originalBorder;
+                            targetElement.style.boxShadow = originalBoxShadow;
+                        }}, 4000);
+                    }} else {{
+                        alert("{LANG['NOT_FOUND']}");
+                    }}
+                }}, 150);
             }}
             
             function update() {{
@@ -1683,6 +1799,42 @@ def generate():
             */
             
             function showT(element, obj, comment) {{
+                // Detect if Ctrl key is pressed using the global window event object
+                if (window.event && window.event.ctrlKey) {{
+                    // Determine the best query parameter string
+                    let fallbackQuery = (obj.prefix && obj.id) ? (obj.prefix + " " + obj.id) : "";
+                    if ((obj.prefix === "RASC" || obj.prefix === "R") && obj.tech_ref) {{
+                        fallbackQuery = obj.tech_ref.trim();
+                    }}
+
+                    // Re-instantiate the local pipeline worker logic for standalone invocation inside showT context
+                    let standaloneSimbadFetcher = async function(queryName) {{
+                        let url = "https://simbad.cds.unistra.fr/simbad/sim-tap/sync";
+                        let adqlBasic = `SELECT TOP 1 main_id, otype, ra, dec, oid, galdim_majaxis, galdim_minaxis FROM basic JOIN ident ON oid = oidref WHERE id = '${{queryName}}'`;
+                        try {{
+                            let response = await fetch(url, {{
+                                method: "POST",
+                                headers: {{ "Content-Type": "application/x-www-form-urlencoded" }},
+                                body: new URLSearchParams({{ "request": "doQuery", "lang": "ADQL", "format": "json", "query": adqlBasic }})
+                            }});
+                            if (!response.ok) return `["N/A", "${{queryName}}", "const TBD", "N/A", "N/A", "${{queryName}}", "N/A", "N/A"]`;
+                            let resBasic = await response.json();
+                            if (resBasic && resBasic.data && resBasic.data.length > 0) {{
+                                let row = resBasic.data[0];
+                                let rId = row[0] ? row[0].replace(/[\s\u00a0]+/g, ' ').trim() : queryName;
+                                let rRa = row[2] !== null ? (row[2] / 15).toFixed(2) : "N/A";
+                                let rDec = row[3] !== null ? row[3].toFixed(2) : "N/A";
+                                return `["N/A", "${{rId}}", "const TBD", "N/A", "N/A", "${{rId}}", ${{rRa}}, ${{rDec}}]`;
+                            }}
+                        }} catch (e) {{}}
+                        return `["N/A", "${{queryName}}", "const TBD", "N/A", "N/A", "${{queryName}}", "N/A", "N/A"]`;
+                    }};
+
+                    // Directly process the object being hovered over without re-triggering search mutations
+                    processCatalogObject(obj, fallbackQuery, standaloneSimbadFetcher);
+                    return; // Abort tooltip rendering
+                }}
+                
                 if (globalChartInstance) {{
                     globalChartInstance.destroy();
                     globalChartInstance = null;
