@@ -783,8 +783,15 @@ OTHER_DATA = {
     15: ["OC", "NGC 2355", "Gémeaux", "9.5", "9'", "Amas riche et compact de 70 étoiles", 7.28, 13.78],
     16: ["PN", "NGC 2438", "Poupe", "11", "65\"", "Nébuleuse Planétaire de M46 (sur le bord nord M46)", 7.7, -14.73],
     17: ["N+C","IC 4685", "Sagittaire","7.2", "10'", "chineese dragon", 18.15, -23.99],
-    18: ["EN", "NGC 6334", "Scorpion", "10", "20'", "nébuleuse patte de chat - Halpha", 17.35,-36,15]
+    18: ["EN", "NGC 6334", "Scorpion", "10", "20'", "nébuleuse patte de chat - Halpha", 17.35,-36,15],
+    19: ["G", "NGC 4170", "Chevelure de Bérénice", 12.34, "3.8'x3.8'", "the box - HCG61", 12.21, 29.18],
+    20: ["G", "NGC 4302", "Chevelure de Bérénice", 11.61, "5.3'x0.9'", "NGC 4302 à faire avec M99", 12.36, 14.60],
+    21: ["G", "NGC 5566", "Vierge", 10.55, "8.0'x3.0'", "Arp286 = NGC5566_5560_5569", 14.34, 3.93],
+    22: ["PN", "PN A66 39", "Hercule", "N/A", "2.9' x 2.9'", "PN A66 39 ABELL39 _ ACO 39", 16.46, 27.9],
+    23: ["G", "NGC 3718", "grande Ourse", 10.61, "5.1' x 2.5'", "NGC 3718", 11.54, 53.07],
+    24: ["G", "NGC 2146", "Girafe", 10.59, "5.4' x 3.4'", "NGC 2146", 6.31, 78.36]
 }
+
 
 
 
