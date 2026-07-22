@@ -9,6 +9,7 @@
 # https://vicmenard.com/articles/
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
+#   V6.4 : bug fixed, dates of day/nigth were false
 #   V6.3 : checked all catalogs coordinates - request to SIMBAD in logs F12
 #            CTRL + hovering paints bad coordinates box in red, then goto F12
 #   V6.2 : added alasky thumbnails in tooltip - O'MEARA fixed
@@ -201,7 +202,7 @@ MESSIER_DATA = {
     50: ["OC", "NGC 2323", "Licorne", "5.9", "16'", "Amas de la Licorne", 7.05, -8.3],
     51: ["G", "NGC 5194", "Ch. de Chasse", "8.4", "11'x7'", "Galaxie du Tourbillon", 13.5, 47.2],
     52: ["OC", "NGC 7654", "Cassiopée", "6.9", "13'", "Amas de Cassiopée", 23.4, 61.6],
-    53: ["GC", "NGC 5024", "Chevelure", "7.6", "13'", "Amas de la Chevelure", 13.21, 18.2],
+    53: ["GC", "NGC 5024", "Chevelure de Berenice", "7.6", "13'", "Amas de la Chevelure de Berenice", 13.21, 18.2],
     54: ["GC", "NGC 6715", "Sagittaire", "7.6", "12'", "Amas du Sagittaire", 18.92, -30.5],
     55: ["GC", "NGC 6809", "Sagittaire", "6.3", "19'", "Amas du Sagittaire", 19.67, -30.9],
     56: ["GC", "NGC 6779", "Lyre", "8.3", "9'", "Amas de la Lyre", 19.28, 30.18],
@@ -212,7 +213,7 @@ MESSIER_DATA = {
     61: ["G", "NGC 4303", "Vierge", "9.7", "6'x6'", "Galaxie de la Vierge", 12.37, 4.5],
     62: ["GC", "NGC 6266", "Ophiuchus", "6.5", "15'", "Amas d'Ophiuchus", 17.02, -30.1],
     63: ["G", "NGC 5055", "Ch. de Chasse", "8.6", "12'x8'", "Galaxie du Tournesol", 13.26, 42.0],
-    64: ["G", "NGC 4826", "Chevelure", "8.5", "10'x5'", "Galaxie de l'Œil Noir", 12.94, 21.7],
+    64: ["G", "NGC 4826", "Chevelure de Berenice", "8.5", "10'x5'", "Galaxie de l'Œil Noir", 12.94, 21.7],
     65: ["G", "NGC 3623", "Lion", "9.3", "10'x3'", "Galaxie du Lion", 11.32, 13.1],
     66: ["G", "NGC 3627", "Lion", "8.9", "9'x4'", "Galaxie du Lion", 11.34, 13.0],
     67: ["OC", "NGC 2682", "Cancer", "6.1", "30'", "Amas du Cobra Royal", 8.85, 11.8],
@@ -233,22 +234,22 @@ MESSIER_DATA = {
     82: ["G", "NGC 3034", "Grande Ourse", "8.4", "11'x4'", "Galaxie du Cigare", 9.93, 69.7],
     83: ["G", "NGC 5236", "Hydre", "7.5", "13'x11'", "Galaxie du Moulinet Austral", 13.62, -29.9],
     84: ["G", "NGC 4374", "Vierge", "9.1", "6'x6'", "Galaxie de la Vierge", 12.42, 12.9],
-    85: ["G", "NGC 4382", "Chevelure", "9.1", "7'x5'", "Galaxie de la Chevelure", 12.42, 18.2],
+    85: ["G", "NGC 4382", "Chevelure de Berenice", "9.1", "7'x5'", "Galaxie de la Chevelure de Berenice", 12.42, 18.2],
     86: ["G", "NGC 4406", "Vierge", "8.9", "9'x6'", "Galaxie de la Vierge", 12.44, 12.9],
     87: ["G", "NGC 4486", "Vierge", "8.6", "8'x8'", "Virgo A", 12.51, 12.4],
-    88: ["G", "NGC 4501", "Chevelure", "9.6", "7'x4'", "Galaxie de la Chevelure", 12.53, 14.4],
+    88: ["G", "NGC 4501", "Chevelure de Berenice", "9.6", "7'x4'", "Galaxie de la Chevelure de Berenice", 12.53, 14.4],
     89: ["G", "NGC 4552", "Vierge", "9.8", "5'x5'", "Galaxie de la Vierge", 12.59, 12.6],
     90: ["G", "NGC 4569", "Vierge", "9.5", "10'x4'", "Galaxie de la Vierge", 12.61, 13.2],
-    91: ["G", "NGC 4548", "Chevelure", "10.2", "5'x4'", "Galaxie de la Chevelure", 12.59, 14.5],
+    91: ["G", "NGC 4548", "Chevelure de Berenice", "10.2", "5'x4'", "Galaxie de la Chevelure de Berenice", 12.59, 14.5],
     92: ["GC", "NGC 6341", "Hercule", "6.3", "14'", "Amas d'Hercule", 17.28, 43.1],
     93: ["OC", "NGC 2447", "Poupe", "6.0", "22'", "Amas de la Poupe", 7.74, -23.9],
     94: ["G", "NGC 4736", "Ch. de Chasse", "8.2", "11'x9'", "Galaxie de l'Œil de Crocodile", 12.85, 41.1],
     95: ["G", "NGC 3351", "Lion", "9.7", "7'x5'", "Galaxie du Lion", 10.73, 11.7],
     96: ["G", "NGC 3368", "Lion", "9.2", "8'x5'", "Galaxie du Lion", 10.78, 11.8],
     97: ["PN", "NGC 3587", "Grande Ourse", "9.9", "3.4'", "Nébuleuse du Hibou", 11.25, 55.0],
-    98: ["G", "NGC 4192", "Chevelure", "10.1", "10'x3'", "Galaxie de la Chevelure", 12.23, 14.9],
-    99: ["G", "NGC 4254", "Chevelure", "9.9", "5'x5'", "Galaxie du Coma Pinwheel", 12.31, 14.4],
-    100: ["G", "NGC 4321", "Chevelure", "9.3", "7'x6'", "Galaxie de la Chevelure", 12.38, 15.8],
+    98: ["G", "NGC 4192", "Chevelure de Berenice", "10.1", "10'x3'", "Galaxie de la Chevelure de Berenice", 12.23, 14.9],
+    99: ["G", "NGC 4254", "Chevelure de Berenice", "9.9", "5'x5'", "Galaxie du Coma Pinwheel - Katherine's wheel", 12.31, 14.4],
+    100: ["G", "NGC 4321", "Chevelure de Berenice", "9.3", "7'x6'", "Galaxie de la Chevelure de Berenice", 12.38, 15.8],
     101: ["G", "NGC 5457", "Grande Ourse", "7.9", "28'x27'", "Galaxie du Moulinet", 14.05, 54.4],
     102: ["G", "NGC 5866", "Dragon", "9.9", "6'x3'", "Galaxie du Fuseau", 15.11, 55.8],
     103: ["OC", "NGC 581", "Cassiopée", "7.4", "6'", "Amas de Cassiopée", 1.55, 60.7],
@@ -789,9 +790,14 @@ OTHER_DATA = {
     21: ["G", "NGC 5566", "Vierge", 10.55, "8.0'x3.0'", "Arp286 = NGC5566_5560_5569", 14.34, 3.93],
     22: ["PN", "PN A66 39", "Hercule", "N/A", "2.9' x 2.9'", "PN A66 39 ABELL39 _ ACO 39", 16.46, 27.9],
     23: ["G", "NGC 3718", "grande Ourse", 10.61, "5.1' x 2.5'", "NGC 3718", 11.54, 53.07],
-    24: ["G", "NGC 2146", "Girafe", 10.59, "5.4' x 3.4'", "NGC 2146", 6.31, 78.36]
+    24: ["G", "NGC 2146", "Girafe", 10.59, "5.4' x 3.4'", "NGC 2146", 6.31, 78.36],
+    25: ["EN", "NGC 1893", "Cocher", "N/A", "36.0'", "IC410 tétard - NGC 1893", 5.38, 33.44],
+    26: ["G", "NGC 5916", "Balance", 14, "1.2'x26''", "NGC 5916", 15.36, -13.17],
+    27: ["EN", "LBN 102.79-00.92", "Céphée", "N/A", "90''", "SH2-132", 22.32, 56.08],
+    28: ["RN", "BD+69 1231", "Céphée", 9.29, "N/A", "VDB-152", 22.22, 70.25],
+    29: ["RN", "GN 21.15.8", "Céphée", "N/A", "N/A", "SH2-136 fantome céphée", 21.27, 68.26],
+    30: ["EN", "LBN 119.57-00.92", "Cassiopée", "N/A", "30'", "SH2-173 fantome cassiopée", 0.35, 61.73]
 }
-
 
 
 
@@ -1049,356 +1055,341 @@ def generate():
     limit_small = CONFIG.get("LIMIT_SMALL_OBJECT", 60)
     
     html_template = fr"""<!DOCTYPE html>
-    <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <style>
-            :root {{ --case-size: {CONFIG["THUMB_SIZE"]}px; }}
-            body {{ background: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px; overflow-x: hidden; }}
-            h1 {{ font-size: 2.2em; margin-bottom: 5px; color: #fff; }}
-            .stats-header {{ color: #8b949e; font-size: 1.1em; margin-bottom: 20px; }}
-            .filter-bar {{ margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }}
-            .filter-select {{ 
-                background: #21262d; color: #fff; border: 1px solid #388bfd; 
-                padding: 8px 35px 8px 15px; border-radius: 20px; cursor: pointer; 
-                font-family: inherit; font-size: 14px; outline: none; transition: 0.2s;
-                appearance: none; -webkit-appearance: none; -moz-appearance: none;
-                background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-                background-repeat: no-repeat; background-position: right 12px top 50%; background-size: 10px auto;
-            }}
-            .btn-export {{ 
-                position: fixed; top: 10px; right: 10px; z-index: 1000;
-                background: #161b22; border: 1px solid #30363d; color: #8b949e;
-                padding: 6px 12px; border-radius: 6px; font-size: 11px;
-                cursor: pointer; transition: 0.2s;
-            }}
-            
-            /* button with a question mark */
-            .btn-search {{
-                position: fixed;
-                top: 10px;
-                left: 10px;
-                z-index: 1000;
-                background: #161b22;
-                border: 1px solid #30363d;
-                /* Text color and design "?" */
-                color: #8b949e; /* Modifiez cette couleur selon vos préférences */
-                font-size: 16px;
-                font-family: sans-serif;
-                padding: 6px 12px;
-                font-weight: bold;
-                border-radius: 6px;
-                cursor: pointer;
-                transition: .2s;
-            }}
-            .btn-search:hover {{
-                background: #21262d;
-                border-color: #8b949e;
-                color: #c9d1d9;
-            }}
-            
-            .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--case-size), 1fr)); gap: 15px; width: 100%; margin: 0 auto; }}
-            .case {{ background: #161b22; border-radius: 8px; border: 1px solid #30363d; overflow: hidden; position: relative; display: flex; flex-direction: column; }}
-            
-            /* Hearts handling - same size empty or full */
-            .todo-heart {{ 
-                position: absolute !important; 
-                top: 5px; 
-                right: 8px; 
-                font-size: 20px; 
-                z-index: 10; 
-                user-select: none; 
-                pointer-events: none;
-                color: #ff4d4d;
-                line-height: 1;
-            }}
-            .todo-heart.no-comment {{ 
-                color: transparent;
-                -webkit-text-stroke: 1.5px #ff4d4d;  // this makes the heart hollow
-            }}
-            .todo-heart.has-comment {{
-                color: #ff4d4d !important;
-                -webkit-text-stroke: 0px transparent;
-            }}
-            .img-box {{ width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; background: #000; cursor: pointer; overflow: hidden; position: relative; }}
-            .img-box img {{ width: 100%; height: 100%; object-fit: cover; }}
-            .empty-info {{ color: #484f58; font-size: 11px; font-weight: bold; text-align: center; padding: 5px; line-height: 1.2; }}
-            .label {{ background: #21262d; padding: 8px 5px; font-weight: bold; font-size: 12px; border-top: 1px solid #30363d; cursor: pointer; transition: 0.2s; user-select: none; }}
-            
-            #tooltip {{ position: fixed; display: none; background: #0d1117; border: 1px solid #3498db; border-radius: 8px; padding: 12px; z-index: 2000; text-align: left; min-width: 320px; box-shadow: 0 8px 24px #000; pointer-events: none; }}
-            #tooltip.frozen {{ border-color: #ff4d4d !important; pointer-events: auto !important; cursor: default; }}
-            
-            #overlay {{ display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; overflow: hidden; }}
-            #fullImg {{ position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: grab; user-select: none; max-width: 95%; max-height: 95%; transition: transform 0.05s linear; }}
-            #customPrompt {{ background: #161b22; color: #fff; border: 1px solid #388bfd; border-radius: 8px; padding: 15px; box-shadow: 0 8px 24px #000; max-width: 300px; text-align: center; }}
-            #customPrompt::backdrop {{ background: rgba(0,0,0,0.6); }}
-            #customPrompt label {{ display: block; font-size: 13px; margin-bottom: 10px; color: #c9d1d9; }}
-            #customPrompt input {{ background: #0d1117; color: #fff; border: 1px solid #30363d; border-radius: 4px; padding: 6px; width: 90%; margin-bottom: 12px; outline: none; }}
-            #customPrompt button {{ background: #21262d; border: 1px solid #388bfd; color: #fff; padding: 6px 15px; border-radius: 4px; cursor: pointer; font-size: 13px; }}
-            
-            .chart-container {{ background: #000000; padding: 5px; position: relative; margin-top: 10px; width: 300px; height: {CONFIG["CHART_HEIGHT"]}px; }}
-            canvas {{ display: block; width: 100% !important; height: 100% !important; }}
-        </style>
-        
-    </head>
-    <body>
-        <button onclick="searchCatalog()" class="btn-search">?</button>
-
-        <h1 id="catTitle">{LANG['CATALOG']}</h1>
-        <div class="stats-header" id="statsText"></div>
-        <div class="filter-bar">
-            <select id="catSelect" class="filter-select" onchange="update()">
-                {select_options}
-            </select>
-            <select id="familySelect" class="filter-select" onchange="filterF(this.value)">
-                {family_options}
-            </select>
-            <select id="seasonSelect" class="filter-select" onchange="filterS(this.value)">
-                <option value="Tous">{LANG['ALL']}</option>
-                {season_options}
-            </select>
-            <select id="dirSelect" class="filter-select" onchange="filterD(this.value)">
-                {dir_options}
-            </select>
-            <button onclick="exportTodo()" class="filter-select btn-export">💾 TODO.txt ❤</button>
-        </div>
-        <div class="grid" id="grid"></div>
-        <div id="tooltip"></div>
-        <div id="overlay" onclick="if(event.target===this) closeM()"><img id="fullImg"></div>
-
-        <dialog id="customPrompt">
-            <form method="dialog" id="promptForm">
-                <label>{LANG['PROMPT_LABEL']}</label>
-                <input type="text" id="promptInput" autocomplete="off">
-                <br>
-                <button type="submit">{LANG['VALIDATE']}</button>
-            </form>
-        </dialog>
-
-        <script>
-            console.log("Core processing block start.");
-            const data = {json.dumps(final_json)};
-            const stats = {json.dumps(stats)};
-            const prefixes = {json.dumps(prefixes_js)};
-            const thumbDir = "{CONFIG['THUMB_DIR']}";
-            const userLat = {CONFIG['LATITUDE']}; 
-            const userLon = {CONFIG['LONGITUDE']};
-            const userElv = {CONFIG['ELEVATION']};
-            let globalChartInstance = null;
-            let isTooltipFrozen = false;
-            
-            // Sync local storage mapping with unique prefix codes (e.g., M33, C33)
-            let localTodo = JSON.parse(localStorage.getItem('astro_todo')) || {{}};
-            for (let cat in data) {{
-                data[cat].forEach(obj => {{
-                    if (obj.todo) {{ 
-                        let globalUniqueKey = obj.prefix + obj.id;
-                        localTodo[globalUniqueKey] = obj.todo_comment || "";
-                    }}
-                }});
-            }}
-            localStorage.setItem('astro_todo', JSON.stringify(localTodo));
-
-            const FAMILIES = {{
-                "Nébuleuse": ["N", "PN", "SC", "SNR", "EN", "RN", "E/RN", "N+C"],
-                "Galaxie": ["G"],
-                "Amas": ["GC", "OC", "D", "A", "N+C", "QSR"]
-            }};
-            
-            let currentSeason = 'Tous', currentDir = 'Tous', currentFamily = 'Tous';
-            let scale = 1, posX = 0, posY = 0, isDragging = false, startX, startY;
-            const m = document.getElementById("overlay"), mi = document.getElementById("fullImg"), t = document.getElementById('tooltip');
-
-            // Unfreeze tooltip when user right-clicks on a frozen tooltip box                                                                        
-            t.addEventListener('contextmenu', (e) => {{
-                if (isTooltipFrozen) {{
-                    e.preventDefault();
-                    unfreezeTooltip();
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <style>
+                :root {{ --case-size: {CONFIG["THUMB_SIZE"]}px; }}
+                body {{ background: #0d1117; color: #c9d1d9; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px; overflow-x: hidden; }}
+                h1 {{ font-size: 2.2em; margin-bottom: 5px; color: #fff; }}
+                .stats-header {{ color: #8b949e; font-size: 1.1em; margin-bottom: 20px; }}
+                .filter-bar {{ margin-bottom: 30px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }}
+                .filter-select {{ 
+                    background: #21262d; color: #fff; border: 1px solid #388bfd; 
+                    padding: 8px 35px 8px 15px; border-radius: 20px; cursor: pointer; 
+                    font-family: inherit; font-size: 14px; outline: none; transition: 0.2s;
+                    appearance: none; -webkit-appearance: none; -moz-appearance: none;
+                    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+                    background-repeat: no-repeat; background-position: right 12px top 50%; background-size: 10px auto;
                 }}
-            }});
+                .btn-export {{ 
+                    position: fixed; top: 10px; right: 10px; z-index: 1000;
+                    background: #161b22; border: 1px solid #30363d; color: #8b949e;
+                    padding: 6px 12px; border-radius: 6px; font-size: 11px;
+                    cursor: pointer; transition: 0.2s;
+                }}
+                
+                /* button with a question mark */
+                .btn-search {{
+                    position: fixed;
+                    top: 10px;
+                    left: 10px;
+                    z-index: 1000;
+                    background: #161b22;
+                    border: 1px solid #30363d;
+                    /* Text color and design "?" */
+                    color: #8b949e; /* Modifiez cette couleur selon vos préférences */
+                    font-size: 16px;
+                    font-family: sans-serif;
+                    padding: 6px 12px;
+                    font-weight: bold;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    transition: .2s;
+                }}
+                .btn-search:hover {{
+                    background: #21262d;
+                    border-color: #8b949e;
+                    color: #c9d1d9;
+                }}
+                
+                .grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--case-size), 1fr)); gap: 15px; width: 100%; margin: 0 auto; }}
+                .case {{ background: #161b22; border-radius: 8px; border: 1px solid #30363d; overflow: hidden; position: relative; display: flex; flex-direction: column; }}
+                
+                /* Hearts handling - same size empty or full */
+                .todo-heart {{ 
+                    position: absolute !important; 
+                    top: 5px; 
+                    right: 8px; 
+                    font-size: 20px; 
+                    z-index: 10; 
+                    user-select: none; 
+                    pointer-events: none;
+                    color: #ff4d4d;
+                    line-height: 1;
+                }}
+                .todo-heart.no-comment {{ 
+                    color: transparent;
+                    -webkit-text-stroke: 1.5px #ff4d4d;  // this makes the heart hollow
+                }}
+                .todo-heart.has-comment {{
+                    color: #ff4d4d !important;
+                    -webkit-text-stroke: 0px transparent;
+                }}
+                .img-box {{ width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; background: #000; cursor: pointer; overflow: hidden; position: relative; }}
+                .img-box img {{ width: 100%; height: 100%; object-fit: cover; }}
+                .empty-info {{ color: #484f58; font-size: 11px; font-weight: bold; text-align: center; padding: 5px; line-height: 1.2; }}
+                .label {{ background: #21262d; padding: 8px 5px; font-weight: bold; font-size: 12px; border-top: 1px solid #30363d; cursor: pointer; transition: 0.2s; user-select: none; }}
+                
+                #tooltip {{ position: fixed; display: none; background: #0d1117; border: 1px solid #3498db; border-radius: 8px; padding: 12px; z-index: 2000; text-align: left; min-width: 320px; box-shadow: 0 8px 24px #000; pointer-events: none; }}
+                #tooltip.frozen {{ border-color: #ff4d4d !important; pointer-events: auto !important; cursor: default; }}
+                
+                #overlay {{ display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; overflow: hidden; }}
+                #fullImg {{ position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: grab; user-select: none; max-width: 95%; max-height: 95%; transition: transform 0.05s linear; }}
+                #customPrompt {{ background: #161b22; color: #fff; border: 1px solid #388bfd; border-radius: 8px; padding: 15px; box-shadow: 0 8px 24px #000; max-width: 300px; text-align: center; }}
+                #customPrompt::backdrop {{ background: rgba(0,0,0,0.6); }}
+                #customPrompt label {{ display: block; font-size: 13px; margin-bottom: 10px; color: #c9d1d9; }}
+                #customPrompt input {{ background: #0d1117; color: #fff; border: 1px solid #30363d; border-radius: 4px; padding: 6px; width: 90%; margin-bottom: 12px; outline: none; }}
+                #customPrompt button {{ background: #21262d; border: 1px solid #388bfd; color: #fff; padding: 6px 15px; border-radius: 4px; cursor: pointer; font-size: 13px; }}
+                
+                .chart-container {{ background: #000000; padding: 5px; position: relative; margin-top: 10px; width: 300px; height: {CONFIG["CHART_HEIGHT"]}px; }}
+                canvas {{ display: block; width: 100% !important; height: 100% !important; }}
+            </style>
+            
+        </head>
+        <body>
+            <button onclick="searchCatalog()" class="btn-search">?</button>
 
-            // Filters handling functions triggered by select elements change
-            function filterS(s) {{ currentSeason = s; update(); }}
-            function filterD(d) {{ currentDir = d; update(); }}
-            function filterF(f) {{ currentFamily = f; update(); }}
+            <h1 id="catTitle">{LANG['CATALOG']}</h1>
+            <div class="stats-header" id="statsText"></div>
+            <div class="filter-bar">
+                <select id="catSelect" class="filter-select" onchange="update()">
+                    {select_options}
+                </select>
+                <select id="familySelect" class="filter-select" onchange="filterF(this.value)">
+                    {family_options}
+                </select>
+                <select id="seasonSelect" class="filter-select" onchange="filterS(this.value)">
+                    <option value="Tous">{LANG['ALL']}</option>
+                    {season_options}
+                </select>
+                <select id="dirSelect" class="filter-select" onchange="filterD(this.value)">
+                    {dir_options}
+                </select>
+                <button onclick="exportTodo()" class="filter-select btn-export">💾 TODO.txt ❤</button>
+            </div>
+            <div class="grid" id="grid"></div>
+            <div id="tooltip"></div>
+            <div id="overlay" onclick="if(event.target===this) closeM()"><img id="fullImg"></div>
 
-        
+            <dialog id="customPrompt">
+                <form method="dialog" id="promptForm">
+                    <label>{LANG['PROMPT_LABEL']}</label>
+                    <input type="text" id="promptInput" autocomplete="off">
+                    <br>
+                    <button type="submit">{LANG['VALIDATE']}</button>
+                </form>
+            </dialog>
 
-            function exportTodo() {{
-                // Reconstruct native JSON catalog architecture mapping for standard TODO.txt backwards compatibility
-                let exportData = {{}};
-                for (let catName in data) {{
-                    if (catName === "All in 1") continue;
-                    exportData[catName] = {{}};
-                    data[catName].forEach(obj => {{
-                        let globalUniqueKey = obj.prefix + obj.id;
-                        if (localTodo[globalUniqueKey] !== undefined) {{
-                            exportData[catName][obj.id] = localTodo[globalUniqueKey];
+            <script>
+                console.log("Core processing block start.");
+                const data = {json.dumps(final_json)};
+                const stats = {json.dumps(stats)};
+                const prefixes = {json.dumps(prefixes_js)};
+                const thumbDir = "{CONFIG['THUMB_DIR']}";
+                const userLat = {CONFIG['LATITUDE']}; 
+                const userLon = {CONFIG['LONGITUDE']};
+                const userElv = {CONFIG['ELEVATION']};
+                let globalChartInstance = null;
+                let isTooltipFrozen = false;
+                
+                // Sync local storage mapping with unique prefix codes (e.g., M33, C33)
+                let localTodo = JSON.parse(localStorage.getItem('astro_todo')) || {{}};
+                for (let cat in data) {{
+                    data[cat].forEach(obj => {{
+                        if (obj.todo) {{ 
+                            let globalUniqueKey = obj.prefix + obj.id;
+                            localTodo[globalUniqueKey] = obj.todo_comment || "";
                         }}
                     }});
                 }}
-                const blob = new Blob([JSON.stringify(exportData, null, 4)], {{type: 'text/plain'}});
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url; a.download = 'TODO.txt'; a.click();
-                window.URL.revokeObjectURL(url);
-            }}
+                localStorage.setItem('astro_todo', JSON.stringify(localTodo));
 
-            /**
-             * Handles adding or removing an object from the favorite/todo list (Right-click on thumbnail image box)
-             */               
-            function toggleHeart(e, prefix, objId) {{
-                e.preventDefault(); 
-                if (isTooltipFrozen) return false;
+                const FAMILIES = {{
+                    "Nébuleuse": ["N", "PN", "SC", "SNR", "EN", "RN", "E/RN", "N+C"],
+                    "Galaxie": ["G"],
+                    "Amas": ["GC", "OC", "D", "A", "N+C", "QSR"]
+                }};
                 
-                let globalUniqueKey = prefix + objId;
+                let currentSeason = 'Tous', currentDir = 'Tous', currentFamily = 'Tous';
+                let scale = 1, posX = 0, posY = 0, isDragging = false, startX, startY;
+                const m = document.getElementById("overlay"), mi = document.getElementById("fullImg"), t = document.getElementById('tooltip');
 
-                if (localTodo[globalUniqueKey] !== undefined) {{
-                    delete localTodo[globalUniqueKey];
-                    localStorage.setItem('astro_todo', JSON.stringify(localTodo));
-                    update();
-                }} else {{
-                    const dialog = document.getElementById('customPrompt');
-                    const form = document.getElementById('promptForm');
-                    const input = document.getElementById('promptInput');
-                    input.value = ""; 
-                    dialog.showModal();
-                    form.onsubmit = () => {{
-                        localTodo[globalUniqueKey] = input.value.trim();
+                // Unfreeze tooltip when user right-clicks on a frozen tooltip box                                                                        
+                t.addEventListener('contextmenu', (e) => {{
+                    if (isTooltipFrozen) {{
+                        e.preventDefault();
+                        unfreezeTooltip();
+                    }}
+                }});
+
+                // Filters handling functions triggered by select elements change
+                function filterS(s) {{ currentSeason = s; update(); }}
+                function filterD(d) {{ currentDir = d; update(); }}
+                function filterF(f) {{ currentFamily = f; update(); }}
+
+            
+
+                function exportTodo() {{
+                    // Reconstruct native JSON catalog architecture mapping for standard TODO.txt backwards compatibility
+                    let exportData = {{}};
+                    for (let catName in data) {{
+                        if (catName === "All in 1") continue;
+                        exportData[catName] = {{}};
+                        data[catName].forEach(obj => {{
+                            let globalUniqueKey = obj.prefix + obj.id;
+                            if (localTodo[globalUniqueKey] !== undefined) {{
+                                exportData[catName][obj.id] = localTodo[globalUniqueKey];
+                            }}
+                        }});
+                    }}
+                    const blob = new Blob([JSON.stringify(exportData, null, 4)], {{type: 'text/plain'}});
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url; a.download = 'TODO.txt'; a.click();
+                    window.URL.revokeObjectURL(url);
+                }}
+
+                /**
+                 * Handles adding or removing an object from the favorite/todo list (Right-click on thumbnail image box)
+                 */               
+                function toggleHeart(e, prefix, objId) {{
+                    e.preventDefault(); 
+                    if (isTooltipFrozen) return false;
+                    
+                    let globalUniqueKey = prefix + objId;
+
+                    if (localTodo[globalUniqueKey] !== undefined) {{
+                        delete localTodo[globalUniqueKey];
                         localStorage.setItem('astro_todo', JSON.stringify(localTodo));
                         update();
-                    }};
-                }}
-                return false;
-            }}
-
-            /**
-             * Locks or unlocks the tooltip visibility on right-click over a card label
-             */
-            function freezeTooltip(e, element, obj, currentComment) {{
-                e.preventDefault();
-                if (isTooltipFrozen) {{
-                    unfreezeTooltip();
+                    }} else {{
+                        const dialog = document.getElementById('customPrompt');
+                        const form = document.getElementById('promptForm');
+                        const input = document.getElementById('promptInput');
+                        input.value = ""; 
+                        dialog.showModal();
+                        form.onsubmit = () => {{
+                            localTodo[globalUniqueKey] = input.value.trim();
+                            localStorage.setItem('astro_todo', JSON.stringify(localTodo));
+                            update();
+                        }};
+                    }}
                     return false;
                 }}
-                showT(element, obj, currentComment);
-                isTooltipFrozen = true;
-                t.classList.add('frozen');
-                
-                if (globalChartInstance) {{
-                    globalChartInstance.options.plugins.tooltip.enabled = true;
-                    globalChartInstance.update();
-                }}
-                return false;
-            }}
 
-            /**
-             * Completely hides and unlocks the locked tooltip, resetting the active chart instance
-             */
-            function unfreezeTooltip() {{
-                isTooltipFrozen = false;
-                t.classList.remove('frozen');
-                t.style.display = 'none';
-                if (globalChartInstance) {{
-                    globalChartInstance.destroy();
-                    globalChartInstance = null;
-                }}
-            }}
-
-             /**
-             * Computes if an object is currently visible tonight during astronomical night hours.
-             * Strictly replicates the graph's rendering logic.
-             */
-            function computeIsVisibleToday(raTarget, decTarget) {{
-                try {{
-                    const userLat = parseFloat("{CONFIG["LATITUDE"]}");
-                    const userLon = parseFloat("{CONFIG["LONGITUDE"]}");
-                    
-                    const latRad = userLat * Math.PI / 180;
-                    const decRad = decTarget * Math.PI / 180;
-
-                    // Recreate the graph's time base (around local midnight)
-                    const now = new Date();
-                    const midnightLocal = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
-
-                    let indexCoucherAstro = null;
-                    let indexLeverAstro = null;
-
-                    let altitudesSoleil = [];
-                    let altitudesObjet = [];
-
-                    // --- 1. COMPUTE BOTH CURVES (SUN AND OBJECT) ON THE SAME INDICES ---
-                    for (let i = -72; i < 72; i++) {{
-                        const hr = i / 6;
-                        const datePoint = new Date(midnightLocal.getTime() + hr * 60 * 60 * 1000);
-                        
-                        // Local Sidereal Time (LST) calculation identical to the graph
-                        const j2000 = (datePoint.getTime() / 86400000) - 10957.5;
-                        const lstHours = (18.697374558 + 24.06570982441908 * j2000 + userLon / 15) % 24;
-
-                        // A. Target altitude
-                        const hourAngleRad = (lstHours - raTarget) * 15 * Math.PI / 180;
-                        const sinAltTarget = Math.sin(latRad) * Math.sin(decRad) + Math.cos(latRad) * Math.cos(decRad) * Math.cos(hourAngleRad);
-                        const altTargetDeg = Math.asin(sinAltTarget) * 180 / Math.PI;
-                        altitudesObjet.push(altTargetDeg);
-
-                        // B. Sun altitude (reproducing the graph's formula)
-                        const sunRA = (typeof raSunHours !== 'undefined') ? raSunHours : 3.6; 
-                        const sunDec = (typeof DEC_SUN_RAD !== 'undefined') ? DEC_SUN_RAD : (19.3 * Math.PI / 180);
-                        
-                        const sunHourAngleRad = (lstHours - sunRA) * 15 * Math.PI / 180;
-                        const sinAltSun = Math.sin(latRad) * Math.sin(sunDec) + Math.cos(latRad) * Math.cos(sunDec) * Math.cos(sunHourAngleRad);
-                        const altSunDeg = Math.asin(sinAltSun) * 180 / Math.PI;
-                        altitudesSoleil.push(altSunDeg);
-                    }}
-
-                    // --- 2. FIND NIGHT BOUNDARIES (ASTRO TWILIGHT / NIGHT BELOW -12°) ---
-                    // Scan chronologically to find when the sun sets and rises below the threshold
-                    for (let idx = 0; idx < altitudesSoleil.length; idx++) {{
-                        // Threshold set to -12° (start of astronomical twilight / night)
-                        if (altitudesSoleil[idx] <= -12) {{
-                            if (indexCoucherAstro === null) {{
-                                indexCoucherAstro = idx; // First point under the threshold
-                            }}
-                            indexLeverAstro = idx; // Last point under the threshold (updated at each step)
-                        }}
-                    }}
-
-                    // If the sun never drops below -12° tonight (no astronomical window)
-                    if (indexCoucherAstro === null || indexLeverAstro === null) {{
+                /**
+                 * Locks or unlocks the tooltip visibility on right-click over a card label
+                 */
+                function freezeTooltip(e, element, obj, currentComment) {{
+                    e.preventDefault();
+                    if (isTooltipFrozen) {{
+                        unfreezeTooltip();
                         return false;
                     }}
-
-                    // --- 3. COMPUTE DYNAMIC VISIBILITY THRESHOLD ---
-                    // Calculate absolute maximum altitude regardless of the season: 90 - abs(lat - dec)
-                    const maxAbsoluteAltitude = 90 - Math.abs(userLat - decTarget);
+                    showT(element, obj, currentComment);
+                    isTooltipFrozen = true;
+                    t.classList.add('frozen');
                     
-                    const configThreshold = parseFloat("{CONFIG["TN_ALTITUDE_THRESHOLD"]}");
-                    const configLowFactor = parseFloat("{CONFIG["TN_LOW_ALTITUDE_FACTOR"]}");
-                    
-                    let targetThreshold = 0;
-                    if (maxAbsoluteAltitude > configThreshold) {{
-                        targetThreshold = configThreshold;
-                    }} else {{
-                        targetThreshold = maxAbsoluteAltitude * configLowFactor;
+                    if (globalChartInstance) {{
+                        globalChartInstance.options.plugins.tooltip.enabled = true;
+                        globalChartInstance.update();
                     }}
-
-                    // --- 4. CHECK TARGET ALTITUDE BETWEEN THESE TWO BOUNDARIES ---
-                    for (let idx = indexCoucherAstro; idx <= indexLeverAstro; idx++) {{
-                        if (altitudesObjet[idx] > targetThreshold) {{
-                            return true; // Match found! The object exceeds the dynamic threshold during the astro window
-                        }}
-                    }}
-
                     return false;
-                }} catch (err) {{
-                    return true; 
                 }}
-            }}
-            
-            
+
+                /**
+                 * Completely hides and unlocks the locked tooltip, resetting the active chart instance
+                 */
+                function unfreezeTooltip() {{
+                    isTooltipFrozen = false;
+                    t.classList.remove('frozen');
+                    t.style.display = 'none';
+                    if (globalChartInstance) {{
+                        globalChartInstance.destroy();
+                        globalChartInstance = null;
+                    }}
+                }}
+
+                 /**
+                 * Computes if an object is currently visible tonight during astronomical night hours.
+                 * Strictly replicates the graph's rendering logic.
+                 */
+                function computeIsVisibleToday(raTarget, decTarget) {{
+                    try {{
+                        const observer = new Astronomy.Observer(userLat, userLon, userElv);
+
+                        // Recreate the graph's time base (around local midnight)
+                        const now = new Date();
+                        const midnightLocal = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+
+                        let indexCoucherAstro = null;
+                        let indexLeverAstro = null;
+
+                        let altitudesSoleil = [];
+                        let altitudesObjet = [];
+
+                        // --- 1. COMPUTE BOTH CURVES (SUN AND OBJECT) ON THE SAME INDICES ---
+                        for (let i = -72; i < 72; i++) {{
+                            const hr = i / 6;
+                            const datePoint = new Date(midnightLocal.getTime() + hr * 60 * 60 * 1000);
+                            
+                            // A. Target altitude using Astronomy Engine
+                            const equTarget = new Astronomy.Equatorial(raTarget, decTarget);
+                            const horTarget = Astronomy.Horizon(datePoint, observer, equTarget.ra, equTarget.dec, 'normal');
+                            altitudesObjet.push(horTarget.altitude);
+
+                            // B. Sun altitude using Astronomy Engine
+                            const equSun = Astronomy.SunPosition(datePoint);
+                            const horSun = Astronomy.Horizon(datePoint, observer, equSun.ra, equSun.dec, 'normal');
+                            altitudesSoleil.push(horSun.altitude);
+                        }}
+
+                        // --- 2. FIND NIGHT BOUNDARIES (ASTRO TWILIGHT / NIGHT BELOW -12°) ---
+                        // Scan chronologically to find when the sun sets and rises below the threshold
+                        for (let idx = 0; idx < altitudesSoleil.length; idx++) {{
+                            // Threshold set to -12° (start of astronomical twilight / night)
+                            if (altitudesSoleil[idx] <= -12) {{
+                                if (indexCoucherAstro === null) {{
+                                    indexCoucherAstro = idx; // First point under the threshold
+                                }}
+                                indexLeverAstro = idx; // Last point under the threshold (updated at each step)
+                            }}
+                        }}
+
+                        // If the sun never drops below -12° tonight (no astronomical window)
+                        if (indexCoucherAstro === null || indexLeverAstro === null) {{
+                            return false;
+                        }}
+
+                        // --- 3. COMPUTE DYNAMIC VISIBILITY THRESHOLD ---
+                        // Calculate absolute maximum altitude regardless of the season: 90 - abs(lat - dec)
+                        const maxAbsoluteAltitude = 90 - Math.abs(userLat - decTarget);
+                        
+                        const configThreshold = parseFloat("{CONFIG["TN_ALTITUDE_THRESHOLD"]}");
+                        const configLowFactor = parseFloat("{CONFIG["TN_LOW_ALTITUDE_FACTOR"]}");
+                        
+                        let targetThreshold = 0;
+                        if (maxAbsoluteAltitude > configThreshold) {{
+                            targetThreshold = configThreshold;
+                        }} else {{
+                            targetThreshold = maxAbsoluteAltitude * configLowFactor;
+                        }}
+
+                        // --- 4. CHECK TARGET ALTITUDE BETWEEN THESE TWO BOUNDARIES ---
+                        for (let idx = indexCoucherAstro; idx <= indexLeverAstro; idx++) {{
+                            if (altitudesObjet[idx] > targetThreshold) {{
+                                return true; // Match found! The object exceeds the dynamic threshold during the astro window
+                            }}
+                        }}
+
+                        return false;
+                    }} catch (err) {{
+                        return true; 
+                    }}
+                }}
             
             // SEARCH AND AUTOMATIC CENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
             // SEARCH AND AUTOMATIC CENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
@@ -1869,7 +1860,6 @@ def generate():
 
                 // Extraction des coordonnées (placée ici pour éviter le ReferenceError)
                 let raDecimal = parseFloat(obj.info[6]);
-                //const declin = parseFloat(obj.info[7]);
                 
                 // Direction and badge calculation
                 const declin = parseFloat(obj.info[7]), isNorth = declin > userLat;
@@ -1880,9 +1870,6 @@ def generate():
                 const raDeg = raDecimal * 15;
                 const publicImageUrl = `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&ra=${{raDeg}}&dec=${{declin}}&width=150&height=150&fov=0.6&projection=TAN&format=jpg`;
 
-                // Log de l'URL remis en place
-                //console.log("Objet :", obj.prefix + obj.id, "RA(deg):", raDeg, "DEC:", declin, "-> URL :", publicImageUrl);
-                
                 // Début du conteneur Flexbox (Texte à gauche, Image à droite)
                 html += `<div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 5px;">`;
                 
@@ -1923,13 +1910,6 @@ def generate():
 
                 t.innerHTML = html; t.style.display = 'block';
 
-                /* CRITICAL ZONE: Viewport-Relative Tooltip Anchoring & Collision Strategy.
-                   The styling layout applies 'position: fixed' to avoid viewport breakout bugs 
-                   when rendering massive databases containing large scroll containers.
-                   The layout reads bounding viewport box geometries using 'getBoundingClientRect()'.
-                   By checking the card midpoint against the global center of the viewport window, 
-                   it automatically shifts the anchor offsets to avoid boundary clippings.
-                */
                 const rect = element.getBoundingClientRect();
                 const windowWidth = window.innerWidth;
                 const windowHeight = window.innerHeight;
@@ -1974,58 +1954,77 @@ def generate():
 
                     let maxAlt = -90;
                     let idxMax = 0;
-                    let nowIndex = -1;
 
                     const latRad = userLat * Math.PI / 180;
                     const decRad = DEC_TARGET * Math.PI / 180;
-                    const DEC_SUN_RAD = 19.3 * Math.PI / 180;
 
+                    // Helper calcul altitude Soleil autonome
+                    function getSunAlt(datePoint) {{
+                        if (typeof Astronomy !== 'undefined') {{
+                            try {{
+                                let time = Astronomy.MakeTime(datePoint);
+                                let eq = Astronomy.Equator ? Astronomy.Equator('Sun', time, null, true, true) : null;
+                                if (eq) {{
+                                    let lst = Astronomy.SiderealTime(time) + userLon / 15;
+                                    let ha = (lst - eq.ra) * 15 * Math.PI / 180;
+                                    let sAlt = Math.sin(latRad) * Math.sin(eq.dec * Math.PI / 180) + Math.cos(latRad) * Math.cos(eq.dec * Math.PI / 180) * Math.cos(ha);
+                                    return Math.asin(sAlt) * 180 / Math.PI;
+                                }}
+                            }} catch(e) {{}}
+                        }}
+                        const rad = Math.PI / 180;
+                        const d = (datePoint.getTime() / 86400000) - 10957.5;
+                        const g = (357.529 + 0.98560028 * d) % 360 * rad;
+                        const q = (280.459 + 0.98564736 * d) % 360;
+                        const L = (q + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) % 360 * rad;
+                        const e = (23.439 - 0.00000036 * d) * rad;
+                        const ra = Math.atan2(Math.cos(e) * Math.sin(L), Math.cos(L)) / rad / 15;
+                        const dec = Math.asin(Math.sin(e) * Math.sin(L)) / rad;
+                        const gmst = (18.697374558 + 24.06570982441908 * d) % 24;
+                        const lst = (gmst + userLon / 15) % 24;
+                        const ha = (lst - ra) * 15 * rad;
+                        const sinAlt = Math.sin(userLat * rad) * Math.sin(dec * rad) + Math.cos(userLat * rad) * Math.cos(dec * rad) * Math.cos(ha);
+                        return Math.asin(sinAlt) / rad;
+                    }}
+
+                    // Discrétisation par pas de 4 minutes (15 pas par heure, de -12h à +12h autour de minuit = 361 pas)
+                    const PAS_PAR_HEURE = 15;
+                    const TOTAL_PAS_HALFWAY = 12 * PAS_PAR_HEURE;
+
+                    for (let i = -TOTAL_PAS_HALFWAY; i <= TOTAL_PAS_HALFWAY; i++) {{
+                        const hr = i / PAS_PAR_HEURE;
+                        const datePoint = new Date(minuitLocal.getTime() + hr * 60 * 60 * 1000);
+                        altitudesSoleil.push(getSunAlt(datePoint));
+                    }}
+
+                    // Détection du coucher et du lever du Soleil
                     let idxCoucher = -1;
                     let idxLever = -1;
+                    const indexMinuit = TOTAL_PAS_HALFWAY;
 
-                    // Compute sun altitudes for the whole 24h window
-                    for (let i = -72; i < 72; i++) {{
-                        const hr = i / 6;
-                        const datePoint = new Date(minuitLocal.getTime() + hr * 60 * 60 * 1000);
-                        try {{
-                            const astroTimePoint = Astronomy.MakeTime(datePoint);
-                            const lstHours = Astronomy.SiderealTime(astroTimePoint) + userLon / 15;
-                            const raSunHours = 3.6;
-                            const hourAngleRad = (lstHours - raSunHours) * 15 * Math.PI / 180;
-                            const sinAlt = Math.sin(latRad) * Math.sin(DEC_SUN_RAD) + Math.cos(latRad) * Math.cos(DEC_SUN_RAD) * Math.cos(hourAngleRad);
-                            altitudesSoleil.push(Math.asin(sinAlt) * 180 / Math.PI);
-                        }} catch (err) {{
-                            altitudesSoleil.push(-20);
-                        }}
-                    }}
-
-                    // Detect sunset and sunrise index points
                     for (let k = 1; k < altitudesSoleil.length; k++) {{
-                        if (k < 72 && altitudesSoleil[k-1] >= 0 && altitudesSoleil[k] < 0) idxCoucher = k;
-                        if (k >= 72 && altitudesSoleil[k-1] <= 0 && altitudesSoleil[k] > 0) idxLever = k;
+                        if (k < indexMinuit && altitudesSoleil[k-1] >= 0 && altitudesSoleil[k] < 0) idxCoucher = k;
+                        if (k >= indexMinuit && altitudesSoleil[k-1] <= 0 && altitudesSoleil[k] > 0) idxLever = k;
                     }}
 
+                    const pasDecalage = Math.round(DECALAGE_HEURES * PAS_PAR_HEURE);
                     let xMinIndex = 0;
                     let xMaxIndex = altitudesSoleil.length - 1;
-                    const PAS_PAR_HEURE = 6;
-                    const pasDecalage = DECALAGE_HEURES * PAS_PAR_HEURE;
 
                     if (idxCoucher !== -1 && idxLever !== -1) {{
                         xMinIndex = Math.max(0, idxCoucher - pasDecalage);
                         xMaxIndex = Math.min(altitudesSoleil.length - 1, idxLever + pasDecalage);
                     }} else {{
-                        xMinIndex = 72 - (12 * PAS_PAR_HEURE);
-                        xMaxIndex = 72 + (12 * PAS_PAR_HEURE) - 1;
+                        xMinIndex = indexMinuit - (12 * PAS_PAR_HEURE);
+                        xMaxIndex = indexMinuit + (12 * PAS_PAR_HEURE);
                     }}
 
-                    // Calculate targeted object altitude coordinates inside the active chart limits
-                    for (let i = -72; i < 72; i++) {{
-                        const hr = i / 6;
+                    // Calcul de la courbe de l'astre cible sur la même grille temporelle
+                    for (let i = -TOTAL_PAS_HALFWAY; i <= TOTAL_PAS_HALFWAY; i++) {{
+                        const hr = i / PAS_PAR_HEURE;
                         heuresRelatives.push(hr);
                         const datePoint = new Date(minuitLocal.getTime() + hr * 60 * 60 * 1000);
-                        labelsX.push(`${{datePoint.getHours()}}h${{datePoint.getMinutes() === 0 ? '' : datePoint.getMinutes()}}`);
-                        
-                        if (nowIndex === -1 && datePoint >= maintenant) nowIndex = heuresRelatives.length - 1;
+                        labelsX.push(`${{datePoint.getHours()}}h${{datePoint.getMinutes() === 0 ? '' : String(datePoint.getMinutes()).padStart(2, '0')}}`);
 
                         try {{
                             const astroTimePoint = Astronomy.MakeTime(datePoint);
@@ -2038,25 +2037,27 @@ def generate():
                         }} catch (err) {{ altitudes.push(0); }}
                     }}
 
-                    // Custom Chart.js layout drawing plugin (Sky background color shifts and vertical marker lines)
+                    // Plugin d'arrière-plan avec dégradé crépusculaire
                     const backgroundPlugin = {{
                         id: 'customBackgroundAndLines',
                         beforeDraw: (chart) => {{
                             const {{ctx, chartArea: {{top, bottom, left, right}}, scales: {{x, y}}}} = chart;
-                            const gradient = ctx.createLinearGradient(left, 0, right, 0);
-                            const xMinVisible = chart.scales.x.min;
-                            const xMaxVisible = chart.scales.x.max;
-                            const totalVisible = xMaxVisible - xMinVisible;
+                            if (!left || !right || right <= left) return;
 
-                            for (let index = xMinVisible; index <= xMaxVisible; index++) {{
-                                let ratio = (index - xMinVisible) / totalVisible;
-                                let altSoleil = altitudesSoleil[index];
-                                let color = "#000000";
-                                if (altSoleil > 0) color = "#2a528a";
-                                else if (altSoleil > -6) color = "#1a3360";
-                                else if (altSoleil > -12) color = "#0e1c3a";
-                                else if (altSoleil > -18) color = "#060a1e";
-                                gradient.addColorStop(Math.max(0, Math.min(1, ratio)), color);
+                            const gradient = ctx.createLinearGradient(left, 0, right, 0);
+                            const totalVisible = xMaxIndex - xMinIndex;
+
+                            if (totalVisible > 0) {{
+                                for (let idx = xMinIndex; idx <= xMaxIndex; idx++) {{
+                                    let ratio = (idx - xMinIndex) / totalVisible;
+                                    let altSoleil = altitudesSoleil[idx] !== undefined ? altitudesSoleil[idx] : -20;
+                                    let color = "#000000";
+                                    if (altSoleil > 0) color = "#2a528a";
+                                    else if (altSoleil > -6) color = "#1a3360";
+                                    else if (altSoleil > -12) color = "#0e1c3a";
+                                    else if (altSoleil > -18) color = "#060a1e";
+                                    gradient.addColorStop(Math.max(0, Math.min(1, ratio)), color);
+                                }}
                             }}
 
                             ctx.save();
@@ -2071,19 +2072,10 @@ def generate():
                             ctx.beginPath(); ctx.moveTo(left, y.getPixelForValue(30)); ctx.lineTo(right, y.getPixelForValue(30)); ctx.stroke();
 
                             const xMaxPix = x.getPixelForValue(idxMax);
-                            if (idxMax >= xMinVisible && idxMax <= xMaxVisible) {{
+                            if (idxMax >= xMinIndex && idxMax <= xMaxIndex) {{
                                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
                                 ctx.lineWidth = 1; ctx.setLineDash([2, 4]);
                                 ctx.beginPath(); ctx.moveTo(xMaxPix, top); ctx.lineTo(xMaxPix, bottom); ctx.stroke();
-                            }}
-
-                            if (nowIndex !== -1 && nowIndex >= xMinVisible && nowIndex <= xMaxVisible) {{
-                                const xNowPix = x.getPixelForValue(nowIndex);
-                                ctx.strokeStyle = 'rgba(0, 255, 0, 0.6)';
-                                ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]);
-                                ctx.beginPath(); ctx.moveTo(xNowPix, top); ctx.lineTo(xNowPix, bottom); ctx.stroke();
-                                ctx.fillStyle = 'rgba(0, 255, 0, 0.8)'; ctx.font = 'bold 10px sans-serif';
-                                ctx.save(); ctx.translate(xNowPix - 4, top + 10); ctx.rotate(-Math.PI / 2); ctx.fillText('now', 0, 0); ctx.restore();
                             }}
                             ctx.restore();
                         }}
