@@ -9,6 +9,7 @@
 # https://vicmenard.com/articles/
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
+#   V7.0 : objects scanning is done recursively from the app root directory (except for thumbnail dir)
 #   V6.4 : bug fixed, dates of day/nigth were false
 #   V6.3 : checked all catalogs coordinates - request to SIMBAD in logs F12
 #            CTRL + hovering paints bad coordinates box in red, then goto F12
@@ -47,6 +48,7 @@
 import os
 import re
 import subprocess
+import struct
 import sys
 import json
 import importlib
@@ -857,14 +859,94 @@ def compute_best_season(ra):
     else:
         return LANG["SEASONS"]["A"] # Automne
 
+def read_shortcut_target(lnk_path):
+    """
+    direct read the target of of a windows shortcut  (.lnk) 
+    no external dependancy (no win32com).
+    """
+    if not lnk_path.lower().endswith('.lnk') or not os.path.exists(lnk_path):
+        return lnk_path
+    try:
+        with open(lnk_path, 'rb') as f:
+            content = f.read()
+        
+        # cjeck  Header GUID of files Shell Link Windows
+        if content[:4] != b'\x4c\x00\x00\x00':
+            return lnk_path
+            
+        flags = struct.unpack('<I', content[0x14:0x18])[0]
+        has_link_target_id_list = bool(flags & 0x01)
+        has_link_info = bool(flags & 0x02)
+        
+        position = 0x4c
+        if has_link_target_id_list:
+            id_list_size = struct.unpack('<H', content[position:position+2])[0]
+            position += 2 + id_list_size
+            
+        if has_link_info:
+            link_info_start = position
+            link_info_flags = struct.unpack('<I', content[link_info_start+0x08:link_info_start+0x0C])[0]
+            
+            # CommonNetworkRelativeLink / VolumeID + LocalBasePath
+            if link_info_flags & 0x01:  # VolumeIDAndLocalBasePath Present
+                local_base_path_offset = struct.unpack('<I', content[link_info_start+0x10:link_info_start+0x14])[0]
+                target_bytes = content[link_info_start + local_base_path_offset:]
+                target_path = target_bytes.split(b'\x00')[0].decode('mbcs', errors='ignore')
+                if target_path and os.path.exists(target_path):
+                    return target_path
+
+            # Unicode LocalBasePath Offset if present
+            if link_info_flags & 0x01 and len(content) > link_info_start + 0x1C:
+                local_base_path_offset_unicode = struct.unpack('<I', content[link_info_start+0x1C:link_info_start+0x20])[0]
+                if local_base_path_offset_unicode > 0:
+                    target_bytes = content[link_info_start + local_base_path_offset_unicode:]
+                    target_path = target_bytes.split(b'\x00\x00')[0].decode('utf-16le', errors='ignore')
+                    if target_path and os.path.exists(target_path):
+                        return target_path
+    except Exception:
+        pass
+    return lnk_path
+
 def find_image(prefix, obj_id, tech_ref):
     """Search for a matching image in the source directory based on technical references or IDs"""
-    valid_exts = ('.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff', '.lnk')
+    valid_exts = ('.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff')
     if not os.path.exists(CONFIG["SOURCE_DIR"]): return None
     
-    # Pre-filter files with valid extensions and exclude thumbnails
-    files = [f for f in os.listdir(CONFIG["SOURCE_DIR"]) 
-             if f.lower().endswith(valid_exts) and "_thumb" not in f]
+    # Excluded directories (thumbnails directory and generic thumbnail folder names)
+    thumb_dir_abs = os.path.abspath(CONFIG.get("THUMB_DIR", ""))
+    
+    files = []
+    
+    # File & Directory walker resolving Windows .lnk files
+    dirs_to_visit = [CONFIG["SOURCE_DIR"]]
+    visited_dirs = set()
+
+    while dirs_to_visit:
+        current_dir = dirs_to_visit.pop(0)
+        abs_current = os.path.abspath(current_dir)
+        
+        if abs_current in visited_dirs:
+            continue
+        visited_dirs.add(abs_current)
+
+        try:
+            entries = list(os.scandir(current_dir))
+        except OSError:
+            continue
+
+        for entry in entries:
+            entry_path = entry.path
+            resolved_path = read_shortcut_target(entry_path) if entry.name.lower().endswith('.lnk') else entry_path
+            
+            if os.path.isdir(resolved_path):
+                abs_resolved = os.path.abspath(resolved_path)
+                # Prune thumbnail directories
+                if abs_resolved != thumb_dir_abs and entry.name.lower() not in ('thumbnail', 'thumbnails', '_thumb'):
+                    dirs_to_visit.append(resolved_path)
+            elif os.path.isfile(resolved_path):
+                if resolved_path.lower().endswith(valid_exts) and "_thumb" not in entry.name:
+                    rel_path = os.path.relpath(resolved_path, CONFIG["SOURCE_DIR"])
+                    files.append(rel_path)
 
     if tech_ref:
         # Search by technical designation (e.g., NGC 7000, IC 434)
@@ -877,7 +959,7 @@ def find_image(prefix, obj_id, tech_ref):
                     return filename
 
     # Fallback search: match using catalog prefix + object ID
-    pattern_id = rf"(^|[_ \-\.]){prefix}[_ \-\s]?{obj_id}(?!\d)"
+    pattern_id = rf"(^|[_ \-\.\/\\ ]){prefix}[_ \-\s]?{obj_id}(?!\d)"
     for filename in files:
         if re.search(pattern_id, filename, re.IGNORECASE):
             return filename
@@ -887,12 +969,15 @@ def find_image(prefix, obj_id, tech_ref):
 def get_exif_date(path):
     """Extract capture date from EXIF or fallback to file modification date"""
     try:
-        with Image.open(path) as img:
+        resolved_path = read_shortcut_target(path)
+        with Image.open(resolved_path) as img:
             exif = img._getexif()
             if exif and 306 in exif:
                 return datetime.strptime(exif[306], "%Y:%m:%d %H:%M:%S").strftime("%d/%m/%Y %H:%M")
     except: pass
-    return datetime.fromtimestamp(os.path.getmtime(path)).strftime("%d/%m/%Y %H:%M")
+    
+    resolved_path = read_shortcut_target(path)
+    return datetime.fromtimestamp(os.path.getmtime(resolved_path)).strftime("%d/%m/%Y %H:%M")
 
 def make_thumbnail(src):
     """
@@ -903,14 +988,21 @@ def make_thumbnail(src):
     It also yields the square grid thumbnail for the interface layout.
     """
     if not os.path.exists(CONFIG["THUMB_DIR"]): os.makedirs(CONFIG["THUMB_DIR"])
-    dest = os.path.join(CONFIG["THUMB_DIR"], f"thumb_{src}")
     
+    # Handle subfolder paths gracefully for destination naming
+    safe_src_name = src.replace('/', '_').replace('\\', '_')
+    dest = os.path.join(CONFIG["THUMB_DIR"], f"thumb_{safe_src_name}")
+    
+    # Full path to source file for opening
+    full_src_path = os.path.join(CONFIG["SOURCE_DIR"], src) if not os.path.isabs(src) and os.path.exists(os.path.join(CONFIG["SOURCE_DIR"], src)) else src
+    full_src_path = read_shortcut_target(full_src_path)
+
     # Check for TIF/TIFF formats to generate a web-friendly compressed preview proxy
     if src.lower().endswith(('.tif', '.tiff')):
-        view_dest = os.path.join(CONFIG["THUMB_DIR"], f"view_{os.path.splitext(src)[0]}.jpg")
+        view_dest = os.path.join(CONFIG["THUMB_DIR"], f"view_{os.path.splitext(safe_src_name)[0]}.jpg")
         if not os.path.exists(view_dest):
             try:
-                with Image.open(src) as img_view:
+                with Image.open(full_src_path) as img_view:
                     img_view = ImageOps.exif_transpose(img_view).convert("RGB")
                     view_size = CONFIG.get("VIEW_SIZE", 1200)
                     img_view.thumbnail((view_size, view_size), Image.Resampling.LANCZOS)
@@ -922,7 +1014,7 @@ def make_thumbnail(src):
     
     # Create the square micro-thumbnail used within the catalog layout grid
     try:
-        with Image.open(src) as img:
+        with Image.open(full_src_path) as img:
             img = ImageOps.exif_transpose(img).convert("RGB")
             w, h = img.size
             min_dim = min(w, h)
@@ -935,6 +1027,8 @@ def make_thumbnail(src):
             print(src)
             return dest
     except: return src
+    
+
     
 def load_todo_list():
     """Load the list of marked objects from TODO.txt (JSON format)"""
@@ -1007,8 +1101,8 @@ def generate():
                 "info": info, 
                 "type_code": type_code, # needed for JS filters
                 "tech_ref": tech_ref,
-                "img": img_file or "", 
-                "thumb": thumb, 
+                "img": (img_file or "").replace('\\', '/'), 
+                "thumb": thumb.replace('\\', '/'), 
                 "date": date,
                 "h_max": round(h_max, 1),
                 "season_computed": season_computed,
@@ -1588,8 +1682,61 @@ def generate():
                     // Fallback block if the target object is missing from local script datasets
                     logSimbadLine(simbadQuery).then(simbadLine => {{
                         console.log("SIMBAD reference for missing object:", simbadLine);
-                        alert("{LANG['NOT_FOUND']}\nSIMBAD: " + simbadLine);
+                        
+                        // Affichage via un élément HTML sélectionnable au lieu d'un alert native
+                        showSelectableMessage("{LANG['NOT_FOUND']}\nSIMBAD: " + simbadLine);
                     }});
+                }}
+
+                /**
+                 * Fonction d'affichage d'un message avec texte sélectionnable
+                 */
+                function showSelectableMessage(message) {{
+                    // Supprime un ancien message s'il existe déjà
+                    const existingMsg = document.getElementById('astro-error-message');
+                    if (existingMsg) existingMsg.remove();
+
+                    const msgContainer = document.createElement('div');
+                    msgContainer.id = 'astro-error-message';
+                    
+                    // Style de base pour assurer la sélection et la visibilité
+                    Object.assign(msgContainer.style, {{
+                        position: 'fixed',
+                        top: '20px',
+                        right: '20px',
+                        zIndex: '9999',
+                        backgroundColor: '#f8d7da',
+                        color: '#721c24',
+                        padding: '15px 20px',
+                        borderRadius: '5px',
+                        border: '1px solid #f5c6cb',
+                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                        fontFamily: 'monospace',
+                        whiteSpace: 'pre-wrap',
+                        userSelect: 'text',          // Force la possibilité de sélectionner le texte
+                        webkitUserSelect: 'text',   // Compatibilité Safari/Chrome
+                        maxHeight: '80vh',
+                        overflowY: 'auto'
+                    }});
+
+                    msgContainer.innerText = message;
+
+                    // Bouton de fermeture
+                    const closeBtn = document.createElement('button');
+                    closeBtn.innerText = '✕';
+                    Object.assign(closeBtn.style, {{
+                        marginLeft: '15px',
+                        float: 'right',
+                        cursor: 'pointer',
+                        border: 'none',
+                        background: 'none',
+                        fontWeight: 'bold',
+                        color: '#721c24'
+                    }});
+                    closeBtn.onclick = () => msgContainer.remove();
+
+                    msgContainer.prepend(closeBtn);
+                    document.body.appendChild(msgContainer);
                 }}
             }}
 
@@ -1728,8 +1875,8 @@ def generate():
                     */
                     let clickImg = obj.img;
                     if (obj.img && (obj.img.toLowerCase().endsWith('.tif') || obj.img.toLowerCase().endsWith('.tiff'))) {{
-                        let baseName = obj.img.substring(0, obj.img.lastIndexOf('.'));
-                        if (baseName.startsWith('thumb_')) baseName = baseName.substring(6);
+                        let safeName = obj.img.replace(/[\/\\\s]/g, '_');
+                        let baseName = safeName.substring(0, safeName.lastIndexOf('.'));
                         clickImg = thumbDir + "/view_" + baseName + ".jpg";
                     }}
                     
@@ -1910,6 +2057,13 @@ def generate():
 
                 t.innerHTML = html; t.style.display = 'block';
 
+                /* CRITICAL ZONE: Viewport-Relative Tooltip Anchoring & Collision Strategy.
+                   The styling layout applies 'position: fixed' to avoid viewport breakout bugs 
+                   when rendering massive databases containing large scroll containers.
+                   The layout reads bounding viewport box geometries using 'getBoundingClientRect()'.
+                   By checking the card midpoint against the global center of the viewport window, 
+                   it automatically shifts the anchor offsets to avoid boundary clippings.
+                */                                                                                           
                 const rect = element.getBoundingClientRect();
                 const windowWidth = window.innerWidth;
                 const windowHeight = window.innerHeight;
