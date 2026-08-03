@@ -9,6 +9,7 @@
 # https://vicmenard.com/articles/
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
+#   V7.1 : delay before tooltip is pdisplayed
 #   V7.0 : objects scanning is done recursively from the app root directory (except for thumbnail dir)
 #   V6.4 : bug fixed, dates of day/nigth were false
 #   V6.3 : checked all catalogs coordinates - request to SIMBAD in logs F12
@@ -1858,9 +1859,24 @@ def generate():
                     let globalUniqueKey = obj.prefix + obj.id;
                     let isTodo = localTodo[globalUniqueKey] !== undefined;
                     let currentComment = isTodo ? localTodo[globalUniqueKey] : "";
+                    let tooltipTimeout = null;
+                    const delayBeforeTooltip = 700; // delay in ms before display (ex: 1000 ms = 1 sec)
                     
-                    d.onmouseenter = (e) => {{ if (!isTooltipFrozen) showT(d, obj, currentComment); }};
-                    d.onmouseleave = () => {{ if (!isTooltipFrozen) {{ t.style.display='none'; if(globalChartInstance) {{ globalChartInstance.destroy(); globalChartInstance = null; }} }} }}
+                    d.onmouseenter = (e) => {{ 
+                        if (!isTooltipFrozen) {{
+                            tooltipTimeout = setTimeout(() => {{
+                                showT(d, obj, currentComment);
+                            }}, delayBeforeTooltip);
+                        }}
+                    }};
+                    
+                    d.onmouseleave = () => {{ 
+                        if (tooltipTimeout) {{
+                            clearTimeout(tooltipTimeout);
+                            tooltipTimeout = null;
+                        }}
+                        if (!isTooltipFrozen) {{ t.style.display='none'; if(globalChartInstance) {{ globalChartInstance.destroy(); globalChartInstance = null; }} }} 
+                    }};
                     
                     const heartClass = currentComment ? 'has-comment' : 'no-comment';
                     const heart = isTodo ? '<div class="todo-heart ' + heartClass + '">❤</div>' : '';
