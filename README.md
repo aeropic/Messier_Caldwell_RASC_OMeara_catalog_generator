@@ -12,10 +12,11 @@ If you don't use SIRIL : open and edit the .bat file to specify the path to your
 "C:\Program Files\Siril\python\python.exe" "Caldwell_generator.py"
 
 ## usage:
-Simply organize your image files in a folder and add the string "M1, Mxx, C1, Cx or NGCxyz or ICabc" to the image names.
+Simply organize your image files in one or several trees of folders and add the string "M1, Mxx, C1, Cx or NGCxyz or ICabc" to the image names.
 The script is able to manage files in .jpg, .jpeg, .png, .webp, .tif, .tiff and .lnk (window shortcut to image).
 
-Place the "astro_catalog_generator.py" script and the "astro_catalog_launcher.bat" file in the same folder where the images are located. 
+Place the "astro_catalog_generator.py" script and the "astro_catalog_launcher.bat" file in a dedicated folder (it may be the same folder where the images are located). If your application folder is not the same as the image folder(s) then place a link to the image folder(s) inside the application folder. 
+The script will resolve the link(s) then recursively scan the image folder(s) tree
 Double-click on "astro_catalog_launcher.bat", accept the Windows prompts, and it will automatically install missing python libraries (if any) and it generates an interactive HTML contact sheet. The .bat file, of course, only runs on PC...
 
 If there are multiple objects in the same image, name the file with both objects (e.g.,NGC4038_NGC4039_antenna.jpg). 
