@@ -9,6 +9,7 @@
 # https://vicmenard.com/articles/
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
+#   V7.2 : updates in 'others' catalog
 #   V7.1 : delay before tooltip is pdisplayed
 #   V7.0 : objects scanning is done recursively from the app root directory (except for thumbnail dir)
 #   V6.4 : bug fixed, dates of day/nigth were false
@@ -538,14 +539,14 @@ RASC_DATA = {
     1041: ["PN", "PK 80 ?6.1", "Cygne", "13.5", "16'", "Nébuleuse de l'Œuf", 21.04, 36.7],
     1042: ["EN", "IC 1396", "Céphée", "Non spécifiée", "170'x140'", "Nébuleuse de la Trompe d'Éléphant", 21.65, 57.5],
     1043: ["RN", "IC 5146", "Cygne", "Non spécifiée", "12'x12'", "Nébuleuse du Cocon", 21.89, 47.3],
-    1044: ["G", "NGC 7317?20", "Pégase", "13-14", "1' chacune", "Quintette de Stephan", 22.60, 33.9],
+    1044: ["G", "NGC 7317 20", "Pégase", "13-14", "1' chacune", "Quintette de Stephan", 22.60, 33.9],
     1045: ["PN", "Jones 1", "Pégase", "12.1", "332'", "Nébuleuse planétaire Jones 1", 23.60, 30.5]
 }
 
 O_MEARA_DATA = {
     # hidden treasures
     1: ["OC", "NGC 189", "Cassiopée", "8.8", "5'", "NGC 189", 0.66, 61.1],
-    2: ["OC", "Amas du Voilier", "Cassiopée", "7.0", "15'", "Amas du Voilier", 0.73, 61.8],
+    2: ["OC", "NGC 225", "Cassiopée", "7.0", "15'", "Amas du Voilier", 0.73, 61.8],
     3: ["N", "NGC 281", "Cassiopée", "7.8", "30'x35'", "Nébuleuse Pacman", 0.87, 56.6],
     4: ["GC", "NGC 288", "Sculpteur", "8.1", "13'", "NGC 288", 0.88, -26.6],
     5: ["G", "NGC 404", "Andromède", "10.0", "3.5'", "Galaxie de la Perle Perdue", 1.16, 35.7],
@@ -799,7 +800,15 @@ OTHER_DATA = {
     27: ["EN", "LBN 102.79-00.92", "Céphée", "N/A", "90''", "SH2-132", 22.32, 56.08],
     28: ["RN", "BD+69 1231", "Céphée", 9.29, "N/A", "VDB-152", 22.22, 70.25],
     29: ["RN", "GN 21.15.8", "Céphée", "N/A", "N/A", "SH2-136 fantome céphée", 21.27, 68.26],
-    30: ["EN", "LBN 119.57-00.92", "Cassiopée", "N/A", "30'", "SH2-173 fantome cassiopée", 0.35, 61.73]
+    30: ["EN", "LBN 119.57-00.92", "Cassiopée", "N/A", "30'", "SH2-173 fantome cassiopée", 0.35, 61.73],
+    31: ["RN", "NGC 1909", "Eridan", "N/A", "N/A", "NGC 1909 nébuleuse tête sircière", 5.03, -7.90],
+    32: ["PN", "HD202552", "Cygne", "N/A", "N/A", "MWP1 Mathusalem nebula", 21.2856, 34.2076],
+    33: ["EN", "SH2-115", "Cygne", "N/A", "N/A", "SH2-115 LBN 357", 20.58, 47.04],
+    34: ["G", "IC 1101", "Vierge", 15.1, "2.3'x1.1'", "IC 1101 grande galaxie", 15.18, 5.74],
+    35: ["G", "NGC 6951", "Céphée", 10.65, "N/A", "NGC 6951 + nuages", 20.62, 66.11],
+    36: ["EN", "SH2-144", "Céphée", "N/A", "N/A", "LBN 107 dragon très sombre", 22.75, 59.88],
+    37: ["PN", "SH2-188", "Cassiopée", 17.447, "9'", "SH 2-188 la crevette", 1.51, 58.41],
+    38: ["PN", "PK104-29-1", "Pégase", 15, "5.5'", "PK104-291 Jones1", 23.598, 30.46833]
 }
 
 
@@ -1860,7 +1869,7 @@ def generate():
                     let isTodo = localTodo[globalUniqueKey] !== undefined;
                     let currentComment = isTodo ? localTodo[globalUniqueKey] : "";
                     let tooltipTimeout = null;
-                    const delayBeforeTooltip = 700; // delay in ms before display (ex: 1000 ms = 1 sec)
+                    const delayBeforeTooltip = 400; // delay in ms before display (ex: 1000 ms = 1 sec)
                     
                     d.onmouseenter = (e) => {{ 
                         if (!isTooltipFrozen) {{
