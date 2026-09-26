@@ -1428,6 +1428,11 @@ def generate():
              * Computes if an object is currently visible tonight during astronomical night hours.
              * Strictly replicates the graph's rendering logic.
              */
+/**
+/**
+             * Computes if an object is currently visible tonight during astronomical night hours.
+             * Strictly replicates the graph's rendering logic.
+             */
             function computeIsVisibleToday(raTarget, decTarget) {{
                 try {{
                     const userLat = parseFloat("{CONFIG["LATITUDE"]}");
@@ -1446,14 +1451,24 @@ def generate():
                     let altitudesSoleil = [];
                     let altitudesObjet = [];
 
+                    // Position du Soleil (origine RA à l'équinoxe de printemps ~21 mars)
+                    const vernalEquinox = new Date(now.getFullYear(), 2, 21);
+                    let daysSinceEquinox = (now - vernalEquinox) / 86400000;
+                    if (daysSinceEquinox < 0) daysSinceEquinox += 365.25;
+
+                    const sunRA = (daysSinceEquinox * 24 / 365.25) % 24;
+                    const sunDec = (23.44 * Math.sin(daysSinceEquinox * 2 * Math.PI / 365.25)) * Math.PI / 180;
+
                     // --- 1. COMPUTE BOTH CURVES (SUN AND OBJECT) ON THE SAME INDICES ---
                     for (let i = -72; i < 72; i++) {{
                         const hr = i / 6;
                         const datePoint = new Date(midnightLocal.getTime() + hr * 60 * 60 * 1000);
                         
-                        // Local Sidereal Time (LST) calculation identical to the graph
+                        // J2000 calculations (Epoch Unix 1970 to J2000 12h UTC offset = 10957.5)
                         const j2000 = (datePoint.getTime() / 86400000) - 10957.5;
-                        const lstHours = (18.697374558 + 24.06570982441908 * j2000 + userLon / 15) % 24;
+                        
+                        let lstHours = (18.697374558 + 24.06570982441908 * j2000 + userLon / 15) % 24;
+                        if (lstHours < 0) lstHours += 24;
 
                         // A. Target altitude
                         const hourAngleRad = (lstHours - raTarget) * 15 * Math.PI / 180;
@@ -1461,37 +1476,48 @@ def generate():
                         const altTargetDeg = Math.asin(sinAltTarget) * 180 / Math.PI;
                         altitudesObjet.push(altTargetDeg);
 
-                        // B. Sun altitude (reproducing the graph's formula)
-                        const sunRA = (typeof raSunHours !== 'undefined') ? raSunHours : 3.6; 
-                        const sunDec = (typeof DEC_SUN_RAD !== 'undefined') ? DEC_SUN_RAD : (19.3 * Math.PI / 180);
-                        
+                        // B. Sun altitude
                         const sunHourAngleRad = (lstHours - sunRA) * 15 * Math.PI / 180;
                         const sinAltSun = Math.sin(latRad) * Math.sin(sunDec) + Math.cos(latRad) * Math.cos(sunDec) * Math.cos(sunHourAngleRad);
                         const altSunDeg = Math.asin(sinAltSun) * 180 / Math.PI;
                         altitudesSoleil.push(altSunDeg);
                     }}
 
-                    // --- 2. FIND NIGHT BOUNDARIES (ASTRO TWILIGHT / NIGHT BELOW -12°) ---
-                    // Scan chronologically to find when the sun sets and rises below the threshold
-                    for (let idx = 0; idx < altitudesSoleil.length; idx++) {{
-                        // Threshold set to -12° (start of astronomical twilight / night)
-                        if (altitudesSoleil[idx] <= -12) {{
-                            if (indexCoucherAstro === null) {{
-                                indexCoucherAstro = idx; // First point under the threshold
-                            }}
-                            indexLeverAstro = idx; // Last point under the threshold (updated at each step)
+                    // --- 2. FIND NIGHT BOUNDARIES AROUND MIDNIGHT (INDEX 72) ---
+                    const midnightIndex = 72;
+
+                    // Recherche du crépuscule astro (soir) avant minuit
+                    for (let idx = midnightIndex; idx >= 0; idx--) {{
+                        if (altitudesSoleil[idx] > -12) {{
+                            indexCoucherAstro = idx + 1;
+                            break;
                         }}
                     }}
+                    if (indexCoucherAstro === null && altitudesSoleil[0] <= -12) {{
+                        indexCoucherAstro = 0;
+                    }}
 
-                    // If the sun never drops below -12° tonight (no astronomical window)
-                    if (indexCoucherAstro === null || indexLeverAstro === null) {{
+                    // Recherche de l'aube astro (matin) après minuit
+                    for (let idx = midnightIndex; idx < altitudesSoleil.length; idx++) {{
+                        if (altitudesSoleil[idx] > -12) {{
+                            indexLeverAstro = idx - 1;
+                            break;
+                        }}
+                    }}
+                    if (indexLeverAstro === null && altitudesSoleil[altitudesSoleil.length - 1] <= -12) {{
+                        indexLeverAstro = altitudesSoleil.length - 1;
+                    }}
+
+                    console.log(`[Visibility Check] Night indices: ${{indexCoucherAstro}} to ${{indexLeverAstro}}`);
+
+                    if (indexCoucherAstro === null || indexLeverAstro === null || indexCoucherAstro >= indexLeverAstro) {{
                         return false;
                     }}
 
                     // --- 3. CHECK TARGET ALTITUDE BETWEEN THESE TWO BOUNDARIES ---
                     for (let idx = indexCoucherAstro; idx <= indexLeverAstro; idx++) {{
                         if (altitudesObjet[idx] > 10) {{
-                            return true; // Match found! The object is > 10° during the astro window
+                            return true; // Target reaches > 10° during astro night
                         }}
                     }}
 
@@ -1501,7 +1527,6 @@ def generate():
                     return true; 
                 }}
             }}
-            
 
             
             // SEARCH AND AUTOMATICCENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
