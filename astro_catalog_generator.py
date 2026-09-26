@@ -1419,24 +1419,19 @@ def generate():
                     }}
                 }}
 
-                 /**
-                 * Computes if an object is currently visible tonight during astronomical night hours.
-                 * Strictly replicates the graph's rendering logic.
-                 */
-                 
-                              /**
-             * Computes if an object is currently visible tonight during astronomical night hours.
-             * Strictly replicates the graph's rendering logic.
-             */
-/**
+
 /**
              * Computes if an object is currently visible tonight during astronomical night hours.
              * Strictly replicates the graph's rendering logic.
              */
+/**
+
             function computeIsVisibleToday(raTarget, decTarget) {{
                 try {{
                     const userLat = parseFloat("{CONFIG["LATITUDE"]}");
                     const userLon = parseFloat("{CONFIG["LONGITUDE"]}");
+                    const altThreshold = parseFloat("{CONFIG["TN_ALTITUDE_THRESHOLD"]}");
+                    const lowAltFactor = parseFloat("{CONFIG["TN_LOW_ALTITUDE_FACTOR"]}");
                     
                     const latRad = userLat * Math.PI / 180;
                     const decRad = decTarget * Math.PI / 180;
@@ -1508,16 +1503,22 @@ def generate():
                         indexLeverAstro = altitudesSoleil.length - 1;
                     }}
 
-                    console.log(`[Visibility Check] Night indices: ${{indexCoucherAstro}} to ${{indexLeverAstro}}`);
-
                     if (indexCoucherAstro === null || indexLeverAstro === null || indexCoucherAstro >= indexLeverAstro) {{
                         return false;
                     }}
 
-                    // --- 3. CHECK TARGET ALTITUDE BETWEEN THESE TWO BOUNDARIES ---
+                    // --- 3. CHECK TARGET ALTITUDE USING ABSOLUTE MAX ALTITUDE ---
+                    // Absolute max altitude (meridian transit) = 90 - |lat - dec|
+                    const maxAltAbsolute = 90 - Math.abs(userLat - decTarget);
+
+                    // Determine effective threshold based on absolute max altitude
+                    const targetThreshold = (maxAltAbsolute >= altThreshold) 
+                        ? altThreshold 
+                        : (maxAltAbsolute * lowAltFactor);
+
                     for (let idx = indexCoucherAstro; idx <= indexLeverAstro; idx++) {{
-                        if (altitudesObjet[idx] > 10) {{
-                            return true; // Target reaches > 10° during astro night
+                        if (altitudesObjet[idx] >= targetThreshold) {{
+                            return true; // Target reaches threshold during astro night
                         }}
                     }}
 
