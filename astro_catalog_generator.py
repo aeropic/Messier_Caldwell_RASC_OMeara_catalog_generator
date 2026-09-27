@@ -9,6 +9,8 @@
 # https://vicmenard.com/articles/
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
+#
+#   V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected   
 #   V7.4 : the next opposition month is displayed in tooltip
 #   V7.3 : fix the isvisibletonight (ce soir)
 #   V7.2 : updates in 'others' catalog
@@ -1899,6 +1901,10 @@ def generate():
                 
                 if (!data[cat]) return;
 
+                // Pre-calcul de la liste des noms de mois localisés
+                const monthFormatter = new Intl.DateTimeFormat(navigator.language || 'fr-FR', {{ month: 'long' }});
+                const monthNames = Array.from({{ length: 12 }}, (_, i) => monthFormatter.format(new Date(2000, i, 1)));
+
                 data[cat].forEach(obj => {{
                     if (!obj.info || obj.info.length < 7) return;
                     const objType = obj.info[0].trim();
@@ -1947,7 +1953,18 @@ def generate():
                     const heartClass = currentComment ? 'has-comment' : 'no-comment';
                     const heart = isTodo ? '<div class="todo-heart ' + heartClass + '">❤</div>' : '';
 
-                    let displaySeason = currentSeason === 'Tous' ? '<br>(' + objSeason + ')' : '';
+                    // Affichage conditionnel : saison si "Tous", mois de culmination sinon
+                    let displaySeason = '';
+                    if (currentSeason === 'Tous') {{
+                        displaySeason = '<br>(' + objSeason + ')';
+                    }} else {{
+                        let bestMonthIdx = Math.floor(((raVal / 2) + 8.7) % 12);
+                        if (bestMonthIdx < 0) bestMonthIdx += 12;
+                        let zenithMonth = monthNames[bestMonthIdx];
+                        let formattedMonth = zenithMonth.charAt(0).toUpperCase() + zenithMonth.slice(1);
+                        displaySeason = '<br>(' + formattedMonth + ')';
+                    }}
+
                     let displayComment = currentComment ? '<br><span style="color: #ff6b6b;">' + currentComment + '</span>' : '';
                     let content = obj.thumb ? '<img src="' + obj.thumb + '">' : '<div class="empty-info">' + objType + displaySeason + displayComment + '</div>';
                     
