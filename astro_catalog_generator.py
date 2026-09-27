@@ -862,6 +862,27 @@ TODO_FILE = "TODO.txt" # format is {"Catalog name": {"IdObjet": "free Comment"}}
 
 
 def compute_best_season(ra):
+    """Calculates the best observation season based on Right Ascension (RA) 
+    strictly matching the JS culmination month formula: Math.floor(((ra / 2) + 8.7) % 12)
+    """
+    # mois_idx = (ra / 2 + 8.7) % 12
+    # Mars (2), Avril (3), Mai (4) -> Printemps : 2.0 <= (ra/2 + 8.7) % 12 < 5.0
+    # Juin (5), Juillet (6), Août (7) -> Été : 5.0 <= (ra/2 + 8.7) % 12 < 8.0
+    # Septembre (8), Octobre (9), Novembre (10) -> Automne : 8.0 <= (ra/2 + 8.7) % 12 < 11.0
+    # Décembre (11), Janvier (0), Février (1) -> Hiver : reste
+    
+    val = ((ra / 2.0) + 8.7) % 12.0
+
+    if 2.0 <= val < 5.0:
+        return LANG["SEASONS"]["P"]  # Printemps
+    elif 5.0 <= val < 8.0:
+        return LANG["SEASONS"]["E"]  # Été (couvre M2 à 21h33 -> val = 7.47 -> Août)
+    elif 8.0 <= val < 11.0:
+        return LANG["SEASONS"]["A"]  # Automne
+    else:
+        return LANG["SEASONS"]["H"]  # Hiver
+        
+def compute_oldbest_season(ra):
     """Calculates the best observation season based on Right Ascension (RA)"""
     if 3 <= ra < 9:
         return LANG["SEASONS"]["H"] # Hiver
