@@ -1424,7 +1424,7 @@ def generate():
              * Computes if an object is currently visible tonight during astronomical night hours.
              * Strictly replicates the graph's rendering logic.
              */
-/**
+
 
             function computeIsVisibleToday(raTarget, decTarget) {{
                 try {{
