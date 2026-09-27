@@ -9,6 +9,7 @@
 # https://vicmenard.com/articles/
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
+#   V7.4 : the next opposition month is displayed in tooltip
 #   V7.3 : fix the isvisibletonight (ce soir)
 #   V7.2 : updates in 'others' catalog
 #   V7.1 : delay before tooltip is pdisplayed
@@ -1926,7 +1927,8 @@ def generate():
                     const heart = isTodo ? '<div class="todo-heart ' + heartClass + '">❤</div>' : '';
 
                     let displaySeason = currentSeason === 'Tous' ? '<br>(' + objSeason + ')' : '';
-                    let content = obj.thumb ? '<img src="' + obj.thumb + '">' : '<div class="empty-info">' + objType + displaySeason + '</div>';
+                    let displayComment = currentComment ? '<br><span style="color: #ff6b6b;">' + currentComment + '</span>' : '';
+                    let content = obj.thumb ? '<img src="' + obj.thumb + '">' : '<div class="empty-info">' + objType + displaySeason + displayComment + '</div>';
                     
                     /* CRITICAL ZONE: DynamICfull-resolution preview assignment.
                        If the source image was a high-fidelity TIFF format, we intercept the link 
@@ -2067,6 +2069,15 @@ def generate():
 
                 // Extraction des coordonnées (placée ici pour éviter le ReferenceError)
                 let raDecimal = parseFloat(obj.info[6]);
+
+                
+                // Mois de culmination au plein Sud au milieu de la nuit astronomique (nom issu du système via Intl)
+                const monthFormatter = new Intl.DateTimeFormat(navigator.language || 'fr-FR', {{ month: 'long' }});
+                const monthNames = Array.from({{ length: 12 }}, (_, i) => monthFormatter.format(new Date(2000, i, 1)));
+                let bestMonthIdx = Math.floor(((raDecimal / 2) + 8.7) % 12);
+                if (bestMonthIdx < 0) bestMonthIdx += 12;
+                let zenithMonth = monthNames[bestMonthIdx];
+                
                 
                 // Direction and badge calculation
                 const declin = parseFloat(obj.info[7]), isNorth = declin > userLat;
@@ -2083,7 +2094,7 @@ def generate():
                 // Colonne de gauche : Les infos techniques
                 html += `<div style="flex: 1;">`;
                 html += `<div><strong>{LANG["TOOLTIP_LABELS"]["TYPE"]}:</strong> ${{obj.info[0]}}</div>`;
-                html += `<div><strong>{LANG["TOOLTIP_LABELS"]["SEASON"]}:</strong> ${{obj.season_computed}}</div>`;
+                html += `<div><strong>{LANG["TOOLTIP_LABELS"]["SEASON"]}:</strong> ${{obj.season_computed}} (${{zenithMonth}})</div>`;
                 html += `<div><strong>{LANG["TOOLTIP_LABELS"]["CONSTELLATION"]}:</strong> ${{obj.info[2]}}</div>`;
                 html += `<div><strong>{LANG["TOOLTIP_LABELS"]["MAGNITUDE"]}:</strong> ${{obj.info[3]}}</div>`;
                 html += `<div ${{c}}><strong>{LANG["TOOLTIP_LABELS"]["SIZE"]}:</strong> ${{s}}</div>`;
@@ -2123,7 +2134,7 @@ def generate():
                    The layout reads bounding viewport box geometries using 'getBoundingClientRect()'.
                    By checking the card midpoint against the global center of the viewport window, 
                    it automatically shifts the anchor offsets to avoid boundary clippings.
-                */                                                                                           
+                */                                                                              
                 const rect = element.getBoundingClientRect();
                 const windowWidth = window.innerWidth;
                 const windowHeight = window.innerHeight;
