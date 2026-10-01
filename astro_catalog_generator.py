@@ -10,7 +10,8 @@
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
 #
-#   V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected   
+#   V7.6 : Telescopius URL fixed
+#   V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected      V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected   #   V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected   
 #   V7.4 : the next opposition month is displayed in tooltip
 #   V7.3 : fix the isvisibletonight (ce soir)
 #   V7.2 : updates in 'others' catalog
@@ -23,7 +24,7 @@
 #   V6.1.1 : english translation of "?" function
 #   V6.1 : added a "?" button to find an object by reference
 #   V6.0 : added a "All in 1" catalog option. Added some Deep sky challenges from RASC
-#          added a "OTHER" catalog with some interesting objects from "the list" (VICMenard)
+#          added a "OTHER" catalog with some interesting objects from "the list" (Vic Menard)
 #   V5.2 : fixed visible to night option
 #   V5.1 : plot of object altitude curve - added visible to night option
 #   V5.0 : database restructuration: first field is direct type
@@ -91,7 +92,7 @@ CONFIG = {
     "LIMIT_IMPOSSIBLE": 0,                        # degrees : change here if your horizon is masked
     "LIMIT_DIFFICILE": 20,
     "LIMIT_SMALL_OBJECT": 120,                    # arcseconds ; paint small objects size in orange
-    "CHART_HEIGHT": 80,                            # Height of the graphICarea inside the tooltip (in px)
+    "CHART_HEIGHT": 80,                            # Height of the graphic area inside the tooltip (in px)
     "TN_ALTITUDE_THRESHOLD": 30.0,                # altitude threshold (degrees) for visibility computation of high onjects
     "TN_LOW_ALTITUDE_FACTOR": 0.80                 # for low objects, they are "visible tonight" when their altitude becomes > (80% * maxalt) during astro period
 }
@@ -113,7 +114,7 @@ LANG = {
     "SOUTH": "Sud",                                          # "South"
     "PROMPT_LABEL": "Entrez une description optionnelle :",  # "Enter an optional description:"
     "VALIDATE": "Valider",                                   # "Validate"
-    "SEARCH_PROMPT": "Entrez une référence d'objet (ex: 3344, NGC3344, NGC3344) puis F12 pour vérifier les coord. :",
+    "SEARCH_PROMPT": "Entrez une référence d'objet (ex: 3344, NGC3344, NGC 3344) puis F12 pour vérifier les coord. :",
     "NOT_FOUND": "Objet non trouvé",
     "TYPES": {
         "N": "Nébuleuse",                                    # "nebula"
@@ -150,7 +151,7 @@ LANG = {
 
 
 # --- DATABASES (MESSIER, CALDWELL, RASC) ---
-# --- you can translate the constellation name and the usual name but keep the NGCreference as is ---
+# --- you can translate the constellation name and the usual name but keep the NGC reference as is ---
 # --- replace the lists here after with the "English_databases.txt" content for the english translation
 
 
@@ -193,8 +194,8 @@ MESSIER_DATA = {
     33: ["G", "NGC598", "Triangle", "5.7", "70'x40'", "Galaxie du Triangle", 1.56, 30.7],
     34: ["OC", "NGC1039", "Persée", "5.2", "35'", "Amas de Persée", 2.7, 42.8],
     35: ["OC", "NGC2168", "Gémeaux", "5.1", "28'", "Amas des Gémeaux", 6.15, 24.3],
-    36: ["OC", "NGC1960", "Cocher", "6.0", "12'", "Amas du Cocher", 5.6, 34.1],
-    37: ["OC", "NGC2099", "Cocher", "5.6", "24'", "Amas du Cocher", 5.87, 32.5],
+    36: ["OC", "NGC1960", "Cocher", "6.0", "12'", "Amas du moulinet", 5.6, 34.1],
+    37: ["N+C", "NGC2099", "Cocher", "5.6", "24'", "Amas sel et poivre + PN Halpha", 5.87, 32.5],
     38: ["OC", "NGC1912", "Cocher", "6.4", "21'", "Amas de l'Étoile de Mer", 5.47, 35.8],
     39: ["OC", "NGC7092", "Cygne", "4.6", "32'", "Amas du Cygne", 21.54, 48.4],
     40: ["D", "WNC 4", "Grande Ourse", "8.4", "0.8'", "Winnecke 4", 12.37, 58.1],
@@ -813,6 +814,8 @@ OTHER_DATA = {
     36: ["EN", "SH2-144", "Céphée", "N/A", "N/A", "LBN 107 dragon très sombre", 22.75, 59.88],
     37: ["PN", "SH2-188", "Cassiopée", 17.447, "9'", "SH 2-188 la crevette", 1.51, 58.41],
     38: ["N/A", "LDN1295", "Cassiopée", "N/A", "10.0'", "LDN 1295 girafe", 0.75, 52.43],
+    39: ["N/A", "NGC5395", "chiens de chasse", "11.4", "2.2'x1'", "galaxies du héron", 13.99, 37.48],
+    40: ["SNR", "SNR g111.7-02.1", "Cassiopée", 14.3, "5.0'", "SNR G111.7-02.1 Cas A", 23.39, 58.81],
     
 }
 
@@ -885,8 +888,6 @@ def compute_best_season(ra):
         return LANG["SEASONS"]["H"]  # Hiver
         
 
-        
-
 
 def read_shortcut_target(lnk_path):
     """
@@ -941,7 +942,7 @@ def find_image(prefix, obj_id, tech_ref):
     valid_exts = ('.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff')
     if not os.path.exists(CONFIG["SOURCE_DIR"]): return None
     
-    # Excluded directories (thumbnails directory and generICthumbnail folder names)
+    # Excluded directories (thumbnails directory and generic thumbnail folder names)
     thumb_dir_abs = os.path.abspath(CONFIG.get("THUMB_DIR", ""))
     
     files = []
@@ -1010,7 +1011,7 @@ def get_exif_date(path):
 
 def make_thumbnail(src):
     """
-    CRITICAL ZONE: DynamICprocessing of source assets & automated TIF conversions.
+    CRITICAL ZONE: Dynamic processing of source assets & automated TIF conversions.
     Browsers cannot natively render astronomical high-fidelity TIF/TIFF master files.
     When a .tif/tiff file is detected, this block compresses and downscales it into 
     a 'view_*.jpg' proxy image targeted for standard HTML display. 
@@ -1104,7 +1105,7 @@ def generate():
             info_raw = data_dict["data"][k]
             info = list(info_raw) 
             
-            # --- translation logIC---
+            # --- translation logic---
             type_code = info[0] # Ex: "SNR"
             info[0] = LANG["TYPES"].get(type_code, type_code) # becomes "Rémanent Supernova"
             
@@ -1142,7 +1143,7 @@ def generate():
             
             objs.append(obj_data)
             
-            # --- "All in 1" Deduplication logIC---
+            # --- "All in 1" Deduplication logic---
             # Remove all spaces and normalize casing to prevent false mismatching
             cleaned_ref = re.sub(r'\s+', '', str(tech_ref)).upper() if tech_ref else ""
             fallback_ref = f"{prefix.upper()}{str(k).upper()}"
@@ -1436,11 +1437,20 @@ def generate():
                     }}
                 }}
 
+                                                                                                      
+                                                                   
+                   
+                                                                      
+                          
+                                                                                           
+
 
 /**
              * Computes if an object is currently visible tonight during astronomical night hours.
              * Strictly replicates the graph's rendering logic.
              */
+
+                                                   
 
 
             function computeIsVisibleToday(raTarget, decTarget) {{
@@ -1456,12 +1466,30 @@ def generate():
                     // Recreate the graph's time base (around local midnight)
                     const now = new Date();
                     const midnightLocal = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+                            
+                                                                        
+                                                                                            
+                                                                                                                            
+                                                                    
+
 
                     let indexCoucherAstro = null;
                     let indexLeverAstro = null;
+                                                                  
+                          
 
+
+                                                                                                       
+                                                                                 
+                                                                                              
+                                                               
                     let altitudesSoleil = [];
                     let altitudesObjet = [];
+                                  
+                                                                                                               
+                              
+                          
+
 
                     // Position du Soleil (origine RA à l'équinoxe de printemps ~21 mars)
                     const vernalEquinox = new Date(now.getFullYear(), 2, 21);
@@ -1522,6 +1550,8 @@ def generate():
 
                     if (indexCoucherAstro === null || indexLeverAstro === null || indexCoucherAstro >= indexLeverAstro) {{
                         return false;
+                                     
+                      
                     }}
 
                     // --- 3. CHECK TARGET ALTITUDE USING ABSOLUTE MAX ALTITUDE ---
@@ -1547,8 +1577,8 @@ def generate():
             }}
 
             
-            // SEARCH AND AUTOMATICCENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
-            // SEARCH AND AUTOMATICCENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
+
+            // SEARCH AND AUTOMATIC CENTERING FUNCTION WITH MULTI-LANGUAGE SUPPORT
             async function searchCatalog() {{
                 // Open native browser prompt to capture user input using localized string
                 let searchStr = prompt("{LANG['SEARCH_PROMPT']}");
@@ -1562,14 +1592,14 @@ def generate():
                 let allInOne = data["All in 1"] || [];
                 let foundObj = null;
                 
-                // Flags if user input is purely numerIC(e.g., searching "3344" instead of "NGC3344")
+                // Flags if user input is purely numeric(e.g., searching "3344" instead of "NGC3344")
                 let isNumericOnly = /^\d+$/.test(cleanSearch);
                 
                 // Iterate through the master database to find a matching signature
                 for (let i = 0; i < allInOne.length; i++) {{
                     let obj = allInOne[i];
                     
-                    // Normalize standard technical reference string (e.g., "NGC4321" becomes "NGC4321")
+                    // Normalize standard technical reference string (e.g., "NGC 4321" becomes "NGC4321")
                     let refTech = obj.tech_ref ? obj.tech_ref.replace(/\s+/g, '').toUpperCase() : "";
                     
                     // Normalize catalog identifier prefix + identifier (e.g., "M" + "100" becomes "M100")
@@ -1597,18 +1627,18 @@ def generate():
                 // Helper function to query SIMBAD database safely via multi-step linear logic
                 async function logSimbadLine(queryName) {{
                     let url = "https://simbad.cds.unistra.fr/simbad/sim-tap/sync";
-                    let adqlBasIC= `SELECT TOP 1 main_id, otype, ra, dec, oid, galdim_majaxis, galdim_minaxis FROM basICJOIN ident ON oid = oidref WHERE id = '${{queryName}}'`;
+                    let adqlBasic = `SELECT TOP 1 main_id, otype, ra, dec, oid, galdim_majaxis, galdim_minaxis FROM basic JOIN ident ON oid = oidref WHERE id = '${{queryName}}'`;
                     
                     try {{
                         let basicResponse = await fetch(url, {{
                             method: "POST",
                             headers: {{ "Content-Type": "application/x-www-form-urlencoded" }},
-                            body: new URLSearchParams({{ "request": "doQuery", "lang": "ADQL", "format": "json", "query": adqlBasIC}})
+                            body: new URLSearchParams({{ "request": "doQuery", "lang": "ADQL", "format": "json", "query": adqlBasic}})
                         }});
                         if (!basicResponse.ok) throw new Error("Primary failed");
-                        let resBasIC= await basicResponse.json();
+                        let resBasic = await basicResponse.json();
                         
-                        if (resBasIC&& resBasic.data && resBasic.data.length > 0) {{
+                        if (resBasic && resBasic.data && resBasic.data.length > 0) {{
                             let row = resBasic.data[0];
                             let mainId = row[0] ? row[0].replace(/[\s\u00a0]+/g, ' ').trim() : queryName;
                             let rawType = row[1] ? row[1].trim() : "";
@@ -1719,8 +1749,8 @@ def generate():
                     }}
                 }}
 
-                // Strategy routing logICfor mapping the targeted query string
-                let simbadQuery = isNumericOnly ? "NGC" + cleanSearch : searchStr.trim();
+                // Strategy routing logic for mapping the targeted query string
+                let simbadQuery = isNumericOnly ? "NGC " + cleanSearch : searchStr.trim();
 
                 if (foundObj) {{
                     // Fetch filtering interactive dropdowns
@@ -1810,7 +1840,7 @@ def generate():
                 // Re-inject required space formatting for explicit SIMBAD TAP lookups
                 if (/^NGC\d+$/.test(primarySimbadTarget.replace(/\s+/g, '').toUpperCase())) {{
                     let num = primarySimbadTarget.replace(/\s+/g, '').toUpperCase().replace('NGC', '');
-                    primarySimbadTarget = "NGC" + num;
+                    primarySimbadTarget = "NGC " + num;
                 }} else if (/^M\d+$/.test(primarySimbadTarget.replace(/\s+/g, '').toUpperCase())) {{
                     let num = primarySimbadTarget.replace(/\s+/g, '').toUpperCase().replace('M', '');
                     primarySimbadTarget = "M " + num;
@@ -1961,7 +1991,7 @@ def generate():
                     let displayComment = currentComment ? '<br><span style="color: #ff6b6b;">' + currentComment + '</span>' : '';
                     let content = obj.thumb ? '<img src="' + obj.thumb + '">' : '<div class="empty-info">' + objType + displaySeason + displayComment + '</div>';
                     
-                    /* CRITICAL ZONE: DynamICfull-resolution preview assignment.
+                    /* CRITICAL ZONE: Dynamic full-resolution preview assignment.
                        If the source image was a high-fidelity TIFF format, we intercept the link 
                        and map the card interaction event to open the generated 'view_*.jpg' proxy 
                        instead of trying to open the unsupported raw .tif binary directly.
@@ -1973,7 +2003,7 @@ def generate():
                         clickImg = thumbDir + "/view_" + baseName + ".jpg";
                     }}
                     
-                    /* CRITICAL ZONE: Heterogeneous DynamICURL Generation For Telescopius routing.
+                    /* CRITICAL ZONE: Heterogeneous Dynamic URL Generation For Telescopius routing.
                        Each deep-sky index handles naming profiles uniquely based on its survey ecosystem:
                        1. Messier & Caldwell: Directly match uniform sequential tracking codes ('m-X', 'c-X').
                        2. RASC & O'Meara & SAC: Mixed cross-referenced deep-sky tables. The script parses the target's 
@@ -1984,7 +2014,7 @@ def generate():
                     if (obj.prefix && prefixes.Messier && obj.prefix === prefixes.Messier) tUrl += "m-" + obj.id;
                     else if (obj.prefix && prefixes.Caldwell && obj.prefix === prefixes.Caldwell) tUrl += "c-" + obj.id;
                     else if (obj.prefix && (prefixes.RASC || prefixes["O'Meara"] || prefixes["OTHER"])) {{
-                        const match = obj.tech_ref.match(/(?:NGC|IC|SH2|BARNARD|VDB|LDN)[_ \-]?(\d+)/i);
+                        const match = obj.tech_ref.match(/(?:NGC|IC|SH2|BARNARD|VDB|LDN|LBN|SNR)[_ \-]?(\d+)/i);
                         const idNum = match ? match[1] : ""; 
                         
                         if (obj.tech_ref.toUpperCase().includes("IC")) tUrl += "ic-" + idNum;
@@ -1992,7 +2022,11 @@ def generate():
                         else if (obj.tech_ref.toUpperCase().includes("BARNARD")) tUrl += "barnard-" + idNum;
                         else if (obj.tech_ref.toUpperCase().includes("VDB")) tUrl += "vdb-" + idNum;
                         else if (obj.tech_ref.toUpperCase().includes("LDN")) tUrl += "ldn-" + idNum;
+                        else if (obj.tech_ref.toUpperCase().includes("LBN")) tUrl += obj.tech_ref;
+                        else if (obj.tech_ref.toUpperCase().includes("SNR")) tUrl += obj.tech_ref;
                         else tUrl += "ngc-" + idNum;
+                        
+                        console.log(idNum);
                     }}
                 
                     const labelText = obj.tech_ref ? obj.prefix + obj.id + ' - ' + obj.tech_ref : obj.prefix + obj.id;
@@ -2045,10 +2079,10 @@ def generate():
                         fallbackQuery = obj.tech_ref.trim();
                     }}
 
-                    // Re-instantiate the local pipeline worker logICfor standalone invocation inside showT context
+                    // Re-instantiate the local pipeline worker logic for standalone invocation inside showT context
                     let standaloneSimbadFetcher = async function(queryName) {{
                         let url = "https://simbad.cds.unistra.fr/simbad/sim-tap/sync";
-                        let adqlBasIC= `SELECT TOP 1 main_id, otype, ra, dec, oid, galdim_majaxis, galdim_minaxis FROM basICJOIN ident ON oid = oidref WHERE id = '${{queryName}}'`;
+                        let adqlBasic = `SELECT TOP 1 main_id, otype, ra, dec, oid, galdim_majaxis, galdim_minaxis FROM basICJOIN ident ON oid = oidref WHERE id = '${{queryName}}'`;
                         try {{
                             let response = await fetch(url, {{
                                 method: "POST",
@@ -2056,8 +2090,8 @@ def generate():
                                 body: new URLSearchParams({{ "request": "doQuery", "lang": "ADQL", "format": "json", "query": adqlBasIC}})
                             }});
                             if (!response.ok) return `["N/A", "${{queryName}}", "const TBD", "N/A", "N/A", "${{queryName}}", "N/A", "N/A"]`;
-                            let resBasIC= await response.json();
-                            if (resBasIC&& resBasic.data && resBasic.data.length > 0) {{
+                            let resBasic = await response.json();
+                            if (resBasic && resBasic.data && resBasic.data.length > 0) {{
                                 let row = resBasic.data[0];
                                 let rId = row[0] ? row[0].replace(/[\s\u00a0]+/g, ' ').trim() : queryName;
                                 let rRa = row[2] !== null ? (row[2] / 15).toFixed(2) : "N/A";
