@@ -11,7 +11,7 @@
 #
 #
 #   V7.6 : Telescopius URL fixed
-#   V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected      V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected   #   V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected   
+#   V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected     
 #   V7.4 : the next opposition month is displayed in tooltip
 #   V7.3 : fix the isvisibletonight (ce soir)
 #   V7.2 : updates in 'others' catalog
