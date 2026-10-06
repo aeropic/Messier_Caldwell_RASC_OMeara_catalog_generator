@@ -10,8 +10,9 @@
 # https://alasky.cds.unistra.fr/hips-image-services/
 #
 #
+#   V7.7 : when the todo comment includes a "=" character, then a in progress symbol is displayed
 #   V7.6 : Telescopius URL fixed
-#   V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected     
+#   V7.5 : the next opposition month is displayed in thumbnail area when one season or today is selected   
 #   V7.4 : the next opposition month is displayed in tooltip
 #   V7.3 : fix the isvisibletonight (ce soir)
 #   V7.2 : updates in 'others' catalog
@@ -664,7 +665,7 @@ O_MEARA_DATA = {
     1002: ["G", "NGC134", "Sculpteur", "10.4", "8.1'", "Galaxie du Calmar Géant", 0.50, -33.2],
     1003: ["G", "NGC488", "Poissons", "10.4", "5.2'", "Galaxie du Tourbillon", 1.36, 5.26],
     1004: ["OC", "NGC654", "Cassiopée", "7.9", "40'", "Amas ouvert avec nébulosité", 1.74, 61.8],
-    1005: ["OC", "Collinder 463", "Cassiopée", "9.1", "57'", "Lund 57 / Loch Ness monster", 1.89, 71.9],
+    1005: ["OC", "LDN 768", "Cassiopée", "9.1", "57'", "Collinder 463 Lund 57 / Loch Ness monster", 1.89, 71.9],
     1006: ["OC", "Stock 2", "Cassiopée", "4.4", "130'", "Strong Man Cluster", 2.25, 59.4],
     1007: ["G", "NGC936", "Céto", "10.1", "5.2'", "Galaxie de la Soucoupe", 2.46, -1.1],
     1008: ["G", "NGC1084", "Éridan", "10.6", "2.9'", "Galaxie de la Truffe", 2.77, -7.5],
@@ -806,7 +807,7 @@ OTHER_DATA = {
     28: ["RN", "BD+69 1231", "Céphée", 9.29, "N/A", "VDB-152", 22.22, 70.25],
     29: ["RN", "GN 21.15.8", "Céphée", "N/A", "N/A", "SH2-136 fantome céphée", 21.27, 68.26],
     30: ["EN", "LBN 119.57-00.92", "Cassiopée", "N/A", "30'", "SH2-173 fantome cassiopée", 0.35, 61.73],
-    31: ["RN", "NGC1909", "Eridan", "N/A", "N/A", "NGC1909 nébuleuse tête sircière", 5.03, -7.90],
+    31: ["RN", "NGC1909", "Eridan", "N/A", "N/A", "NGC1909 nébuleuse tête sorcière", 5.03, -7.90],
     32: ["PN", "HD202552", "Cygne", "N/A", "N/A", "MWP1 Mathusalem nebula", 21.2856, 34.2076],
     33: ["EN", "SH2-115", "Cygne", "N/A", "N/A", "SH2-115 LBN 357", 20.58, 47.04],
     34: ["G", "IC1101", "Vierge", 15.1, "2.3'x1.1'", "IC1101 grande galaxie", 15.18, 5.74],
@@ -816,6 +817,8 @@ OTHER_DATA = {
     38: ["N/A", "LDN1295", "Cassiopée", "N/A", "10.0'", "LDN 1295 girafe", 0.75, 52.43],
     39: ["N/A", "NGC5395", "chiens de chasse", "11.4", "2.2'x1'", "galaxies du héron", 13.99, 37.48],
     40: ["SNR", "SNR g111.7-02.1", "Cassiopée", 14.3, "5.0'", "SNR G111.7-02.1 Cas A", 23.39, 58.81],
+    41: ["N+C", "NGC6883", "Cygne", 8, "35'", "amas + nébuleuses bleues rouges", 20.19, 35.83],
+    42: ["EN", "SH2-101", "Cygne", "N/A", "20'", "SH2-101 nebuleuse tulipe LBN 071.58+02.86", 20.00, 35.28],
     
 }
 
@@ -1252,6 +1255,10 @@ def generate():
                     color: #ff4d4d !important;
                     -webkit-text-stroke: 0px transparent;
                 }}
+                .todo-heart.in-progress {{
+                    color: #ffcc00 !important;
+                    -webkit-text-stroke: 0px transparent;
+                }}
                 .img-box {{ width: 100%; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; background: #000; cursor: pointer; overflow: hidden; position: relative; }}
                 .img-box img {{ width: 100%; height: 100%; object-fit: cover; }}
                 .empty-info {{ color: #484f58; font-size: 11px; font-weight: bold; text-align: center; padding: 5px; line-height: 1.2; }}
@@ -1437,20 +1444,11 @@ def generate():
                     }}
                 }}
 
-                                                                                                      
-                                                                   
-                   
-                                                                      
-                          
-                                                                                           
-
 
 /**
              * Computes if an object is currently visible tonight during astronomical night hours.
              * Strictly replicates the graph's rendering logic.
              */
-
-                                                   
 
 
             function computeIsVisibleToday(raTarget, decTarget) {{
@@ -1466,30 +1464,12 @@ def generate():
                     // Recreate the graph's time base (around local midnight)
                     const now = new Date();
                     const midnightLocal = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
-                            
-                                                                        
-                                                                                            
-                                                                                                                            
-                                                                    
-
 
                     let indexCoucherAstro = null;
                     let indexLeverAstro = null;
-                                                                  
-                          
 
-
-                                                                                                       
-                                                                                 
-                                                                                              
-                                                               
                     let altitudesSoleil = [];
                     let altitudesObjet = [];
-                                  
-                                                                                                               
-                              
-                          
-
 
                     // Position du Soleil (origine RA à l'équinoxe de printemps ~21 mars)
                     const vernalEquinox = new Date(now.getFullYear(), 2, 21);
@@ -1550,8 +1530,6 @@ def generate():
 
                     if (indexCoucherAstro === null || indexLeverAstro === null || indexCoucherAstro >= indexLeverAstro) {{
                         return false;
-                                     
-                      
                     }}
 
                     // --- 3. CHECK TARGET ALTITUDE USING ABSOLUTE MAX ALTITUDE ---
@@ -1973,9 +1951,11 @@ def generate():
                         if (!isTooltipFrozen) {{ t.style.display='none'; if(globalChartInstance) {{ globalChartInstance.destroy(); globalChartInstance = null; }} }} 
                     }};
                     
+                    const isWorkInProgress = currentComment.includes('=');
                     const heartClass = currentComment ? 'has-comment' : 'no-comment';
-                    const heart = isTodo ? '<div class="todo-heart ' + heartClass + '">❤</div>' : '';
-
+                    const symbol = isWorkInProgress ? '⚠️' : '❤';
+                    const heart = isTodo ? '<div class="todo-heart ' + heartClass + '">' + symbol + '</div>' : '';
+                    
                     // Affichage conditionnel : saison si "Tous", mois de culmination sinon
                     let displaySeason = '';
                     if (currentSeason === 'Tous') {{
