@@ -78,6 +78,10 @@ In addition, to increase visibility, objects tagged and with a note will appear 
 
 <img width="458" height="307" alt="cata_hollow_heart" src="https://github.com/user-attachments/assets/fc3e8556-d3f7-4038-8d8b-669e651be1f4" />
 
+If some targets are a work in progress, you may tag them with a "=" character in the comment. Then a "work in progress" sympbol will be displayed
+
+<img width="563" height="571" alt="chrome_OMiyq6LpG5" src="https://github.com/user-attachments/assets/05c6f003-66d7-4425-a520-0a685b100fa1" />
+
 
 ### the TODO.txt file 
 
